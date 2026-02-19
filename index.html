@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gieo Quẻ Đầu Năm 2026</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧧</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CẤU HÌNH CHUNG --- */
+        body {
+            margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #8a0000 0%, #ff1a1a 100%);
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            overflow: hidden; text-align: center; color: white;
+        }
+
+        /* --- 2. NGỰA PHI --- */
+        .horse-container {
+            position: absolute; bottom: 15px; left: -300px;
+            z-index: 5; pointer-events: none;
+            display: flex; gap: -20px;
+            animation: runAcross 7s linear infinite;
+        }
+        .horse-unit {
+            font-size: 80px; display: inline-block;
+            transform: scaleX(-1);
+            filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.5));
+        }
+        .galloping { animation: gallop 0.6s ease-in-out infinite alternate; }
+        .horse-red { filter: hue-rotate(-50deg) saturate(2) drop-shadow(5px 5px 5px rgba(0,0,0,0.5)); }
+        .horse-gold { filter: hue-rotate(45deg) saturate(3) brightness(1.2) drop-shadow(5px 5px 5px rgba(0,0,0,0.5)); animation-delay: 0.1s; }
+        .horse-brown { animation-delay: 0.2s; }
+        @keyframes runAcross { 0% { left: -300px; } 100% { left: 110vw; } }
+        @keyframes gallop { 0% { transform: scaleX(-1) translateY(0) rotate(0deg); } 100% { transform: scaleX(-1) translateY(-20px) rotate(5deg); } }
+
+        /* --- 3. UI ELEMENT CƠ BẢN --- */
+        .sound-control {
+            position: fixed; top: 20px; right: 20px;
+            width: 40px; height: 40px; 
+            background: rgba(0, 0, 0, 0.6); border: 2px solid #ffd700; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 22px; cursor: pointer; z-index: 200; 
+            transition: transform 0.2s; animation: pulse-btn 2s infinite;
+        }
+        
+        .speaker-hint {
+            position: fixed; top: 25px; right: 75px; 
+            z-index: 200; 
+            color: #fff; font-size: 14px; font-weight: bold;
+            background: #d00000; 
+            padding: 8px 15px; border-radius: 30px;
+            border: 2px solid #ffd700; 
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+            pointer-events: none; 
+            display: flex; align-items: center; gap: 5px;
+            animation: hint-bounce 1s infinite alternate;
+            white-space: nowrap; 
+        }
+        .speaker-hint::after { content: '➡️'; font-size: 18px; }
+
+        @keyframes hint-bounce { 0% { transform: translateX(0); } 100% { transform: translateX(-5px); } }
+        @keyframes pulse-btn { 0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
+
+        /* --- 4. BAO LÌ XÌ --- */
+        #envelope {
+            width: 300px; height: 450px;
+            background: linear-gradient(to bottom, #b30000, #e60000);
+            border: 4px solid #ffd700; border-radius: 20px;
+            cursor: pointer; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.7);
+            transition: transform 0.3s; z-index: 20; position: relative;
+            margin-bottom: 80px; 
+        }
+        #envelope:hover { transform: scale(1.05); }
+        .envelope-icon { font-size: 80px; margin-bottom: -10px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3)); }
+        .year-text { font-size: 35px; font-weight: 900; color: #ffd700; text-shadow: 3px 3px 0px #8b0000; font-family: 'Arial Black', sans-serif; margin-bottom: 10px; }
+        .click-hint { font-size: 18px; font-weight: bold; margin-top: 20px; animation: blink 1.5s infinite; }
+        @keyframes blink { 50% { opacity: 0.5; } }
+
+        /* --- (ĐÃ XÓA PHẦN #nameSelection) --- */
+
+        /* --- 6. NỘI DUNG CHÍNH (LỜI CHÚC) --- */
+        #content {
+            display: none; background: #fffaf0;
+            padding: 25px 20px; border-radius: 20px;
+            box-shadow: 0 0 60px rgba(255, 204, 0, 0.9);
+            width: 360px; max-width: 90%;
+            border: 3px solid #d41414;
+            position: relative; z-index: 20;
+            margin-bottom: 100px;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 85vh; overflow-y: auto; 
+            scroll-behavior: smooth; 
+        }
+        @keyframes popIn { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } }
+
+        h1.title-tet { color: #d00000; font-size: 24px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;}
+        .horse-icons-top { font-size: 28px; margin: 0px 0 10px 0; }
+        
+        /* CSS CHO LỜI CHÚC & BÚT */
+        .wishes { 
+            font-size: 16px; line-height: 1.6; color: #333; font-style: italic; font-weight: 600; 
+            background: #fff; padding: 15px; border-radius: 10px; border: 1px dashed #d00000; margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .highlight-text {
+            display: block; text-align: center; 
+            font-size: 26px; font-weight: bold; 
+            color: #d00000; font-style: italic; 
+            margin-top: 15px; text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+        }
+
+        .writing-pen {
+            display: inline-block; font-size: 20px;
+            margin-left: 5px;
+            animation: write-move 0.3s infinite alternate;
+        }
+        @keyframes write-move {
+            0% { transform: rotate(0deg) translateY(0); }
+            100% { transform: rotate(15deg) translateY(-5px); }
+        }
+
+        /* --- CSS ẢNH NAM.JPG --- */
+        #extra-image-container {
+            display: none; margin-bottom: 15px;
+        }
+
+        .my-custom-img {
+            width: 100%; 
+            max-width: 100%; 
+            border-radius: 10px; border: 3px solid #d00000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: block; margin: 0 auto;
+            
+            /* HIỆU ỨNG CINE DREAMY - Tốc độ 1.5s */
+            opacity: 0;
+            filter: blur(20px) brightness(1.2); 
+            transform: scale(1.1); 
+            
+            animation: cinematicReveal 1.5s ease-out forwards;
+        }
+
+        @keyframes cinematicReveal {
+            0% { opacity: 0; filter: blur(20px) brightness(1.5); transform: scale(1.15); }
+            50% { opacity: 0.8; filter: blur(5px) brightness(1.1); }
+            100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1); }
+        }
+
+        .btn-lucky {
+            display: none; 
+            padding: 12px 30px;
+            background: linear-gradient(to right, #ffd700, #fdb931);
+            color: #d00000; font-weight: bold; border-radius: 50px;
+            border: 2px solid #fff; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+            font-size: 16px; transition: transform 0.2s;
+            animation: pulse-gold 1.5s infinite;
+        }
+        @keyframes pulse-gold {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        /* --- 7. CÁC POPUP KHÁC --- */
+        #qrOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(100, 0, 0, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.5s; overflow-y: auto; padding: 20px 0; }
+        .btn-close-qr { position: absolute; top: 30px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; opacity: 0.8; transition: 0.3s; text-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 2005; }
+        .btn-close-qr:hover { opacity: 1; transform: scale(1.1); }
+        .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 20px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
+        .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 10px; cursor: zoom-in; transition: transform 0.2s; }
+        .qr-img-large:hover { transform: scale(1.02); }
+        #qrLightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s; }
+        .lightbox-img-content { width: auto; height: auto; max-width: 90%; max-height: 80vh; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); animation: zoomInPopup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: zoom-out; }
+        @keyframes zoomInPopup { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .lightbox-hint-text { color: #ccc; margin-top: 15px; font-style: italic; font-size: 14px; animation: blink 2s infinite; }
+        .qr-note { color: #fff; font-style: italic; font-size: 16px; margin-bottom: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+        .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 10px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .btn-download-bottom:hover { transform: scale(1.05); background: #b30000; }
+        .final-message { margin-top: 30px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
+        @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        #shakingModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
+        .fortune-container { width: 100px; height: 160px; background: linear-gradient(to right, #b30000, #d00000, #b30000); border: 4px solid #ffd700; border-radius: 10px 10px 30px 30px; position: relative; animation: shake-hard 0.4s ease-in-out infinite; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+        .fortune-container::before { content: ''; position: absolute; top: -15px; left: 5px; width: 82px; height: 25px; background: #800000; border: 4px solid #ffd700; border-radius: 50%; z-index: 2; }
+        .sticks-bundle { position: absolute; top: -40px; left: 20px; width: 60px; height: 60px; z-index: 1; }
+        .stick-sample { position: absolute; width: 10px; height: 80px; background: #f0e68c; border-radius: 5px; border: 1px solid #d4a017; }
+        .stick-sample:nth-child(1) { left: 10px; transform: rotate(-15deg); top: 10px; } .stick-sample:nth-child(2) { left: 25px; transform: rotate(0deg); top: 0px; } .stick-sample:nth-child(3) { left: 40px; transform: rotate(15deg); top: 10px; }
+        @keyframes shake-hard { 0% { transform: rotate(0deg) translateY(0); } 25% { transform: rotate(-10deg) translateY(-10px); } 50% { transform: rotate(0deg) translateY(0); } 75% { transform: rotate(10deg) translateY(10px); } 100% { transform: rotate(0deg) translateY(0); } }
+        .shaking-text { color: #ffd700; font-size: 22px; font-weight: bold; margin-top: 40px; text-shadow: 0 0 10px #d00000; animation: blink 1s infinite; }
+        #resultModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 3000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
+        .bamboo-card { width: 300px; min-height: 450px; background: #fdf5e6; border: 8px solid #d4a017; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; padding: 0; box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); transform: scale(0.1); opacity: 0; animation: card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; overflow: hidden; }
+        .card-header { width: 100%; height: 70px; background: #d00000; display: flex; justify-content: center; align-items: center; color: #ffd700; font-size: 35px; font-weight: 900; border-bottom: 4px solid #d4a017; text-transform: uppercase; }
+        .card-body { padding: 20px; width: 100%; box-sizing: border-box; text-align: center; color: #5c4033; background-image: linear-gradient(#fdf5e6 1px, transparent 1px), linear-gradient(90deg, #fdf5e6 1px, transparent 1px); background-size: 20px 20px; }
+        .fortune-rank { display: inline-block; font-size: 24px; font-weight: bold; font-family: 'Dancing Script', cursive, sans-serif; background: linear-gradient(to right, #d00000, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: 2px solid #d00000; padding: 5px 20px; border-radius: 50px; margin-bottom: 20px; text-transform: uppercase; white-space: nowrap; animation: heartbeat 2s infinite; }
+        @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .fortune-content p { font-size: 16px; margin: 10px 0; font-weight: 600; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+        .fortune-content b { color: #d00000; font-size: 18px; }
+        .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: bold; }
+        .btn-get-money-card { margin-top: auto; margin-bottom: 20px; background: linear-gradient(to right, #d00000, #ff0000); color: #fff; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 16px; animation: pulse-gold 1.5s infinite; }
+        @keyframes card-reveal { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
+        .flower { position: absolute; top: -10vh; z-index: 10; pointer-events: none; opacity: 0.8; }
+        .firework-shell { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5; }
+        .firework-particle { position: absolute; border-radius: 50%; animation: realistic-burst 1.2s ease-out forwards, twinkle 0.2s infinite alternate; }
+        @keyframes realistic-burst { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 60% { transform: translate(var(--x), var(--y)) scale(0.8); opacity: 0.8; } 100% { transform: translate(var(--x), calc(var(--y) + 100px)) scale(0.4); opacity: 0; } }
+        @keyframes twinkle { from { opacity: 1; } to { opacity: 0.7; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+
+<body onclick="playAudioForce()">
+
+    <div id="shakingModal">
+        <div class="fortune-container">
+            <div class="sticks-bundle">
+                <div class="stick-sample"></div>
+                <div class="stick-sample"></div>
+                <div class="stick-sample"></div>
+            </div>
+        </div>
+        <div class="shaking-text">Đang xin keo... 🙏</div>
+    </div>
+
+    <div id="resultModal">
+        <div class="bamboo-card">
+            <div class="card-header"><div>Lộc</div></div>
+            <div class="card-body">
+                <div class="fortune-rank" id="fortune-word">Chữ Lộc</div>
+                <div class="fortune-content" id="fortune-details"></div>
+                <div class="poem" id="fortune-poem"></div>
+            </div>
+            <button class="btn-get-money-card" onclick="revealQR()">Nhận Lộc Ngay 🧧</button>
+        </div>
+    </div>
+
+    <div id="qrLightbox" onclick="closeLightbox()">
+        <img src="" id="lightboxImg" class="lightbox-img-content">
+        <div class="lightbox-hint-text">(Chạm để đóng)</div>
+    </div>
+
+    <div id="qrOverlay">
+        <div class="btn-close-qr" onclick="closeQR()">×</div>
+        
+        <div class="qr-title-large" id="qrTitle">Lì xì tặng em</div>
+        
+        <img src="" alt="QR Code" class="qr-img-large" id="qrImgMain" onclick="openLightbox(this.src)">
+        
+        <div class="qr-note">(Quét bằng APP Viettel Money<br>Chạm vào mã QR để phóng to)</div>
+        
+        <a href="" download="LiXi_Tet_2026.jpg" class="btn-download-bottom" id="btnDownload">
+            <span>⬇️</span> Tải mã QR về
+        </a>
+        
+        <div class="final-message" id="finalMsg">
+            </div>
+    </div>
+
+    <div class="horse-container">
+        <div class="horse-unit horse-red galloping">🐎</div>
+        <div class="horse-unit horse-gold galloping">🐎</div>
+        <div class="horse-unit horse-brown galloping">🐎</div>
+    </div>
+
+    <div id="envelope" onclick="openEnvelope()">
+        <div class="envelope-icon">🧧</div>
+        <div class="year-text">Xuân Bính Ngọ<br>2026</div>
+        <div class="click-hint">Ấn vào đây <br> để nhận lộc đầu năm nha </div>
+    </div>
+
+    <div id="content">
+        <h1 class="title-tet">Chúc Mừng Năm Mới<br>Xuân Bính Ngọ 2026!</h1>
+        <div class="horse-icons-top">🐎 🐎 🐎</div>
+        
+        <div id="extra-image-container">
+            <img src="Anh-2.jpg" id="mainImage" alt="Mạnh mẽ như ngựa" class="my-custom-img">
+        </div>
+
+        <div class="wishes">
+            <span id="type-text"></span>
+            <span id="writing-pen" class="writing-pen">🖌️</span>
+        </div>
+
+        <div id="btnLucky" class="btn-lucky" onclick="startShaking()">
+            ✨ Rút Quẻ Lộc Đầu Năm 🧧
+        </div>
+    </div>
+
+    <div id="speakerHint" class="speaker-hint">Click mở loa để nghe nhạc nha</div>
+    <div id="soundBtn" class="sound-control" onclick="toggleSound(event)">🔇</div>
+
+    <audio id="tetMusic" loop>
+        <source src="nhac-tet.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        var music = document.getElementById('tetMusic');
+        var soundBtn = document.getElementById('soundBtn');
+        var speakerHint = document.getElementById('speakerHint'); 
+        var isPlaying = false;
+
+        // --- CẤU HÌNH DỮ LIỆU CÁ NHÂN HÓA ĐẦY ĐỦ ---
+        const PERSON_DATA = {
+            "sep_tung": {
+                group: "boss", // Nhóm Sếp
+                wish: "Năm mới em kính chúc Anh cùng gia đình dồi dào sức khỏe - hạnh phúc - bình an - vạn sự như ý. Chúc Phòng mình sẽ hoàn thành vượt mọi chỉ tiêu và đạt nhiều thành tích cao trong năm 2026. Em cảm ơn Anh đã luôn chia sẻ và hỗ trợ ạ.",
+                fortune: {
+                    word: "Thống Lĩnh",
+                    content: "<p><b>👑 Sự Nghiệp:</b><br>Quyết đoán, dẫn dắt đội ngũ vươn xa.</p><p><b>💰 Tài Lộc:</b><br>Vững vàng, gia tăng không ngừng.</p><p><b>🏡 Gia Đạo:</b><br>An khang, thịnh vượng, sum vầy.</p>",
+                    poem: "\"Cầm quân vững lái thuyền ra biển<br>Vạn sự hanh thông, phúc lộc tiền\""
+                }
+            },
+            "sep_doanh": {
+                group: "boss",
+                wish: "Năm mới em kính chúc Anh cùng gia đình dồi dào sức khỏe - hạnh phúc - bình an - vạn sự như ý. Chúc Team mình sẽ luôn đoàn kết, cùng hỗ trợ nhau hoàn thành tốt mọi nhiệm vụ trong năm 2026. Em cảm ơn Anh đã luôn chia sẻ và hỗ trợ ạ.",
+                fortune: {
+                    word: "Đắc Thắng",
+                    content: "<p><b>🤝 Đồng Đội:</b><br>Trên dưới một lòng, sức mạnh vô song.</p><p><b>🚀 Công Việc:</b><br>Thuận buồm xuôi gió, thăng tiến cao.</p><p><b>💰 Tiền Bạc:</b><br>Rủng rỉnh, đầu tư đâu thắng đó.</p>",
+                    poem: "\"Phó tướng tài ba, mưu lược giỏi<br>Công thành danh toại, lộc đầy nhà\""
+                }
+            },
+            // Nhóm Em
+            "e_linh": {
+                group: "member", // Nhóm Member
+                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
+                fortune: {
+                    word: "Như Ý",
+                    content: "<p><b>🌸 Tình Duyên:</b><br>Hoa nở rộ, người thương sẽ tới.</p><p><b>💻 Code:</b><br>Mượt mà, không bug, deploy một phát ăn ngay.</p><p><b>💰 Lương Thưởng:</b><br>Tăng đều đều, tiền tiêu rủng rỉnh.</p>",
+                    poem: "\"Xuân này hơn hẳn mấy xuân qua<br>Phúc lộc đưa nhau đến tận nhà\""
+                }
+            },
+            "e_kimanh": {
+                group: "member",
+                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
+                fortune: {
+                    word: "Cát Tường",
+                    content: "<p><b>💄 Nhan Sắc:</b><br>Ngày càng thăng hạng, rạng rỡ xinh tươi.</p><p><b>💼 Sự Nghiệp:</b><br>Quý nhân phù trợ, thăng tiến vù vù.</p><p><b>🍀 May Mắn:</b><br>Đi đâu cũng gặp điều lành.</p>",
+                    poem: "\"Cát tường như ý, vạn sự an<br>Tài lộc quanh năm, phúc ngập tràn\""
+                }
+            },
+            "e_trung": {
+                group: "member",
+                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
+                fortune: {
+                    word: "Đột Phá",
+                    content: "<p><b>🧠 Trí Tuệ:</b><br>Sáng suốt, giải quyết mọi vấn đề hóc búa.</p><p><b>🏃 Sức Khỏe:</b><br>Dẻo dai, bền bỉ như ngựa chiến.</p><p><b>📈 Thành Công:</b><br>Đạt được cột mốc quan trọng mới.</p>",
+                    poem: "\"Chí lớn tung hoành trời đất rộng<br>Công danh sự nghiệp sáng bừng lên\""
+                }
+            },
+            "e_vinh": {
+                group: "member",
+                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
+                fortune: {
+                    word: "Tài Lộc",
+                    content: "<p><b>💰 Ví Tiền:</b><br>Lúc nào cũng dày, tiêu hoài không hết.</p><p><b>🛠️ Kỹ Năng:</b><br>Level up vù vù, trùm mọi dự án.</p><p><b>😄 Tinh Thần:</b><br>Luôn lạc quan, yêu đời phơi phới.</p>",
+                    poem: "\"Tiền vào cửa trước, vàng cửa sau<br>Hai chữ giàu sang đến rất mau\""
+                }
+            },
+            "e_duc": {
+                group: "member",
+                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
+                fortune: {
+                    word: "Bình An",
+                    content: "<p><b>🧘 Tâm Trí:</b><br>An yên, không lo âu, stress free.</p><p><b>🛡️ Công Việc:</b><br>Vững chắc, ổn định, được tin tưởng.</p><p><b>💖 Tình Cảm:</b><br>Ấm áp, được mọi người yêu quý.</p>",
+                    poem: "\"Bình an hai chữ giá ngàn vàng<br>Phú quý vinh hoa tự xếp hàng\""
+                }
+            }
+        };
+
+        const textPart2 = "2026 - Mã đáo thành công";
+        const typeSpeed = 35; 
+
+        let charIndex = 0;
+        let isTypingPart2 = false; 
+        let selectedPerson = ""; 
+        
+        window.onload = function() {
+            // Lấy tham số 'id' từ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const idParam = urlParams.get('id');
+
+            // Kiểm tra xem ID có hợp lệ không
+            if (idParam && PERSON_DATA[idParam]) {
+                selectedPerson = idParam;
+            } else {
+                // Nếu không có ID hoặc sai ID, mặc định là ai đó (ví dụ e_linh)
+                // Hoặc bạn có thể tạo 1 ID 'guest' chung
+                selectedPerson = 'e_linh'; 
+            }
+
+            setInterval(createFlower, 350);
+            setInterval(createFirework, 800);
+            music.play().then(() => { 
+                isPlaying = true; updateSoundIcon(true);
+            }).catch(() => {
+                updateSoundIcon(false);
+            });
+        };
+
+        function updateSoundIcon(playing) {
+            if (playing) { 
+                soundBtn.innerHTML = '🔊'; soundBtn.style.animation = 'none'; 
+            } 
+            else { 
+                soundBtn.innerHTML = '🔇'; soundBtn.style.animation = 'pulse-btn 2s infinite'; 
+            }
+        }
+
+        function toggleSound(event) {
+            event.stopPropagation();
+            speakerHint.style.display = 'none';
+            if (music.paused) { music.play(); isPlaying = true; updateSoundIcon(true); } 
+            else { music.pause(); isPlaying = false; updateSoundIcon(false); }
+        }
+
+        function playAudioForce() {
+            if (music.paused) {
+                music.play().then(() => { 
+                    isPlaying = true; updateSoundIcon(true); 
+                }).catch((e) => console.log(e));
+            }
+        }
+
+        function openEnvelope() {
+            playAudioForce();
+            speakerHint.style.display = 'none'; 
+            document.getElementById('envelope').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            showImageAndStartGreeting();
+        }
+
+        function showImageAndStartGreeting() {
+            const imgContainer = document.getElementById("extra-image-container");
+            const greetingImg = document.getElementById("mainImage"); 
+
+            // --- LOGIC THAY ĐỔI ẢNH THEO NGƯỜI CHỌN ---
+            if (selectedPerson === 'sep_tung') {
+                greetingImg.src = 'Anh-1.jpg'; // Ảnh riêng cho Sếp Tùng
+            } else {
+                greetingImg.src = 'Anh-2.jpg'; // Ảnh chung cho mọi người khác
+            }
+
+            imgContainer.style.display = "block"; 
+            setTimeout(typeWriter, 500);
+        }
+
+        function typeWriter() {
+            const container = document.getElementById("type-text");
+            const pen = document.getElementById("writing-pen");
+            const textPart1 = PERSON_DATA[selectedPerson].wish;
+
+            if (!isTypingPart2) {
+                if (charIndex < textPart1.length) {
+                    container.innerHTML += textPart1.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeWriter, typeSpeed);
+                } else {
+                    isTypingPart2 = true;
+                    charIndex = 0; 
+                    const newSpan = document.createElement("span");
+                    newSpan.className = "highlight-text"; 
+                    newSpan.id = "highlight-span";
+                    container.appendChild(newSpan); 
+                    newSpan.appendChild(pen);
+                    setTimeout(typeWriter, typeSpeed);
+                }
+            } 
+            else {
+                const highlightSpan = document.getElementById("highlight-span");
+                if (charIndex < textPart2.length) {
+                    const char = textPart2.charAt(charIndex);
+                    const textNode = document.createTextNode(char);
+                    highlightSpan.insertBefore(textNode, pen);
+                    charIndex++;
+                    setTimeout(typeWriter, typeSpeed);
+                } else {
+                    pen.style.display = "none";
+                    
+                    const btnLucky = document.getElementById("btnLucky");
+                    btnLucky.style.display = "inline-block";
+                    
+                    const contentDiv = document.getElementById('content');
+                    contentDiv.scrollTo({
+                        top: contentDiv.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+
+        function startShaking() {
+            document.getElementById('shakingModal').style.display = 'flex';
+            const data = PERSON_DATA[selectedPerson].fortune;
+            document.getElementById('fortune-word').innerHTML = data.word;
+            document.getElementById('fortune-details').innerHTML = data.content;
+            document.getElementById('fortune-poem').innerHTML = data.poem;
+
+            setTimeout(function() {
+                document.getElementById('shakingModal').style.display = 'none';
+                document.getElementById('resultModal').style.display = 'flex';
+            }, 3000);
+        }
+
+        // --- HÀM REVEAL QR MỚI (CẬP NHẬT THEO LOGIC MỚI) ---
+        function revealQR() {
+            // Lấy thông tin người hiện tại
+            const personInfo = PERSON_DATA[selectedPerson];
+            const group = personInfo.group; // 'boss' hoặc 'member'
+
+            // Các Element cần thay đổi
+            const qrTitle = document.getElementById('qrTitle');
+            const qrImgMain = document.getElementById('qrImgMain');
+            const btnDownload = document.getElementById('btnDownload');
+            const finalMsg = document.getElementById('finalMsg');
+
+            // --- CẬP NHẬT NỘI DUNG DỰA TRÊN GROUP ---
+            if (group === 'boss') {
+                // Dành cho Sếp
+                qrTitle.innerText = "Khai Xuân Đắc Lộc";
+                qrImgMain.src = "qr-sep.jpg";
+                btnDownload.href = "qr-sep.jpg";
+                finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng đây là tấm lòng thành của em gửi tới Anh nhân dịp đầu xuân năm mới. Kính chúc Anh một năm Bính Ngọ 2026 thật nhiều sức khỏe, hạnh phúc và thành công rực rỡ!";
+            } else {
+                // Dành cho Member
+                qrTitle.innerText = "Lì xì may mắn đầu năm";
+                qrImgMain.src = "qr-member.jpg";
+                btnDownload.href = "qr-member.jpg";
+                finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng hy vọng nó sẽ mang lại cho em chút niềm vui và may mắn trong ngày đầu năm. Chúc em một năm mới tràn đầy năng lượng và code không bao giờ có bug nhé! ^^";
+            }
+
+            // Hiển thị
+            document.getElementById('resultModal').style.display = 'none';
+            document.getElementById('content').style.display = 'none';
+            document.getElementById('qrOverlay').style.display = 'flex';
+        }
+
+        function closeQR() {
+            document.getElementById('qrOverlay').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }
+
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById("qrLightbox");
+            const lightboxImg = document.getElementById("lightboxImg");
+            lightboxImg.src = imgSrc; 
+            lightbox.style.display = "flex"; 
+        }
+
+        function closeLightbox() {
+            document.getElementById("qrLightbox").style.display = "none";
+        }
+
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.innerHTML = Math.random() > 0.5 ? '🌸' : '🌼'; 
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            const duration = Math.random() * 5 + 5;
+            flower.style.animation = `fall ${duration}s linear forwards`;
+            document.body.appendChild(flower);
+            const style = document.createElement('style');
+            style.innerHTML = `@keyframes fall { to { transform: translateY(110vh) rotate(${Math.random() * 360}deg); } }`;
+            document.head.appendChild(style);
+            setTimeout(() => { flower.remove(); style.remove(); }, duration * 1000);
+        }
+
+        function createFirework() {
+            const shell = document.createElement('div');
+            shell.className = 'firework-shell';
+            shell.style.left = Math.random() * 90 + 5 + 'vw';
+            shell.style.top = Math.random() * 60 + 10 + 'vh';
+            document.body.appendChild(shell);
+            const colors = ['#ff0000', '#ffff00', '#00ff00', '#00ffff', '#ff00ff', '#ffaa00', '#ffffff'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                particle.style.backgroundColor = color;
+                const size = Math.random() * 3 + 2 + 'px';
+                particle.style.width = size; particle.style.height = size;
+                particle.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+                const angle = (i / 50) * 360 * (Math.PI / 180);
+                const distance = Math.random() * 200 + 50;
+                const x = Math.cos(angle) * distance + 'px';
+                const y = Math.sin(angle) * distance + 'px';
+                particle.style.setProperty('--x', x); particle.style.setProperty('--y', y);
+                shell.appendChild(particle);
+            }
+            setTimeout(() => { shell.remove(); }, 1200);
+        }
+    </script>
+</body>
+</html>
