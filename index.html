@@ -36,7 +36,7 @@
         @keyframes runAcross { 0% { left: -300px; } 100% { left: 110vw; } }
         @keyframes gallop { 0% { transform: scaleX(-1) translateY(0) rotate(0deg); } 100% { transform: scaleX(-1) translateY(-20px) rotate(5deg); } }
 
-        /* --- 3. UI ELEMENT CƠ BẢN --- */
+        /* --- 3. NÚT LOA & GỢI Ý --- */
         .sound-control {
             position: fixed; top: 20px; right: 20px;
             width: 40px; height: 40px; 
@@ -81,8 +81,6 @@
         .click-hint { font-size: 18px; font-weight: bold; margin-top: 20px; animation: blink 1.5s infinite; }
         @keyframes blink { 50% { opacity: 0.5; } }
 
-        /* --- (ĐÃ XÓA PHẦN #nameSelection) --- */
-
         /* --- 6. NỘI DUNG CHÍNH (LỜI CHÚC) --- */
         #content {
             display: none; background: #fffaf0;
@@ -101,7 +99,6 @@
         h1.title-tet { color: #d00000; font-size: 24px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;}
         .horse-icons-top { font-size: 28px; margin: 0px 0 10px 0; }
         
-        /* CSS CHO LỜI CHÚC & BÚT */
         .wishes { 
             font-size: 16px; line-height: 1.6; color: #333; font-style: italic; font-weight: 600; 
             background: #fff; padding: 15px; border-radius: 10px; border: 1px dashed #d00000; margin-bottom: 20px;
@@ -125,7 +122,7 @@
             100% { transform: rotate(15deg) translateY(-5px); }
         }
 
-        /* --- CSS ẢNH NAM.JPG --- */
+        /* --- CSS ẢNH LỜI CHÚC TƯƠNG TÁC ĐƯỢC --- */
         #extra-image-container {
             display: none; margin-bottom: 15px;
         }
@@ -136,8 +133,8 @@
             border-radius: 10px; border: 3px solid #d00000;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             display: block; margin: 0 auto;
+            cursor: zoom-in; /* Thêm con trỏ kính lúp báo hiệu có thể click */
             
-            /* HIỆU ỨNG CINE DREAMY - Tốc độ 1.5s */
             opacity: 0;
             filter: blur(20px) brightness(1.2); 
             transform: scale(1.1); 
@@ -174,15 +171,18 @@
         .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 20px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
         .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 10px; cursor: zoom-in; transition: transform 0.2s; }
         .qr-img-large:hover { transform: scale(1.02); }
+        
         #qrLightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s; }
         .lightbox-img-content { width: auto; height: auto; max-width: 90%; max-height: 80vh; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); animation: zoomInPopup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: zoom-out; }
         @keyframes zoomInPopup { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .lightbox-hint-text { color: #ccc; margin-top: 15px; font-style: italic; font-size: 14px; animation: blink 2s infinite; }
         .qr-note { color: #fff; font-style: italic; font-size: 16px; margin-bottom: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+        
         .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 10px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .btn-download-bottom:hover { transform: scale(1.05); background: #b30000; }
         .final-message { margin-top: 30px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
         #shakingModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
         .fortune-container { width: 100px; height: 160px; background: linear-gradient(to right, #b30000, #d00000, #b30000); border: 4px solid #ffd700; border-radius: 10px 10px 30px 30px; position: relative; animation: shake-hard 0.4s ease-in-out infinite; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
         .fortune-container::before { content: ''; position: absolute; top: -15px; left: 5px; width: 82px; height: 25px; background: #800000; border: 4px solid #ffd700; border-radius: 50%; z-index: 2; }
@@ -191,17 +191,51 @@
         .stick-sample:nth-child(1) { left: 10px; transform: rotate(-15deg); top: 10px; } .stick-sample:nth-child(2) { left: 25px; transform: rotate(0deg); top: 0px; } .stick-sample:nth-child(3) { left: 40px; transform: rotate(15deg); top: 10px; }
         @keyframes shake-hard { 0% { transform: rotate(0deg) translateY(0); } 25% { transform: rotate(-10deg) translateY(-10px); } 50% { transform: rotate(0deg) translateY(0); } 75% { transform: rotate(10deg) translateY(10px); } 100% { transform: rotate(0deg) translateY(0); } }
         .shaking-text { color: #ffd700; font-size: 22px; font-weight: bold; margin-top: 40px; text-shadow: 0 0 10px #d00000; animation: blink 1s infinite; }
+        
         #resultModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 3000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
         .bamboo-card { width: 300px; min-height: 450px; background: #fdf5e6; border: 8px solid #d4a017; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; padding: 0; box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); transform: scale(0.1); opacity: 0; animation: card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; overflow: hidden; }
         .card-header { width: 100%; height: 70px; background: #d00000; display: flex; justify-content: center; align-items: center; color: #ffd700; font-size: 35px; font-weight: 900; border-bottom: 4px solid #d4a017; text-transform: uppercase; }
         .card-body { padding: 20px; width: 100%; box-sizing: border-box; text-align: center; color: #5c4033; background-image: linear-gradient(#fdf5e6 1px, transparent 1px), linear-gradient(90deg, #fdf5e6 1px, transparent 1px); background-size: 20px 20px; }
-        .fortune-rank { display: inline-block; font-size: 24px; font-weight: bold; font-family: 'Dancing Script', cursive, sans-serif; background: linear-gradient(to right, #d00000, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: 2px solid #d00000; padding: 5px 20px; border-radius: 50px; margin-bottom: 20px; text-transform: uppercase; white-space: nowrap; animation: heartbeat 2s infinite; }
-        @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        .fortune-content p { font-size: 16px; margin: 10px 0; font-weight: 600; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
-        .fortune-content b { color: #d00000; font-size: 18px; }
-        .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: bold; }
+        
+        /* --- HIỆU CHỈNH CHỮ TÊN THẺ THƯ PHÁP, BOLD, BLINK --- */
+        .fortune-rank { 
+            display: inline-block; 
+            font-size: 32px; /* Tăng kích thước để đẹp hơn với font thư pháp */
+            font-weight: 900; 
+            font-family: 'Dancing Script', cursive, sans-serif; 
+            background: linear-gradient(to right, #d00000, #ff0000); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            border: 2px solid #d00000; 
+            padding: 5px 25px; 
+            border-radius: 50px; 
+            margin-bottom: 15px; 
+            white-space: nowrap; /* Bắt buộc trên 1 dòng */
+            /* Hiệu ứng nhấp nháy phát sáng */
+            animation: text-blink 1.5s infinite alternate; 
+        }
+        @keyframes text-blink { 
+            0% { opacity: 1; filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)); transform: scale(1); } 
+            100% { opacity: 0.6; filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0)); transform: scale(1.02); } 
+        }
+        
+        /* --- HIỆU CHỈNH NỘI DUNG QUẺ (Tránh rớt 1 chữ xuống dòng) --- */
+        .fortune-content p { 
+            font-size: 15px; /* Giảm 1px so với cũ */
+            line-height: 1.4;
+            margin: 10px 0; 
+            font-weight: 600; 
+            border-bottom: 1px dashed #ccc; 
+            padding-bottom: 5px; 
+            text-wrap: balance; /* Trợ thủ đắc lực dàn đều chữ, chống rớt 1 chữ */
+        }
+        
+        .fortune-content b { color: #d00000; font-size: 17px; }
+        .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: bold; font-size: 15px; text-wrap: balance; }
+        
         .btn-get-money-card { margin-top: auto; margin-bottom: 20px; background: linear-gradient(to right, #d00000, #ff0000); color: #fff; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 16px; animation: pulse-gold 1.5s infinite; }
         @keyframes card-reveal { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
+        
         .flower { position: absolute; top: -10vh; z-index: 10; pointer-events: none; opacity: 0.8; }
         .firework-shell { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5; }
         .firework-particle { position: absolute; border-radius: 50%; animation: realistic-burst 1.2s ease-out forwards, twinkle 0.2s infinite alternate; }
@@ -232,7 +266,7 @@
                 <div class="fortune-content" id="fortune-details"></div>
                 <div class="poem" id="fortune-poem"></div>
             </div>
-            <button class="btn-get-money-card" onclick="revealQR()">Nhận Lộc Ngay 🧧</button>
+            <button class="btn-get-money-card" onclick="revealQR()">Nhận Lộc Xuân 🧧</button>
         </div>
     </div>
 
@@ -254,8 +288,7 @@
             <span>⬇️</span> Tải mã QR về
         </a>
         
-        <div class="final-message" id="finalMsg">
-            </div>
+        <div class="final-message" id="finalMsg"></div>
     </div>
 
     <div class="horse-container">
@@ -275,7 +308,7 @@
         <div class="horse-icons-top">🐎 🐎 🐎</div>
         
         <div id="extra-image-container">
-            <img src="Anh-2.jpg" id="mainImage" alt="Mạnh mẽ như ngựa" class="my-custom-img">
+            <img src="Anh-2.jpg" id="mainImage" alt="Mạnh mẽ như ngựa" class="my-custom-img" onclick="openLightbox(this.src)">
         </div>
 
         <div class="wishes">
@@ -301,10 +334,9 @@
         var speakerHint = document.getElementById('speakerHint'); 
         var isPlaying = false;
 
-        // --- CẤU HÌNH DỮ LIỆU CÁ NHÂN HÓA ĐẦY ĐỦ ---
         const PERSON_DATA = {
             "sep_tung": {
-                group: "boss", // Nhóm Sếp
+                group: "boss",
                 wish: "Năm mới em kính chúc Anh cùng gia đình dồi dào sức khỏe - hạnh phúc - bình an - vạn sự như ý. Chúc Phòng mình sẽ hoàn thành vượt mọi chỉ tiêu và đạt nhiều thành tích cao trong năm 2026. Em cảm ơn Anh đã luôn chia sẻ và hỗ trợ ạ.",
                 fortune: {
                     word: "Thống Lĩnh",
@@ -321,9 +353,8 @@
                     poem: "\"Phó tướng tài ba, mưu lược giỏi<br>Công thành danh toại, lộc đầy nhà\""
                 }
             },
-            // Nhóm Em
             "e_linh": {
-                group: "member", // Nhóm Member
+                group: "member",
                 wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
                 fortune: {
                     word: "Như Ý",
@@ -377,16 +408,12 @@
         let selectedPerson = ""; 
         
         window.onload = function() {
-            // Lấy tham số 'id' từ URL
             const urlParams = new URLSearchParams(window.location.search);
             const idParam = urlParams.get('id');
 
-            // Kiểm tra xem ID có hợp lệ không
             if (idParam && PERSON_DATA[idParam]) {
                 selectedPerson = idParam;
             } else {
-                // Nếu không có ID hoặc sai ID, mặc định là ai đó (ví dụ e_linh)
-                // Hoặc bạn có thể tạo 1 ID 'guest' chung
                 selectedPerson = 'e_linh'; 
             }
 
@@ -400,12 +427,8 @@
         };
 
         function updateSoundIcon(playing) {
-            if (playing) { 
-                soundBtn.innerHTML = '🔊'; soundBtn.style.animation = 'none'; 
-            } 
-            else { 
-                soundBtn.innerHTML = '🔇'; soundBtn.style.animation = 'pulse-btn 2s infinite'; 
-            }
+            if (playing) { soundBtn.innerHTML = '🔊'; soundBtn.style.animation = 'none'; } 
+            else { soundBtn.innerHTML = '🔇'; soundBtn.style.animation = 'pulse-btn 2s infinite'; }
         }
 
         function toggleSound(event) {
@@ -417,9 +440,7 @@
 
         function playAudioForce() {
             if (music.paused) {
-                music.play().then(() => { 
-                    isPlaying = true; updateSoundIcon(true); 
-                }).catch((e) => console.log(e));
+                music.play().then(() => { isPlaying = true; updateSoundIcon(true); }).catch((e) => console.log(e));
             }
         }
 
@@ -435,11 +456,10 @@
             const imgContainer = document.getElementById("extra-image-container");
             const greetingImg = document.getElementById("mainImage"); 
 
-            // --- LOGIC THAY ĐỔI ẢNH THEO NGƯỜI CHỌN ---
             if (selectedPerson === 'sep_tung') {
-                greetingImg.src = 'Anh-1.jpg'; // Ảnh riêng cho Sếp Tùng
+                greetingImg.src = 'Anh-1.jpg'; 
             } else {
-                greetingImg.src = 'Anh-2.jpg'; // Ảnh chung cho mọi người khác
+                greetingImg.src = 'Anh-2.jpg'; 
             }
 
             imgContainer.style.display = "block"; 
@@ -482,10 +502,7 @@
                     btnLucky.style.display = "inline-block";
                     
                     const contentDiv = document.getElementById('content');
-                    contentDiv.scrollTo({
-                        top: contentDiv.scrollHeight,
-                        behavior: 'smooth'
-                    });
+                    contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' });
                 }
             }
         }
@@ -503,34 +520,27 @@
             }, 3000);
         }
 
-        // --- HÀM REVEAL QR MỚI (CẬP NHẬT THEO LOGIC MỚI) ---
         function revealQR() {
-            // Lấy thông tin người hiện tại
             const personInfo = PERSON_DATA[selectedPerson];
-            const group = personInfo.group; // 'boss' hoặc 'member'
+            const group = personInfo.group;
 
-            // Các Element cần thay đổi
             const qrTitle = document.getElementById('qrTitle');
             const qrImgMain = document.getElementById('qrImgMain');
             const btnDownload = document.getElementById('btnDownload');
             const finalMsg = document.getElementById('finalMsg');
 
-            // --- CẬP NHẬT NỘI DUNG DỰA TRÊN GROUP ---
             if (group === 'boss') {
-                // Dành cho Sếp
                 qrTitle.innerText = "Khai Xuân Đắc Lộc";
                 qrImgMain.src = "qr-sep.jpg";
                 btnDownload.href = "qr-sep.jpg";
                 finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng đây là tấm lòng thành của em gửi tới Anh nhân dịp đầu xuân năm mới. Kính chúc Anh một năm Bính Ngọ 2026 thật nhiều sức khỏe, hạnh phúc và thành công rực rỡ!";
             } else {
-                // Dành cho Member
                 qrTitle.innerText = "Lì xì may mắn đầu năm";
                 qrImgMain.src = "qr-member.jpg";
                 btnDownload.href = "qr-member.jpg";
                 finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng hy vọng nó sẽ mang lại cho em chút niềm vui và may mắn trong ngày đầu năm. Chúc em một năm mới tràn đầy năng lượng và code không bao giờ có bug nhé! ^^";
             }
 
-            // Hiển thị
             document.getElementById('resultModal').style.display = 'none';
             document.getElementById('content').style.display = 'none';
             document.getElementById('qrOverlay').style.display = 'flex';
