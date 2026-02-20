@@ -195,6 +195,8 @@
         .btn-close-qr { position: absolute; top: 30px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; opacity: 0.8; transition: 0.3s; text-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 2005; }
         .btn-close-qr:hover { opacity: 1; transform: scale(1.1); }
         .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
+        
+        /* ĐÃ SỬA LẠI CÂU NHẮC NHỞ CHO RÕ RÀNG TRÊN ZALO */
         .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
         
         /* Đã tối ưu CSS để Zalo cho phép tải ảnh QR khi giữ lâu */
@@ -307,7 +309,7 @@
 
     <div id="qrOverlay">
         <div class="btn-close-qr" onclick="closeQR()">×</div><div class="qr-title-large" id="qrTitle">Lì xì tặng em</div>
-        <div class="qr-note-top">(Sử dụng APP Viettel Money để quét QR<br>Nhấn giữ vào mã QR để lưu ảnh về máy)</div>
+        <div class="qr-note-top">(Sử dụng APP Viettel Money để quét QR<br>Mở bằng Zalo: Bấm nút "Tải mã QR" bên dưới)</div>
         <img src="" alt="QR Code" class="qr-img-large" id="qrImgMain">
         <div class="btn-download-bottom" onclick="forceDownloadQR()"><span>⬇️</span> Tải mã QR</div><div class="final-message" id="finalMsg"></div>
     </div>
@@ -590,9 +592,32 @@
 
         function forceDownloadQR() {
             const imgSrc = document.getElementById('qrImgMain').src;
-            fetch(imgSrc).then(resp => resp.blob()).then(blob => {
-                const url = window.URL.createObjectURL(blob); const a = document.createElement('a'); a.style.display = 'none'; a.href = url; a.download = 'LiXi_Tet_2026.jpg'; document.body.appendChild(a); a.click(); window.URL.revokeObjectURL(url);
-            }).catch(() => { const a = document.createElement('a'); a.href = imgSrc; a.download = 'LiXi_Tet_2026.jpg'; a.click(); });
+            
+            // Nhận diện trình duyệt in-app (Zalo, Facebook)
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const isInAppBrowser = /Zalo|FBAN|FBAV/i.test(ua);
+
+            if (isInAppBrowser) {
+                // Chuyển hướng thẳng đến link ảnh để Zalo/FB mở trình xem ảnh native của nó
+                window.location.href = imgSrc;
+            } else {
+                // Trình duyệt chuẩn (Safari, Chrome) tải ngầm qua Blob bình thường
+                fetch(imgSrc).then(resp => resp.blob()).then(blob => {
+                    const url = window.URL.createObjectURL(blob); 
+                    const a = document.createElement('a'); 
+                    a.style.display = 'none'; 
+                    a.href = url; 
+                    a.download = 'LiXi_Tet_2026.jpg'; 
+                    document.body.appendChild(a); 
+                    a.click(); 
+                    window.URL.revokeObjectURL(url);
+                }).catch(() => { 
+                    const a = document.createElement('a'); 
+                    a.href = imgSrc; 
+                    a.download = 'LiXi_Tet_2026.jpg'; 
+                    a.click(); 
+                });
+            }
         }
         function closeQR() { document.getElementById('qrOverlay').style.display = 'none'; document.getElementById('content').style.display = 'block'; fireworkIntervalMain = setInterval(createFirework, 1800); }
         function openLightbox(imgSrc) { document.getElementById("lightboxImg").src = imgSrc; document.getElementById("qrLightbox").style.display = "flex"; }
