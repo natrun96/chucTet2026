@@ -71,10 +71,8 @@
         .letter-chip.correct { background: #28a745 !important; color: white !important; border-color: #fff !important; cursor: default; animation: popSuccess 0.5s forwards; }
         @keyframes popSuccess { 50% { transform: scale(1.15); background: #20c997; } 100% { transform: scale(1); } }
         
-        /* Chỉnh lại khoảng trắng và dấu gạch ngang trong game */
         .space-chip { width: 6px; } 
         .dash-chip { font-weight: bold; color: #d00000; display: flex; align-items: center; justify-content: center; margin: 0 2px; }
-
         .scramble-container.long-text .letter-chip { font-size: 13px; padding: 4px 6px; min-width: 10px; margin-bottom: 2px; }
 
         .game-instruction { font-size: 13px; font-style: italic; color: #666; margin-top: 12px; margin-bottom: 10px; animation: blink 2s infinite; padding: 0; text-align: center; display: block; }
@@ -200,7 +198,7 @@
         .btn-close-qr { position: absolute; top: 30px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; opacity: 0.8; transition: 0.3s; text-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 2005; }
         .btn-close-qr:hover { opacity: 1; transform: scale(1.1); }
         .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
-        .qr-note-top { color: #fff; font-style: italic; font-size: 14px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
+        .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
         .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 20px; cursor: zoom-in; transition: transform 0.2s; }
         .qr-img-large:hover { transform: scale(1.02); }
         #qrLightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s; }
@@ -209,7 +207,7 @@
         .lightbox-hint-text { color: #ccc; margin-top: 15px; font-style: italic; font-size: 14px; animation: blink 2s infinite; }
         .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 10px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
         .btn-download-bottom:hover { transform: scale(1.05); background: #b30000; }
-        .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 14px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
+        .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Hoa rơi nền ngoài */
@@ -336,7 +334,7 @@
 
         let charIndex = 0; let isTypingPart2 = false; let selectedPerson = ""; let treeInitialized = false;
         const typeSpeed = 30;
-        const ignoreChars = [' ', '-']; // Bỏ qua dấu gạch ngang và khoảng trắng khi trộn game
+        const ignoreChars = [' ', '-']; 
         
         window.onload = function() {
             let idParam = new URLSearchParams(window.location.search).get('id');
@@ -410,10 +408,7 @@
             } else {
                 boardArea.style.display = "block"; correctOrder = data.highlightText.split('');
                 
-                // Thu nhỏ chữ nếu đoạn text quá dài
-                if (correctOrder.length > 15) {
-                    document.getElementById("wordContainer").classList.add("long-text");
-                }
+                if (correctOrder.length > 15) { document.getElementById("wordContainer").classList.add("long-text"); }
 
                 let letters = correctOrder.filter(c => !ignoreChars.includes(c)); 
                 let originalLetters = letters.join('');
