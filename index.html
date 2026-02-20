@@ -107,7 +107,7 @@
         @keyframes card-reveal { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
 
         /* ==========================================================
-           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D (ĐÃ TỐI ƯU CĂN CHỈNH)
+           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D
            ========================================================== */
         #treeOverlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 4000;
@@ -124,7 +124,7 @@
             clip-path: ellipse(150% 100% at 50% 100%); z-index: 1; pointer-events: none;
         }
 
-        /* TIÊU ĐỀ: Căn giữa tuyệt đối trên cùng màn hình */
+        /* TIÊU ĐỀ */
         .tree-title { 
             position: absolute; top: 4vh; left: 0; width: 100%; text-align: center;
             color: #d41414; font-size: 38px; font-weight: 900; 
@@ -135,20 +135,20 @@
         /* KHUNG CHỨA TOÀN BỘ CÂY VÀ CHẬU */
         .tree-area {
             position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%);
-            width: 100vw; min-width: 600px; max-width: 900px; /* Kiểm soát độ vươn của cành trên mobile */
+            width: 100vw; min-width: 600px; max-width: 900px;
             height: 70vh; max-height: 800px;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
             z-index: 2;
         }
 
-        /* CHI TIẾT CHẬU HOA 3D (Z-index xen kẽ) */
+        /* CHI TIẾT CHẬU HOA 3D */
         .pot-lip-back { position: absolute; bottom: 95px; left: 50%; transform: translateX(-50%); width: 150px; height: 22px; background: #6b2f15; border-radius: 50%; z-index: 1; }
         .pot-soil { position: absolute; bottom: 93px; left: 50%; transform: translateX(-50%); width: 135px; height: 16px; background: #2b1408; border-radius: 50%; z-index: 2; box-shadow: inset 0 0 10px rgba(0,0,0,0.8);}
         .pot-lip-front { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 160px; height: 26px; background: linear-gradient(to right, #a0522d, #d2691e, #a0522d); border-radius: 50%; z-index: 4; box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 2px 2px rgba(255,255,255,0.2); }
         .pot-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 130px; height: 95px; background: linear-gradient(to right, #703311, #b34d10, #703311); border-radius: 10px 10px 65px 65px; z-index: 4; display: flex; justify-content: center; align-items: center; box-shadow: inset -15px -10px 20px rgba(0,0,0,0.5), 0 20px 25px rgba(0,0,0,0.6); }
         .pot-body::after { content: '2026'; color: #ffd700; font-size: 26px; font-weight: 900; font-family: 'Arial Black', sans-serif; text-shadow: -1px -1px 0 #cc9900, 2px 2px 3px rgba(0,0,0,0.6); margin-top: 10px;}
 
-        /* CÂY ĐÀO SVG (Cắm vào chính giữa đất) */
+        /* CÂY ĐÀO SVG */
         .tree-svg-container, .tree-canopy {
             position: absolute; bottom: 90px; 
             width: 100%; height: calc(100% - 90px);
@@ -158,7 +158,7 @@
         .tree-canopy { z-index: 5; }
         .tree-svg-container svg { width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(3px 15px 10px rgba(0,0,0,0.3)); }
 
-        /* HOA ĐÀO & LÁ (Sinh bằng JS) */
+        /* HOA ĐÀO & LÁ */
         .svg-flower, .svg-leaf { position: absolute; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2)); transform-origin: center; will-change: transform; }
         .svg-flower { animation: blossom-pulse 3s infinite alternate; }
         @keyframes blossom-pulse { 0% { transform: scale(0.9); } 100% { transform: scale(1.15); } }
@@ -179,17 +179,36 @@
         @keyframes env-swing { 0% { transform: rotate(-6deg); } 100% { transform: rotate(6deg); } }
         @keyframes env-blink { 0% { box-shadow: 0 0 5px #ffd700; } 100% { box-shadow: 0 0 15px #ffd700, 0 0 20px rgba(255,0,0,0.6); } }
 
-        /* LÌ XÌ CLONE BAY RA MÀN HÌNH */
-        .env-clone-wrap { width: 34px; height: 50px; z-index: 9999; display: flex; flex-direction: column; align-items: center; transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1); transform-origin: center; will-change: transform, top, left;}
-        .env-clone { width: 100%; height: 100%; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; border-radius: 4px; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; }
-        .env-clone::before { content: ''; position: absolute; top: -2px; left: -2px; border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 15px solid #b30000; transition: transform 0.6s; transform-origin: top; z-index: 2; }
-        .env-clone .epass-logo { color: #ffaa00; font-weight: 800; font-size: 9px; text-shadow: 1px 1px 0px #5a0000; transform: rotate(-10deg); z-index: 3; transition: opacity 0.3s;}
-        .qr-pop-out { position: absolute; width: 28px; height: 28px; background: white; z-index: 1; opacity: 0; transition: all 0.6s ease-out; padding: 2px; border: 1px solid #ccc; border-radius: 2px;}
+        /* ĐÃ TỐI ƯU CSS LÌ XÌ CLONE BAY RA MÀN HÌNH */
+        .env-clone-wrap { 
+            width: 34px; height: 50px; z-index: 9999; display: flex; flex-direction: column; align-items: center; 
+            /* Chỉ transition transform để sử dụng GPU tăng tốc, bỏ qua top/left */
+            transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1); 
+            transform-origin: center; will-change: transform;
+        }
+        .env-clone { 
+            width: 100%; height: 100%; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; 
+            border-radius: 4px; display: flex; justify-content: center; align-items: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; 
+        }
+        .env-clone::before { 
+            content: ''; position: absolute; top: -2px; left: -2px; 
+            border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 15px solid #b30000; 
+            transition: transform 0.4s, opacity 0.4s; transform-origin: top; z-index: 2; 
+        }
+        .env-clone .epass-logo { 
+            color: #ffaa00; font-weight: 800; font-size: 9px; text-shadow: 1px 1px 0px #5a0000; 
+            transform: rotate(-10deg); z-index: 3; transition: opacity 0.3s;
+        }
+        .qr-pop-out { 
+            position: absolute; width: 28px; height: 28px; background: white; z-index: 1; opacity: 0; 
+            transition: all 0.5s ease-out; padding: 2px; border: 1px solid #ccc; border-radius: 2px;
+            will-change: transform, opacity;
+        }
         
-        .env-clone-wrap.fly-and-open { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(6); }
-        .env-clone-wrap.fly-and-open .env-clone::before { transform: rotateX(180deg); transition-delay: 1s; opacity: 0; }
-        .env-clone-wrap.fly-and-open .epass-logo { opacity: 0; transition-delay: 1s; }
-        .env-clone-wrap.fly-and-open .qr-pop-out { opacity: 1; transform: translateY(-38px); transition-delay: 1.2s; box-shadow: 0 5px 10px rgba(0,0,0,0.5); }
+        .env-clone-wrap.fly-and-open .env-clone::before { transform: rotateX(180deg); transition-delay: 0.5s; opacity: 0; }
+        .env-clone-wrap.fly-and-open .epass-logo { opacity: 0; transition-delay: 0.5s; }
+        .env-clone-wrap.fly-and-open .qr-pop-out { opacity: 1; transform: translateY(-38px); transition-delay: 0.7s; box-shadow: 0 5px 10px rgba(0,0,0,0.5); }
 
         /* ==========================================================
            4. POPUP QR CUỐI CÙNG & HIỆU ỨNG NỀN
@@ -200,7 +219,6 @@
         .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
         .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
         
-        /* Đã tối ưu CSS để Zalo cho phép tải ảnh QR khi giữ lâu */
         .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 20px; transition: transform 0.2s; -webkit-touch-callout: default; -webkit-user-select: auto; user-select: auto; pointer-events: auto; }
         .qr-img-large:hover { transform: scale(1.02); }
         
@@ -213,7 +231,7 @@
         .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hoa rơi nền ngoài (Đã tăng z-index để phủ lên màn QR) */
+        /* Hoa rơi nền ngoài */
         .flower { position: absolute; top: -10vh; z-index: 5001; pointer-events: none; opacity: 0.8; will-change: transform; }
         @keyframes fall { to { transform: translateY(110vh) rotate(var(--fall-rot)); } }
 
@@ -343,6 +361,10 @@
             let idParam = new URLSearchParams(window.location.search).get('id');
             selectedPerson = (idParam && PERSON_DATA[idParam.trim().toLowerCase()]) ? idParam.trim().toLowerCase() : 'e_linh';
             
+            // PRELOAD ảnh QR để mở ra không bị khựng trắng một lúc
+            const preloadImg = new Image();
+            preloadImg.src = PERSON_DATA[selectedPerson].qr;
+
             flowerInterval = setInterval(createFlower, 450); 
             music.play().then(() => { isPlaying = true; updateSoundIcon(true); }).catch(() => { updateSoundIcon(false); });
         };
@@ -399,7 +421,6 @@
                 boardArea.style.display = "none"; 
                 const fullText = "2026 - " + data.highlightText;
                 
-                // Đã chèn delay 2 giây trước khi show kết quả 
                 setTimeout(() => {
                     const backdrop = document.createElement("div"); backdrop.className = "celebration-backdrop"; document.body.appendChild(backdrop);
                     const popup = document.createElement("div"); popup.className = "celebration-popup"; popup.innerText = fullText; document.body.appendChild(popup);
@@ -541,16 +562,48 @@
             }
         }
 
+        /* ĐÃ TỐI ƯU TOÀN BỘ LOGIC RÚT LÌ XÌ GIÚP CHẠY MƯỢT MÀ, KHÔNG LAG */
         function pickEnvelope(envBox, qrImage) {
             let wrapElement = envBox.parentElement;
-            if (wrapElement.classList.contains('opened')) return; wrapElement.classList.add('opened'); 
+            if (wrapElement.classList.contains('opened')) return; 
+            wrapElement.classList.add('opened'); 
+            
+            // Dừng ngay mưa hoa rơi để dồn tài nguyên render đồ họa mở lì xì
+            clearInterval(treePetalInterval);
+            
             const rect = envBox.getBoundingClientRect();
-            const cloneWrap = document.createElement('div'); cloneWrap.className = 'env-clone-wrap';
-            cloneWrap.style.position = 'fixed'; cloneWrap.style.top = rect.top + 'px'; cloneWrap.style.left = rect.left + 'px';
+            const cloneWrap = document.createElement('div'); 
+            cloneWrap.className = 'env-clone-wrap';
+            
+            // Set tọa độ ảo top/left về 0 và dùng "transform" để di chuyển từ đúng vị trí bấm
+            cloneWrap.style.position = 'fixed'; 
+            cloneWrap.style.top = '0px'; 
+            cloneWrap.style.left = '0px';
+            cloneWrap.style.transform = `translate(${rect.left}px, ${rect.top}px) scale(1)`;
+            
             cloneWrap.innerHTML = `<div class="env-clone"><div class="epass-logo">ePass</div><div class="qr-pop-out"><img src="${qrImage}" style="width:100%;height:100%; object-fit: cover; border-radius: 2px;"></div></div>`;
-            document.body.appendChild(cloneWrap); wrapElement.style.opacity = '0';
-            void cloneWrap.offsetWidth; cloneWrap.classList.add('fly-and-open');
-            setTimeout(() => { document.getElementById('treeOverlay').style.display = 'none'; showQRModalReal(qrImage); cloneWrap.remove(); clearInterval(treePetalInterval); }, 2100); 
+            document.body.appendChild(cloneWrap); 
+            wrapElement.style.opacity = '0';
+            
+            // Tính toán vị trí ra giữa khung hình
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            // Yêu cầu trình duyệt render animation mượt mà
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    cloneWrap.classList.add('fly-and-open');
+                    // Tính tọa độ trung tâm (trừ đi 1 nửa của chiều cao/rộng cái bao lì xì ảo)
+                    cloneWrap.style.transform = `translate(${centerX - 17}px, ${centerY - 25}px) scale(5.5)`;
+                });
+            });
+
+            // Rút ngắn độ delay quá lâu (từ 2.1s cũ xuống còn 1.4s)
+            setTimeout(() => { 
+                document.getElementById('treeOverlay').style.display = 'none'; 
+                showQRModalReal(qrImage); 
+                cloneWrap.remove(); 
+            }, 1400); 
         }
 
         /* --- XỬ LÝ QR & HIỆU ỨNG CHUNG --- */
@@ -562,14 +615,12 @@
             if (selectedPerson === 'tun') {
                 qrTitle.innerText = "Lì Xì Cho Vợ Yêu"; finalMsg.innerText = "Chúc vợ yêu của anh năm mới ngập tràn niềm vui, lúc nào cũng cười tươi rạng rỡ và mãi là hậu phương vững chắc nhất của gia đình mình nhé! ❤️";
             } else if (selectedPerson === 'sep_tung' || selectedPerson === 'sep_doanh' || selectedPerson === 'sep_thang') { 
-                // Kiểm tra trực tiếp ID của 3 sếp ở đây
                 qrTitle.innerText = "Khai Xuân Đắc Lộc"; finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng đây là tấm lòng của em gửi tới Anh nhân dịp đầu xuân năm mới. Kính chúc Anh một năm Bính Ngọ 2026 thật nhiều sức khỏe, hạnh phúc và thành công rực rỡ! 😊"; 
             } else { 
                 qrTitle.innerText = "May mắn đầu xuân"; finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng hy vọng nó sẽ mang lại cho em chút niềm vui và may mắn trong ngày đầu năm 😉"; 
             }
             document.getElementById('qrOverlay').style.display = 'flex';
 
-            // Khởi động lại các hiệu ứng rơi và pháo hoa cho màn QR
             clearInterval(flowerInterval);
             flowerInterval = setInterval(createFlower, 450);
             clearInterval(fireworkIntervalMain);
