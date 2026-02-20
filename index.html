@@ -61,7 +61,7 @@
         .image-caption { margin-top: 8px; font-size: 15px; font-weight: 800; color: #b30000; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); font-style: italic; opacity: 0; animation: fadeIn 1s ease-out forwards; animation-delay: 1s; }
         @keyframes cinematicReveal { 0% { opacity: 0; filter: blur(20px) brightness(1.5); transform: scale(1.15); } 50% { opacity: 0.8; filter: blur(5px) brightness(1.1); } 100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1); } }
 
-        /* GAME CHỮ */
+        /* GAME CHỮ & NÚT */
         #interactive-section { border-top: 1px dashed #d00000; padding-top: 15px; margin-top: 15px; }
         .year-label { display: block; text-align: center; font-size: 22px; font-weight: bold; color: #d00000; margin-top: 0px; margin-bottom: 10px; }
         .scramble-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-bottom: 5px; padding: 0; }
@@ -102,7 +102,7 @@
         @keyframes card-reveal { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
 
         /* ==========================================================
-           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D (ĐÃ TỐI ƯU & KHẮC PHỤC LỖI LỆCH)
+           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D (ĐÃ TỐI ƯU & SCALE LỚN)
            ========================================================== */
         #treeOverlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 4000;
@@ -119,17 +119,18 @@
             clip-path: ellipse(150% 100% at 50% 100%); z-index: 1; pointer-events: none;
         }
 
-        /* TIÊU ĐỀ: Fix lỗi lệch phải, căn giữa 100% */
+        /* TIÊU ĐỀ: ĐƯA LÊN CAO HƠN (top: 3vh) */
         .tree-title { 
-            position: absolute; top: 3vh; left: 50%; transform: translateX(-50%); white-space: nowrap;
+            position: absolute; top: 1vh; left: 50%; transform: translateX(-50%); white-space: nowrap;
             color: #d41414; font-size: 42px; font-weight: 900; 
             text-shadow: 2px 2px 0px #fff, 0 0 15px rgba(255,255,255,0.9); 
             font-family: 'Dancing Script', cursive; animation: pulse-gold 2s infinite; z-index: 10; pointer-events: none;
         }
 
-        /* ROOT ANCHOR: Định vị chuẩn xác Cây & Chậu */
+        /* ROOT ANCHOR: Phóng to toàn bộ chậu lên 30% bằng scale */
         .tree-root-anchor {
-            position: absolute; bottom: 5%; left: 50%; width: 100%; max-width: 500px; transform: translateX(-50%);
+            position: absolute; bottom: 5%; left: 50%; width: 100%; max-width: 500px; 
+            transform: translateX(-50%) scale(1.3); transform-origin: bottom center;
             z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
         }
 
@@ -140,12 +141,11 @@
         .pot-body { width: 150px; height: 110px; background: linear-gradient(to right, #703311, #b34d10, #703311); border-radius: 10px 10px 65px 65px; position: absolute; bottom: 0; z-index: 4; display: flex; justify-content: center; align-items: center; box-shadow: inset -15px -10px 20px rgba(0,0,0,0.5), 0 20px 25px rgba(0,0,0,0.6); }
         .pot-body::after { content: '2026'; color: #ffd700; font-size: 32px; font-weight: 900; font-family: 'Arial Black', sans-serif; text-shadow: -1px -1px 0 #cc9900, 2px 2px 3px rgba(0,0,0,0.6); margin-top: 15px;}
 
-        /* CÂY ĐÀO SVG (Cắm vào chính giữa đất và thành chậu) */
+        /* CÂY ĐÀO SVG (Cắm vào chính giữa chậu) */
         .tree-svg-container, .tree-canopy {
-            position: absolute; bottom: 110px; /* Nằm ngay trên lớp đất */
-            width: 150vw; max-width: 1200px; min-width: 850px; /* Scale bự và bao phủ */
+            position: absolute; bottom: 110px; 
+            width: 150vw; max-width: 1200px; min-width: 850px; 
             height: 75vh; max-height: 850px;
-            /* Căn giữa tâm cây với tâm chậu tuyệt đối */
             left: 50%; transform: translateX(-50%);
             z-index: 3; pointer-events: none;
         }
@@ -156,6 +156,10 @@
         .svg-flower, .svg-leaf { position: absolute; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2)); transform-origin: center; will-change: transform; }
         .svg-flower { animation: blossom-pulse 3s infinite alternate; }
         @keyframes blossom-pulse { 0% { transform: scale(0.9); } 100% { transform: scale(1.15); } }
+
+        /* MƯA HOA ĐÀO RƠI TRONG MÀN HÌNH CÂY */
+        .tree-falling-petal { position: absolute; top: -5vh; z-index: 8; pointer-events: none; will-change: transform, top, left; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));}
+        @keyframes tree-fall { to { transform: translateY(110vh) rotate(var(--fall-rot)) translateX(var(--fall-drift)); opacity: 0; } }
 
         /* LÌ XÌ TREO TRÊN CÂY */
         .tree-envelope-wrapper { position: absolute; display: flex; flex-direction: column; align-items: center; z-index: 20; transform-origin: top center; pointer-events: auto; animation: env-swing 3s ease-in-out infinite alternate; cursor: pointer; will-change: transform;}
@@ -200,7 +204,7 @@
         .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Tối ưu hiệu năng Hoa rơi (Chỉ dùng 1 keyframe CSS) */
+        /* Tối ưu hiệu năng Hoa rơi nền ngoài */
         .flower { position: absolute; top: -10vh; z-index: 10; pointer-events: none; opacity: 0.8; will-change: transform; }
         @keyframes fall { to { transform: translateY(110vh) rotate(var(--fall-rot)); } }
 
@@ -307,11 +311,12 @@
 
     <script>
         var music = document.getElementById('tetMusic'); var soundBtn = document.getElementById('soundBtn'); var speakerHint = document.getElementById('speakerHint'); var isPlaying = false;
-        var flowerInterval;
+        var flowerInterval, treePetalInterval, fireworkIntervalMain;
 
         const PERSON_DATA = {
             "sep_tung": { group: "boss", wish: "Nhân dịp năm mới, em kính chúc Anh cùng Gia đình dồi dào sức khỏe, hạnh phúc, bình an, vạn sự như ý. Em chúc Anh sẽ có 1 năm 2026 thật thành công, dẫn dắt Phòng KTCN của chúng ta hoàn thành vượt mọi chỉ tiêu và đạt được nhiều thành tích cao ạ. Em cũng cảm ơn Anh đã luôn tạo điều kiện, đồng hành và hỗ trợ chúng em trong suốt 1 năm qua ạ ❤️.", highlightText: "Vượt Kế hoạch", qr: "qr-sep.jpg", fortune: { word: "Thống Lĩnh", content: "<p><b>👑 Sự Nghiệp:</b><br>Quyết đoán, dẫn dắt đội ngũ vươn xa.</p><p><b>💰 Tài Lộc:</b><br>Vững vàng, gia tăng không ngừng.</p><p><b>🏡 Gia Đạo:</b><br>An khang, thịnh vượng, sum vầy.</p>", poem: "\"Cầm quân vững lái thuyền ra biển<br>Vạn sự hanh thông, phúc lộc tiền\"" } },
             "sep_doanh": { group: "boss", wish: "Nhân dịp năm mới, em kính chúc Anh cùng Gia đình dồi dào sức khỏe, hạnh phúc, bình an, vạn sự như ý. Em chúc Anh sẽ có 1 năm 2026 thật thành công, dẫn dắt Team chúng ta luôn gắn bó, đoàn kết, hoàn thành tốt mọi nhiệm vụ được giao. Em cũng cảm ơn Anh đã luôn tạo điều kiện, lắng nghe, đồng hành và hỗ trợ em trong suốt 1 năm qua ạ ❤️.", highlightText: "Vượt Kế hoạch", qr: "qr-sep.jpg", fortune: { word: "Đắc Thắng", content: "<p><b>🤝 Đồng Đội:</b><br>Trên dưới một lòng, sức mạnh vô song.</p><p><b>🚀 Công Việc:</b><br>Thuận buồm xuôi gió, thăng tiến cao.</p><p><b>💰 Tiền Bạc:</b><br>Rủng rỉnh, đầu tư đâu thắng đó.</p>", poem: "\"Phó tướng tài ba, mưu lược giỏi<br>Công thành danh toại, lộc đầy nhà\"" } },
+            "sep_thang": { group: "boss", wish: "Nhân dịp năm mới, em kính chúc Anh cùng Gia đình dồi dào sức khỏe, an khang, thịnh vượng. Em chúc Anh một năm 2026 sẽ có những định hướng chiến lược sáng suốt, tiếp tục đồng hành và dẫn dắt tập thể Phòng chúng ta chinh phục những cột mốc thành công mới. Cảm ơn Anh đã luôn nhiệt huyết và hỗ trợ chúng em ạ ❤️.", highlightText: "Vượt Kế hoạch", qr: "qr-sep.jpg", fortune: { word: "Đỉnh Cao", content: "<p><b>🌟 Tầm Nhìn:</b><br>Chiến lược nhạy bén, mở ra nhiều cơ hội bứt phá.</p><p><b>📈 Thành Tựu:</b><br>Công danh rạng rỡ, dẫn dắt tập thể chinh phục đỉnh cao.</p><p><b>🏡 Gia Đạo:</b><br>Bình an, êm ấm, niềm vui đong đầy.</p>", poem: "\"Chí lớn đồng lòng vươn biển lớn<br>Đỉnh cao sự nghiệp rạng ngời danh\"" } },
             "e_linh": { group: "member", wish: "Nhân dịp năm mới, anh chúc Linh có thật nhiều sức khỏe, hạnh phúc và bình an. Chúc cho những kế hoạch, dự định trong năm 2026 của em sẽ đều được thực hiện, gặt hái được nhiều kết quả hơn nữa trong công việc và nhanh chóng master \"OTC\" nha 😁. Chúc riêng chuyện tình cảm của 2 em sẽ luôn mặn nồng, hạnh phúc, cùng đồng hành và chia sẻ với nhau nhiều hơn trong cuộc sống.", highlightText: "An Nhiên", qr: "qr-linh.jpg", fortune: { word: "Mỹ Mãn", content: "<p><b>💞 Tình Yêu:</b><br>Thêm phần mặn nồng, gắn kết, anh người yêu luôn thấu hiểu và cưng chiều.</p><p><b>💃 Nhan Sắc & Sức Khỏe:</b><br>Ngày càng rạng rỡ, nhuận sắc, thể lực dồi dào.</p><p><b>💰 Tiền Tài:</b><br>Tài lộc hanh thông, ví lúc nào cũng căng phồng.</p>", poem: "\"Tình nồng thắm thiết mặn mà<br>Tiền tài rủng rỉnh, ngọc ngà sắc xuân\"" } },
             "e_kimanh": { group: "member", wish: "Nhân dịp năm mới, anh chúc Kim Anh có thật nhiều sức khỏe, niềm vui và gặp nhiều may mắn. Với công việc, anh chúc em sẽ bứt phá hơn, cẩn thận hơn, điều gì đã làm tốt thì tiếp tục phát huy, điều gì còn thiếu sót thì sẽ trau dồi, cải thiện để tốt hơn mỗi ngày nhé. Và quan trọng sớm tìm được 1 anh người yêu đẹp zai, nhiều xiền, và chiều chuộng em nha 😝", highlightText: "Bứt Phá", qr: "qr-kimanh.jpg", fortune: { word: "Hanh Thông", content: "<p><b>💖 Tình Duyên:</b><br>Buổi hẹn hò lãng mạn nở hoa, sớm ngày chính thức chung đôi.</p><p><b>💻 Công Việc:</b><br>Suôn sẻ thuận lợi, 'bàn tay vàng' test đâu chuẩn đấy, zero bug!</p><p><b>🍀 May Mắn & Tiền Tài:</b><br>Sức khỏe dẻo dai, phú quý ngập tràn, làm đâu thắng đó.</p>", poem: "\"Tình duyên chớm nở ngọt ngào<br>Công việc mượt mà, lộc vào như mưa\"" } },
             "e_vinh": { group: "member", wish: "Nhân dịp năm mới, anh chúc Vinh có thật nhiều sức khỏe, hạnh phúc và bình an, mọi chuyện không vui trong năm cũ hãy cho qua hết nhé, để đón nhận những điều mới mẻ, vui vẻ trong năm mới. Chúc em sẽ có 1 năm 2026 mạnh mẽ, tự tin, cố gắng nhiều hơn nữa để thực hiện mọi mục tiêu, kế hoạch, đạt được nhiều thành tích cao trong công việc. Và đặc biệt, chuyện tình cảm sớm được đơm hoa kết trái nha 😜", highlightText: "Mạnh Mẽ", qr: "qr-vinh.jpg", fortune: { word: "An Yên", content: "<p><b>🌻 Tinh Thần & Gia Đình:</b><br>Gác lại muộn phiền, cõi lòng bình an, đón nhận vô vàn niềm vui mới.</p><p><b>💘 Tình Duyên:</b><br>Khoảng cách gần ngay chốn công sở, duyên lành đưa tới, sớm chung lối về.</p><p><b>💼 Công Việc & Tài Lộc:</b><br>Thuận buồm xuôi gió, thăng tiến không ngừng, tiền bạc rủng rỉnh.</p>", poem: "\"Qua cơn mưa, trời lại sáng trong<br>Tình duyên gõ cửa, cõi lòng an vui\"" } },
@@ -326,7 +331,7 @@
             let idParam = new URLSearchParams(window.location.search).get('id');
             selectedPerson = (idParam && PERSON_DATA[idParam.trim().toLowerCase()]) ? idParam.trim().toLowerCase() : 'e_linh';
             
-            // Tối ưu tạo hoa rơi liên tục
+            // Hoa rơi nền ngoài
             flowerInterval = setInterval(createFlower, 450); 
             
             music.play().then(() => { isPlaying = true; updateSoundIcon(true); }).catch(() => { updateSoundIcon(false); });
@@ -344,10 +349,9 @@
             document.getElementById('envelope').style.display = 'none'; 
             document.getElementById('content').style.display = 'block'; 
             
-            // THÊM LẠI PHÁO HOA KHI VỪA MỞ LÌ XÌ KHỞI ĐẦU
-            createFirework();
-            setTimeout(createFirework, 400);
-            setTimeout(createFirework, 800);
+            // Xuyên suốt: Pháo hoa nổ ngay từ đầu và lặp lại
+            fireworkIntervalMain = setInterval(createFirework, 1800); 
+            createFirework(); setTimeout(createFirework, 600); setTimeout(createFirework, 1200);
             
             showImageAndStartGreeting(); 
         }
@@ -367,7 +371,7 @@
             }
         }
 
-        /* --- GAME LOGIC --- */
+        /* --- GAME LOGIC & HIỆU ỨNG SẾP --- */
         let currentSelected = null; let wordOrder = []; let correctOrder = [];
         function initGameOrShowBoss() {
             const data = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh'];
@@ -375,8 +379,21 @@
             const finalTextContainer = document.getElementById("finalTextContainer"); const finalText = document.getElementById("finalText");
             const btnLucky = document.getElementById("btnLucky"); const contentDiv = document.getElementById('content');
             interactiveSection.style.display = "block";
+            
             if (data.group === 'boss') {
-                boardArea.style.display = "none"; finalText.innerText = "2026 - " + data.highlightText; finalTextContainer.style.display = "block"; btnLucky.style.display = "block"; setTimeout(() => { contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' }); }, 200);
+                boardArea.style.display = "none"; 
+                const fullText = "2026 - " + data.highlightText;
+                
+                // Hiệu ứng ăn mừng cho Sếp (Giống hệt user khi giải xong game)
+                const backdrop = document.createElement("div"); backdrop.className = "celebration-backdrop"; document.body.appendChild(backdrop);
+                const popup = document.createElement("div"); popup.className = "celebration-popup"; popup.innerText = fullText; document.body.appendChild(popup);
+                createFirework(); setTimeout(createFirework, 800); setTimeout(createFirework, 1600);
+                
+                setTimeout(() => {
+                    popup.remove(); backdrop.remove(); 
+                    finalText.innerText = fullText; finalTextContainer.style.display = "block"; btnLucky.style.display = "block"; 
+                    contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' }); 
+                }, 3000);
             } else {
                 boardArea.style.display = "block"; correctOrder = data.highlightText.split('');
                 let letters = correctOrder.filter(c => c !== ' '); let originalLetters = letters.join('');
@@ -413,7 +430,7 @@
                     
                     setTimeout(() => {
                         popup.remove(); backdrop.remove(); document.getElementById("finalText").innerText = fullText; document.getElementById("finalTextContainer").style.display = "block";
-                        document.getElementById("btnLucky").style.display = "block"; const contentDiv = document.getElementById('content'); contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' }); setInterval(createFirework, 1500);
+                        document.getElementById("btnLucky").style.display = "block"; const contentDiv = document.getElementById('content'); contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' }); 
                     }, 3000); 
                 }, 800);
             }
@@ -432,14 +449,19 @@
         function showTreeOverlay() {
             document.getElementById('resultModal').style.display = 'none'; document.getElementById('content').style.display = 'none';
             document.getElementById('treeOverlay').style.display = 'flex';
-            clearInterval(flowerInterval); // Dừng hoa rơi ngoài màn hình chính để tiết kiệm CPU
+            
+            clearInterval(flowerInterval); // Dừng hoa rơi màn ngoài
+            clearInterval(fireworkIntervalMain); // Dừng pháo hoa khi vào xem cây
+            
+            // Tạo hoa rơi riêng cho màn hình Cây
+            treePetalInterval = setInterval(createTreeFallingPetal, 300);
+
             if (!treeInitialized) { generateTree(); treeInitialized = true; }
         }
 
         function generateTree() {
             const canopy = document.getElementById('treeCanopy'); canopy.innerHTML = '';
             
-            // Phân bổ khu vực nhánh chính để sinh hoa và lá bám theo Vector SVG đã điều chỉnh căn giữa
             const zones = [
                 {x: 10, y: 10, w: 35, h: 40},   // Nhánh Trái
                 {x: 55, y: 5, w: 40, h: 35},    // Nhánh Phải Cao
@@ -448,53 +470,41 @@
                 {x: 40, y: 40, w: 20, h: 30}    // Gốc cành
             ];
 
-            // Rải 120 hoa và lá 
-            for (let i = 0; i < 120; i++) {
+            // TĂNG MẬT ĐỘ HOA LÊN 180 (nhiều hoa hơn)
+            for (let i = 0; i < 180; i++) {
                 let zone = zones[Math.floor(Math.random() * zones.length)];
                 let cx = zone.x + Math.random() * zone.w;
                 let cy = zone.y + Math.random() * zone.h;
 
-                const isFlower = Math.random() > 0.35; // 65% hoa, 35% lá
+                const isFlower = Math.random() > 0.30; // 70% hoa, 30% lá
                 let element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 let useTag = document.createElementNS("http://www.w3.org/2000/svg", "use");
                 
-                element.style.position = "absolute";
-                element.style.left = cx + '%';
-                element.style.top = cy + '%';
-                element.style.overflow = "visible";
+                element.style.position = "absolute"; element.style.left = cx + '%'; element.style.top = cy + '%'; element.style.overflow = "visible";
                 
                 if (isFlower) {
-                    element.setAttribute("class", "svg-flower");
-                    useTag.setAttribute("href", "#peach-flower");
-                    element.style.width = (15 + Math.random()*12) + 'px';
-                    element.style.height = element.style.width;
-                    element.style.animationDelay = (Math.random() * 3) + 's';
+                    element.setAttribute("class", "svg-flower"); useTag.setAttribute("href", "#peach-flower");
+                    element.style.width = (15 + Math.random()*15) + 'px'; element.style.height = element.style.width; element.style.animationDelay = (Math.random() * 3) + 's';
                 } else {
-                    element.setAttribute("class", "svg-leaf");
-                    useTag.setAttribute("href", "#peach-leaf");
-                    element.style.width = (12 + Math.random()*6) + 'px';
-                    element.style.height = element.style.width;
-                    element.style.transform = `rotate(${Math.random()*360}deg)`;
+                    element.setAttribute("class", "svg-leaf"); useTag.setAttribute("href", "#peach-leaf");
+                    element.style.width = (12 + Math.random()*8) + 'px'; element.style.height = element.style.width; element.style.transform = `rotate(${Math.random()*360}deg)`;
                 }
-                
                 element.appendChild(useTag); canopy.appendChild(element);
             }
 
-            // Gắn 10 bao lì xì bám theo các tọa độ chuẩn mới của cây
+            // TĂNG SỐ LƯỢNG LÌ XÌ LÊN 16 BAO (Nhiều lì xì hơn)
             const personInfo = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh']; const qrImage = personInfo.qr;
             const envPos = [
-                [25, 30], [40, 15], [50, 45], // Trái & Gốc
-                [70, 15], [85, 25], [65, 45], [90, 45], // Phải
-                [43, 5], [57, 25], [30, 50] // Điểm xuyết
+                [20, 25], [30, 15], [40, 40], [25, 45], // Cụm Trái
+                [65, 12], [80, 20], [90, 35], [75, 45], [60, 50], // Cụm Phải
+                [48, 5], [55, 25], [45, 25], // Giữa cao
+                [35, 30], [50, 60], [85, 55], [15, 35] // Rải rác điểm xuyết
             ];
             
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < envPos.length; i++) {
                 let wrap = document.createElement('div'); wrap.className = 'tree-envelope-wrapper';
                 const pos = envPos[i];
-                wrap.style.left = pos[0] + '%';
-                wrap.style.top = pos[1] + '%';
-                wrap.style.animationDelay = (Math.random() * 2) + 's';
-                
+                wrap.style.left = pos[0] + '%'; wrap.style.top = pos[1] + '%'; wrap.style.animationDelay = (Math.random() * 2) + 's';
                 wrap.innerHTML = `<div class="env-string"></div><div class="tree-envelope"><div class="epass-logo">ePass</div><div class="qr-pop-out"><img src="${qrImage}" style="width:100%;height:100%; object-fit: cover;"></div></div>`;
                 
                 let envBox = wrap.querySelector('.tree-envelope');
@@ -506,18 +516,13 @@
         function pickEnvelope(envBox, qrImage) {
             let wrapElement = envBox.parentElement;
             if (wrapElement.classList.contains('opened')) return; wrapElement.classList.add('opened'); 
-            
             const rect = envBox.getBoundingClientRect();
-            
             const cloneWrap = document.createElement('div'); cloneWrap.className = 'env-clone-wrap';
             cloneWrap.style.position = 'fixed'; cloneWrap.style.top = rect.top + 'px'; cloneWrap.style.left = rect.left + 'px';
-            
             cloneWrap.innerHTML = `<div class="env-clone"><div class="epass-logo">ePass</div><div class="qr-pop-out"><img src="${qrImage}" style="width:100%;height:100%; object-fit: cover; border-radius: 2px;"></div></div>`;
-            
             document.body.appendChild(cloneWrap); wrapElement.style.opacity = '0';
-            
             void cloneWrap.offsetWidth; cloneWrap.classList.add('fly-and-open');
-            setTimeout(() => { document.getElementById('treeOverlay').style.display = 'none'; showQRModalReal(qrImage); cloneWrap.remove(); }, 2100); 
+            setTimeout(() => { document.getElementById('treeOverlay').style.display = 'none'; showQRModalReal(qrImage); cloneWrap.remove(); clearInterval(treePetalInterval); }, 2100); 
         }
 
         /* --- XỬ LÝ QR & HIỆU ỨNG CHUNG --- */
@@ -535,19 +540,36 @@
                 const url = window.URL.createObjectURL(blob); const a = document.createElement('a'); a.style.display = 'none'; a.href = url; a.download = 'LiXi_Tet_2026.jpg'; document.body.appendChild(a); a.click(); window.URL.revokeObjectURL(url);
             }).catch(() => { const a = document.createElement('a'); a.href = imgSrc; a.download = 'LiXi_Tet_2026.jpg'; a.click(); });
         }
-        function closeQR() { document.getElementById('qrOverlay').style.display = 'none'; document.getElementById('content').style.display = 'block'; }
+        function closeQR() { document.getElementById('qrOverlay').style.display = 'none'; document.getElementById('content').style.display = 'block'; fireworkIntervalMain = setInterval(createFirework, 1800); }
         function openLightbox(imgSrc) { document.getElementById("lightboxImg").src = imgSrc; document.getElementById("qrLightbox").style.display = "flex"; }
         function closeLightbox() { document.getElementById("qrLightbox").style.display = "none"; }
         
-        // Tối ưu tạo hoa rơi bằng CSS Variable (không append DOM style liên tục)
+        // Tối ưu tạo hoa rơi nền ngoài
         function createFlower() {
             const flower = document.createElement('div'); flower.className = 'flower'; flower.innerHTML = Math.random() > 0.5 ? '🌸' : '🌼'; 
             flower.style.left = Math.random() * 100 + 'vw'; flower.style.fontSize = (Math.random() * 20 + 10) + 'px';
             const duration = Math.random() * 5 + 5; 
-            flower.style.setProperty('--fall-rot', Math.random() * 360 + 'deg');
-            flower.style.animation = `fall ${duration}s linear forwards`;
-            document.body.appendChild(flower);
-            setTimeout(() => { flower.remove(); }, duration * 1000);
+            flower.style.setProperty('--fall-rot', Math.random() * 360 + 'deg'); flower.style.animation = `fall ${duration}s linear forwards`;
+            document.body.appendChild(flower); setTimeout(() => { flower.remove(); }, duration * 1000);
+        }
+
+        // Tạo cánh hoa SVG rơi lả tả trong màn hình Cây
+        function createTreeFallingPetal() {
+            let element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            let useTag = document.createElementNS("http://www.w3.org/2000/svg", "use");
+            element.setAttribute("class", "tree-falling-petal");
+            useTag.setAttribute("href", "#peach-flower");
+            element.style.width = (12 + Math.random()*8) + 'px'; element.style.height = element.style.width;
+            element.style.left = (Math.random() * 100) + 'vw';
+            
+            const duration = Math.random() * 4 + 4;
+            element.style.setProperty('--fall-rot', Math.random() * 360 + 'deg');
+            element.style.setProperty('--fall-drift', (Math.random() * 200 - 100) + 'px');
+            element.style.animation = `tree-fall ${duration}s linear forwards`;
+            
+            element.appendChild(useTag);
+            document.getElementById('treeOverlay').appendChild(element);
+            setTimeout(() => { element.remove(); }, duration * 1000);
         }
 
         // Tối ưu pháo hoa (Dùng CSS Variable để đỡ Repaint)
