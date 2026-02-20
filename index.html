@@ -107,7 +107,7 @@
         @keyframes card-reveal { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
 
         /* ==========================================================
-           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D
+           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D (ĐÃ TỐI ƯU CĂN CHỈNH)
            ========================================================== */
         #treeOverlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 4000;
@@ -117,12 +117,14 @@
                               radial-gradient(circle at 80% 40%, rgba(255,240,200,0.5) 0%, transparent 30%);
         }
         
+        /* Cỏ non */
         #treeOverlay::after { 
             content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 15vh; 
             background: linear-gradient(to top, #2d5a27, #5c9955); 
             clip-path: ellipse(150% 100% at 50% 100%); z-index: 1; pointer-events: none;
         }
 
+        /* TIÊU ĐỀ: Căn giữa tuyệt đối trên cùng màn hình */
         .tree-title { 
             position: absolute; top: 4vh; left: 0; width: 100%; text-align: center;
             color: #d41414; font-size: 38px; font-weight: 900; 
@@ -130,20 +132,23 @@
             font-family: 'Dancing Script', cursive; animation: pulse-gold 2s infinite; z-index: 10; pointer-events: none;
         }
 
+        /* KHUNG CHỨA TOÀN BỘ CÂY VÀ CHẬU */
         .tree-area {
             position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%);
-            width: 100vw; min-width: 600px; max-width: 900px;
+            width: 100vw; min-width: 600px; max-width: 900px; /* Kiểm soát độ vươn của cành trên mobile */
             height: 70vh; max-height: 800px;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
             z-index: 2;
         }
 
+        /* CHI TIẾT CHẬU HOA 3D (Z-index xen kẽ) */
         .pot-lip-back { position: absolute; bottom: 95px; left: 50%; transform: translateX(-50%); width: 150px; height: 22px; background: #6b2f15; border-radius: 50%; z-index: 1; }
         .pot-soil { position: absolute; bottom: 93px; left: 50%; transform: translateX(-50%); width: 135px; height: 16px; background: #2b1408; border-radius: 50%; z-index: 2; box-shadow: inset 0 0 10px rgba(0,0,0,0.8);}
         .pot-lip-front { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 160px; height: 26px; background: linear-gradient(to right, #a0522d, #d2691e, #a0522d); border-radius: 50%; z-index: 4; box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 2px 2px rgba(255,255,255,0.2); }
         .pot-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 130px; height: 95px; background: linear-gradient(to right, #703311, #b34d10, #703311); border-radius: 10px 10px 65px 65px; z-index: 4; display: flex; justify-content: center; align-items: center; box-shadow: inset -15px -10px 20px rgba(0,0,0,0.5), 0 20px 25px rgba(0,0,0,0.6); }
         .pot-body::after { content: '2026'; color: #ffd700; font-size: 26px; font-weight: 900; font-family: 'Arial Black', sans-serif; text-shadow: -1px -1px 0 #cc9900, 2px 2px 3px rgba(0,0,0,0.6); margin-top: 10px;}
 
+        /* CÂY ĐÀO SVG (Cắm vào chính giữa đất) */
         .tree-svg-container, .tree-canopy {
             position: absolute; bottom: 90px; 
             width: 100%; height: calc(100% - 90px);
@@ -153,10 +158,12 @@
         .tree-canopy { z-index: 5; }
         .tree-svg-container svg { width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(3px 15px 10px rgba(0,0,0,0.3)); }
 
+        /* HOA ĐÀO & LÁ (Sinh bằng JS) */
         .svg-flower, .svg-leaf { position: absolute; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2)); transform-origin: center; will-change: transform; }
         .svg-flower { animation: blossom-pulse 3s infinite alternate; }
         @keyframes blossom-pulse { 0% { transform: scale(0.9); } 100% { transform: scale(1.15); } }
 
+        /* MƯA HOA ĐÀO RƠI TRONG MÀN HÌNH CÂY */
         .tree-falling-petal { position: absolute; top: -5vh; z-index: 8; pointer-events: none; will-change: transform, top, left; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));}
         @keyframes tree-fall { to { transform: translateY(110vh) rotate(var(--fall-rot)) translateX(var(--fall-drift)); opacity: 0; } }
 
@@ -172,26 +179,14 @@
         @keyframes env-swing { 0% { transform: rotate(-6deg); } 100% { transform: rotate(6deg); } }
         @keyframes env-blink { 0% { box-shadow: 0 0 5px #ffd700; } 100% { box-shadow: 0 0 15px #ffd700, 0 0 20px rgba(255,0,0,0.6); } }
 
-        /* ĐÃ TỐI GIẢN LẠI CSS ANIMATION CỦA LÌ XÌ ẢO CHO MƯỢT */
-        .env-clone-wrap { 
-            width: 34px; height: 50px; z-index: 9999; display: flex; flex-direction: column; align-items: center; 
-            transition: transform 1s cubic-bezier(0.25, 0.1, 0.25, 1); 
-            transform-origin: center; will-change: transform;
-        }
-        .env-clone { 
-            width: 100%; height: 100%; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; 
-            border-radius: 4px; display: flex; justify-content: center; align-items: center; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; 
-        }
-        .env-clone::before { 
-            content: ''; position: absolute; top: -2px; left: -2px; 
-            border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 15px solid #b30000; 
-            z-index: 2; 
-        }
-        .env-clone .epass-logo { 
-            color: #ffaa00; font-weight: 800; font-size: 9px; text-shadow: 1px 1px 0px #5a0000; 
-            transform: rotate(-10deg); z-index: 3;
-        }
+        /* LÌ XÌ CLONE BAY RA MÀN HÌNH (ĐÃ TỐI ƯU SIÊU NHẸ) */
+        .env-clone-wrap { width: 34px; height: 50px; z-index: 9999; display: flex; flex-direction: column; align-items: center; transition: all 2s ease-in-out; transform-origin: center; will-change: transform, top, left, opacity;}
+        .env-clone { width: 100%; height: 100%; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; border-radius: 4px; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; }
+        .env-clone::before { content: ''; position: absolute; top: -2px; left: -2px; border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 15px solid #b30000; z-index: 2; }
+        .env-clone .epass-logo { color: #ffaa00; font-weight: 800; font-size: 9px; text-shadow: 1px 1px 0px #5a0000; transform: rotate(-10deg); z-index: 3;}
+        
+        /* Chỉ phóng to ra giữa màn hình và từ từ mờ đi ở những giây cuối */
+        .env-clone-wrap.fly-and-open { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(5); opacity: 0; }
 
         /* ==========================================================
            4. POPUP QR CUỐI CÙNG & HIỆU ỨNG NỀN
@@ -202,6 +197,7 @@
         .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
         .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
         
+        /* Đã tối ưu CSS để Zalo cho phép tải ảnh QR khi giữ lâu */
         .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 20px; transition: transform 0.2s; -webkit-touch-callout: default; -webkit-user-select: auto; user-select: auto; pointer-events: auto; }
         .qr-img-large:hover { transform: scale(1.02); }
         
@@ -214,7 +210,7 @@
         .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hoa rơi nền ngoài */
+        /* Hoa rơi nền ngoài (Đã tăng z-index để phủ lên màn QR) */
         .flower { position: absolute; top: -10vh; z-index: 5001; pointer-events: none; opacity: 0.8; will-change: transform; }
         @keyframes fall { to { transform: translateY(110vh) rotate(var(--fall-rot)); } }
 
@@ -276,9 +272,12 @@
 
     <div id="treeOverlay">
         <h2 class="tree-title">Hái Lộc Đầu Xuân</h2>
+        
         <div class="tree-area">
+            
             <div class="pot-lip-back"></div>
             <div class="pot-soil"></div>
+            
             <div class="tree-svg-container">
                 <svg viewBox="0 0 1000 800" preserveAspectRatio="xMidYMax meet">
                     <defs>
@@ -297,9 +296,12 @@
                     <path d="M 485 350 C 470 250, 440 150, 390 50 C 370 20, 340 0, 320 -10 C 350 20, 390 60, 420 120 C 450 200, 470 280, 485 380 Z" fill="url(#bark)"/>
                 </svg>
             </div>
+
             <div class="tree-canopy" id="treeCanopy"></div>
+
             <div class="pot-lip-front"></div>
             <div class="pot-body"></div>
+            
         </div>
     </div>
 
@@ -338,9 +340,6 @@
             let idParam = new URLSearchParams(window.location.search).get('id');
             selectedPerson = (idParam && PERSON_DATA[idParam.trim().toLowerCase()]) ? idParam.trim().toLowerCase() : 'e_linh';
             
-            const preloadImg = new Image();
-            preloadImg.src = PERSON_DATA[selectedPerson].qr;
-
             flowerInterval = setInterval(createFlower, 450); 
             music.play().then(() => { isPlaying = true; updateSoundIcon(true); }).catch(() => { updateSoundIcon(false); });
         };
@@ -383,6 +382,8 @@
             }
         }
 
+        /* --- GAME LOGIC --- */
+        let currentSelected = null; let wordOrder = []; let correctOrder = [];
         function initGameOrShowBoss() {
             const data = PERSON_DATA[selectedPerson];
             const interactiveSection = document.getElementById("interactive-section"); const boardArea = document.getElementById("boardArea");
@@ -408,6 +409,7 @@
                 }, 1300);
             } else {
                 boardArea.style.display = "block"; correctOrder = data.highlightText.split('');
+                
                 if (correctOrder.length > 15) { document.getElementById("wordContainer").classList.add("long-text"); }
 
                 let letters = correctOrder.filter(c => !ignoreChars.includes(c)); 
@@ -470,6 +472,7 @@
             setTimeout(function() { document.getElementById('shakingModal').style.display = 'none'; document.getElementById('resultModal').style.display = 'flex'; }, 3000);
         }
 
+        /* --- CÂY ĐÀO 3D & LÌ XÌ --- */
         function showTreeOverlay() {
             document.getElementById('resultModal').style.display = 'none'; document.getElementById('content').style.display = 'none';
             document.getElementById('treeOverlay').style.display = 'flex';
@@ -516,9 +519,10 @@
 
             const qrImage = PERSON_DATA[selectedPerson].qr;
             
-            // CHỈ GIỮ LẠI 7 BAO LÌ XÌ CHO ĐỠ RỐI VÀ NẶNG MÁY
+            // Đã giảm số lượng lì xì xuống còn 8 cái cho đỡ rườm rà và nhẹ máy
             const envPos = [
-                [30, 15], [70, 20], [25, 45], [80, 50], [45, 25], [50, 60], [15, 35]
+                [20, 25], [40, 40], [65, 12], [85, 35], 
+                [55, 25], [35, 50], [75, 55], [48, 5] 
             ];
             
             for (let i = 0; i < envPos.length; i++) {
@@ -526,7 +530,7 @@
                 const pos = envPos[i];
                 wrap.style.left = pos[0] + '%'; wrap.style.top = pos[1] + '%'; wrap.style.animationDelay = (Math.random() * 2) + 's';
                 
-                // Loại bỏ phần thẻ ảnh ẩn qr-pop-out cho đỡ nặng
+                // Đã bỏ hoàn toàn việc nhét ảnh QR ngầm vào bên trong bao lì xì để giảm tải bộ nhớ
                 wrap.innerHTML = `<div class="env-string"></div><div class="tree-envelope"><div class="epass-logo">ePass</div></div>`;
                 
                 let envBox = wrap.querySelector('.tree-envelope');
@@ -535,39 +539,25 @@
             }
         }
 
-        // HÀM XỬ LÝ KHI BẤM LÌ XÌ SIÊU TỐI GIẢN
         function pickEnvelope(envBox, qrImage) {
             let wrapElement = envBox.parentElement;
-            if (wrapElement.classList.contains('opened')) return; 
-            wrapElement.classList.add('opened'); 
+            if (wrapElement.classList.contains('opened')) return; wrapElement.classList.add('opened'); 
             
-            clearInterval(treePetalInterval);
+            // Dừng ngay mưa hoa rơi trên cây để dồn tài nguyên điện thoại cho hiệu ứng phóng to lì xì
+            clearInterval(treePetalInterval); 
             
             const rect = envBox.getBoundingClientRect();
-            const cloneWrap = document.createElement('div'); 
-            cloneWrap.className = 'env-clone-wrap';
+            const cloneWrap = document.createElement('div'); cloneWrap.className = 'env-clone-wrap';
+            cloneWrap.style.position = 'fixed'; cloneWrap.style.top = rect.top + 'px'; cloneWrap.style.left = rect.left + 'px';
             
-            cloneWrap.style.position = 'fixed'; 
-            cloneWrap.style.top = '0px'; 
-            cloneWrap.style.left = '0px';
-            cloneWrap.style.transform = `translate(${rect.left}px, ${rect.top}px) scale(1)`;
-            
-            // Tối giản cấu trúc DOM bay ra giữa màn hình
+            // Bao lì xì clone chỉ chứa vỏ, không chứa ảnh nặng
             cloneWrap.innerHTML = `<div class="env-clone"><div class="epass-logo">ePass</div></div>`;
-            document.body.appendChild(cloneWrap); 
-            wrapElement.style.opacity = '0';
+            document.body.appendChild(cloneWrap); wrapElement.style.opacity = '0';
             
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
+            void cloneWrap.offsetWidth; // Kích hoạt CSS render lại
+            cloneWrap.classList.add('fly-and-open'); // Chạy hiệu ứng phóng to 2s
             
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    // Xoay vài vòng cho đẹp mắt và to lên giữa khung hình
-                    cloneWrap.style.transform = `translate(${centerX - 17}px, ${centerY - 25}px) scale(4) rotate(360deg)`;
-                });
-            });
-
-            // Chuyển thẳng sang popup hiển thị QR sau đúng 2 giây
+            // Chuyển cảnh chính xác sau 2 giây (2000ms)
             setTimeout(() => { 
                 document.getElementById('treeOverlay').style.display = 'none'; 
                 showQRModalReal(qrImage); 
@@ -575,6 +565,7 @@
             }, 2000); 
         }
 
+        /* --- XỬ LÝ QR & HIỆU ỨNG CHUNG --- */
         function showQRModalReal(qrImageSrc) {
             const data = PERSON_DATA[selectedPerson];
             const qrTitle = document.getElementById('qrTitle'); const qrImgMain = document.getElementById('qrImgMain'); const finalMsg = document.getElementById('finalMsg');
@@ -589,6 +580,7 @@
             }
             document.getElementById('qrOverlay').style.display = 'flex';
 
+            // Khởi động lại các hiệu ứng rơi và pháo hoa cho màn QR
             clearInterval(flowerInterval);
             flowerInterval = setInterval(createFlower, 450);
             clearInterval(fireworkIntervalMain);
