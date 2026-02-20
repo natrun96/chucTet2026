@@ -11,7 +11,7 @@
         /* --- 1. CẤU HÌNH CHUNG --- */
         body {
             margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;
-            height: 100vh;
+            height: 100dvh; 
             background: linear-gradient(135deg, #8a0000 0%, #ff1a1a 100%);
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             overflow: hidden; text-align: center; color: white;
@@ -39,20 +39,20 @@
         /* --- 3. NÚT LOA & GỢI Ý --- */
         .sound-control {
             position: fixed; top: 20px; right: 20px;
-            width: 40px; height: 40px; 
+            width: 25px; height: 25px; 
             background: rgba(0, 0, 0, 0.6); border: 2px solid #ffd700; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            font-size: 22px; cursor: pointer; z-index: 200; 
+            font-size: 18px; cursor: pointer; z-index: 200; 
             transition: transform 0.2s; animation: pulse-btn 2s infinite;
         }
         
         .speaker-hint {
-            position: fixed; top: 25px; right: 75px; 
+            position: fixed; top: 20px; right: 50px; 
             z-index: 200; 
-            color: #fff; font-size: 14px; font-weight: bold;
+            color: #fff; font-size: 12px; font-weight: bold;
             background: #d00000; 
-            padding: 8px 15px; border-radius: 30px;
-            border: 2px solid #ffd700; 
+            padding: 2px 5px; border-radius: 40px;
+            border: 1px solid #ffd700; 
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
             pointer-events: none; 
             display: flex; align-items: center; gap: 5px;
@@ -81,35 +81,70 @@
         .click-hint { font-size: 18px; font-weight: bold; margin-top: 20px; animation: blink 1.5s infinite; }
         @keyframes blink { 50% { opacity: 0.5; } }
 
-        /* --- 6. NỘI DUNG CHÍNH (LỜI CHÚC) --- */
+        /* --- CÂU ĐỐI NẰM GIỮA HAI BÊN (ĐÃ SỬA CỠ CHỮ) --- */
+        .couplet {
+            position: fixed; 
+            top: 50%; 
+            width: 48px; /* Chỉnh lại khung cho gọn */
+            background: linear-gradient(to bottom, #b30000, #990000);
+            border: 3px solid #ffd700; 
+            border-radius: 4px;
+            color: #ffd700; font-family: 'Times New Roman', serif;
+            font-weight: 900; text-align: center;
+            padding: 15px 0; 
+            box-shadow: 4px 4px 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.3);
+            z-index: 5; 
+            display: flex; flex-direction: column; align-items: center; gap: 6px; /* Khoảng cách giữa các chữ */
+            animation: floatCouplet 3s ease-in-out infinite alternate;
+        }
+        .couplet-left { left: 8px; }
+        .couplet-right { right: 8px; animation-delay: -1.5s; }
+
+        .couplet span {
+            display: block;
+            font-size: 13px; /* Giảm cỡ chữ để các chữ dài như THỊNH, VƯỢNG vừa khít */
+            line-height: 1.2; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+            width: 100%;
+            white-space: nowrap; /* Bắt buộc không cho rớt xuống dòng */
+        }
+
+        /* Thanh nẹp trên dưới */
+        .couplet-cap-top, .couplet-cap-bottom {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            width: 58px; /* Phủ dài hơn bề ngang khung 1 chút */
+            height: 8px; background: linear-gradient(to right, #ffd700, #e6c300, #ffd700);
+            border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .couplet-cap-top { top: -5px; }
+        .couplet-cap-bottom { bottom: -5px; }
+
+        @keyframes floatCouplet { 
+            0% { transform: translateY(calc(-50% - 10px)); } 
+            100% { transform: translateY(calc(-50% + 10px)); } 
+        }
+
+        /* --- 5. NỘI DUNG CHÍNH (LỜI CHÚC) --- */
         #content {
             display: none; background: #fffaf0;
-            padding: 25px 20px; border-radius: 20px;
+            padding: 20px 20px; border-radius: 20px;
             box-shadow: 0 0 60px rgba(255, 204, 0, 0.9);
             width: 360px; max-width: 90%;
             border: 3px solid #d41414;
             position: relative; z-index: 20;
-            margin-bottom: 100px;
-            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            max-height: 85vh; overflow-y: auto; 
-            scroll-behavior: smooth; 
+            margin-bottom: 10px; 
+            max-height: 85dvh; 
+            overflow-y: auto; scroll-behavior: smooth; 
         }
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } }
 
-        h1.title-tet { color: #d00000; font-size: 24px; font-weight: bold; margin-bottom: 5px; margin-top: 5px;}
+        h1.title-tet { color: #d00000; font-size: 24px; font-weight: bold; margin-bottom: 5px; margin-top: 0px;}
         .horse-icons-top { font-size: 28px; margin: 0px 0 10px 0; }
         
         .wishes { 
             font-size: 16px; line-height: 1.6; color: #333; font-style: italic; font-weight: 600; 
-            background: #fff; padding: 15px; border-radius: 10px; border: 1px dashed #d00000; margin-bottom: 20px;
+            background: #fff; padding: 15px; border-radius: 10px; border: 1px dashed #d00000; margin-bottom: 15px;
             text-align: left;
-        }
-        
-        .highlight-text {
-            display: block; text-align: center; 
-            font-size: 26px; font-weight: bold; 
-            color: #d00000; font-style: italic; 
-            margin-top: 15px; text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
         }
 
         .writing-pen {
@@ -117,29 +152,14 @@
             margin-left: 5px;
             animation: write-move 0.3s infinite alternate;
         }
-        @keyframes write-move {
-            0% { transform: rotate(0deg) translateY(0); }
-            100% { transform: rotate(15deg) translateY(-5px); }
-        }
+        @keyframes write-move { 0% { transform: rotate(0deg) translateY(0); } 100% { transform: rotate(15deg) translateY(-5px); } }
 
-        /* --- CSS ẢNH LỜI CHÚC TƯƠNG TÁC ĐƯỢC --- */
-        #extra-image-container {
-            display: none; margin-bottom: 15px;
-        }
-
+        #extra-image-container { display: none; margin-bottom: 15px; }
         .my-custom-img {
-            width: 100%; 
-            max-width: 100%; 
-            border-radius: 10px; border: 3px solid #d00000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: block; margin: 0 auto;
-            cursor: zoom-in; /* Thêm con trỏ kính lúp báo hiệu có thể click */
-            
-            opacity: 0;
-            filter: blur(20px) brightness(1.2); 
-            transform: scale(1.1); 
-            
-            animation: cinematicReveal 1.5s ease-out forwards;
+            width: 100%; max-width: 100%; border-radius: 10px; border: 3px solid #d00000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: block; margin: 0 auto;
+            cursor: zoom-in; opacity: 0; filter: blur(20px) brightness(1.2); 
+            transform: scale(1.1); animation: cinematicReveal 1.5s ease-out forwards;
         }
 
         @keyframes cinematicReveal {
@@ -148,39 +168,43 @@
             100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1); }
         }
 
-        .btn-lucky {
-            display: none; 
-            padding: 12px 30px;
-            background: linear-gradient(to right, #ffd700, #fdb931);
-            color: #d00000; font-weight: bold; border-radius: 50px;
-            border: 2px solid #fff; cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
-            font-size: 16px; transition: transform 0.2s;
-            animation: pulse-gold 1.5s infinite;
-        }
-        @keyframes pulse-gold {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
-        }
+        /* --- 6. KHU VỰC GAME / CHỮ TĨNH --- */
+        #interactive-section { border-top: 1px dashed #d00000; padding-top: 15px; margin-top: 15px; }
+        .year-label { display: block; text-align: center; font-size: 22px; font-weight: bold; color: #d00000; margin-top: 0px; margin-bottom: 10px; }
+        .scramble-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-bottom: 5px; padding: 0; }
+        .letter-chip { background: linear-gradient(to bottom, #ffd700, #fdb931); color: #d00000; font-weight: bold; font-size: 16px; padding: 5px 8px; border-radius: 6px; border: 1px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); cursor: pointer; user-select: none; transition: all 0.2s; display: flex; justify-content: center; align-items: center; min-width: 14px; text-align: center; }
+        .letter-chip:active { transform: scale(0.95); }
+        .letter-chip.selected { border: 1px solid #d00000; background: #fff; color: #d00000; transform: scale(1.15) translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 10; }
+        .letter-chip.correct { background: #28a745 !important; color: white !important; border-color: #fff !important; cursor: default; animation: popSuccess 0.5s forwards; }
+        @keyframes popSuccess { 50% { transform: scale(1.15); background: #20c997; } 100% { transform: scale(1); } }
+        .space-chip { width: 10px; } 
+        .game-instruction { font-size: 13px; font-style: italic; color: #666; margin-top: 12px; margin-bottom: 10px; animation: blink 2s infinite; padding: 0; text-align: center; display: block; }
+        
+        .celebration-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9998; opacity: 0; animation: fadeInOutBackdrop 3s ease-in-out forwards; }
+        @keyframes fadeInOutBackdrop { 0% { opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
+        .celebration-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); font-size: 38px; font-weight: 900; color: #ffd700; text-shadow: 0 0 20px #ff0000, 2px 2px 0px #8b0000, -2px -2px 0px #8b0000; z-index: 9999; white-space: nowrap; pointer-events: none; animation: zoomPopCenter 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes zoomPopCenter { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 15% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 85% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; } }
+        .static-highlight { display: block; text-align: center; font-size: 26px; font-weight: 900; color: #d00000; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); margin-top: 5px; margin-bottom: 20px; animation: popIn 0.5s; text-wrap: balance; }
+        .btn-lucky { display: none; padding: 12px 30px; margin: 0 auto; background: linear-gradient(to right, #ffd700, #fdb931); color: #d00000; font-weight: bold; border-radius: 50px; border: 2px solid #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); font-size: 16px; transition: transform 0.2s; animation: pulse-gold 1.5s infinite; }
+        @keyframes pulse-gold { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 
-        /* --- 7. CÁC POPUP KHÁC --- */
+        /* --- 7. CÁC POPUP KHÁC (QR, LIGHTBOX) --- */
         #qrOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(100, 0, 0, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.5s; overflow-y: auto; padding: 20px 0; }
         .btn-close-qr { position: absolute; top: 30px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; opacity: 0.8; transition: 0.3s; text-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 2005; }
         .btn-close-qr:hover { opacity: 1; transform: scale(1.1); }
-        .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 20px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
-        .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 10px; cursor: zoom-in; transition: transform 0.2s; }
+        .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
+        .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
+        .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 20px; cursor: zoom-in; transition: transform 0.2s; }
         .qr-img-large:hover { transform: scale(1.02); }
         
         #qrLightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s; }
-        .lightbox-img-content { width: auto; height: auto; max-width: 90%; max-height: 80vh; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); animation: zoomInPopup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: zoom-out; }
+        .lightbox-img-content { width: auto; height: auto; max-width: 90%; max-height: 80vh; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); background-color: #fff; animation: zoomInPopup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: zoom-out; }
         @keyframes zoomInPopup { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .lightbox-hint-text { color: #ccc; margin-top: 15px; font-style: italic; font-size: 14px; animation: blink 2s infinite; }
-        .qr-note { color: #fff; font-style: italic; font-size: 16px; margin-bottom: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
         
-        .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 10px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 10px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
         .btn-download-bottom:hover { transform: scale(1.05); background: #b30000; }
-        .final-message { margin-top: 30px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
+        .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
         #shakingModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
@@ -196,48 +220,16 @@
         .bamboo-card { width: 300px; min-height: 450px; background: #fdf5e6; border: 8px solid #d4a017; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; padding: 0; box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); transform: scale(0.1); opacity: 0; animation: card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; overflow: hidden; }
         .card-header { width: 100%; height: 70px; background: #d00000; display: flex; justify-content: center; align-items: center; color: #ffd700; font-size: 35px; font-weight: 900; border-bottom: 4px solid #d4a017; text-transform: uppercase; }
         .card-body { padding: 20px; width: 100%; box-sizing: border-box; text-align: center; color: #5c4033; background-image: linear-gradient(#fdf5e6 1px, transparent 1px), linear-gradient(90deg, #fdf5e6 1px, transparent 1px); background-size: 20px 20px; }
-        
-        /* --- HIỆU CHỈNH CHỮ TÊN THẺ THƯ PHÁP, BOLD, BLINK --- */
-        .fortune-rank { 
-            display: inline-block; 
-            font-size: 32px; /* Tăng kích thước để đẹp hơn với font thư pháp */
-            font-weight: 900; 
-            font-family: 'Dancing Script', cursive, sans-serif; 
-            background: linear-gradient(to right, #d00000, #ff0000); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            border: 2px solid #d00000; 
-            padding: 5px 25px; 
-            border-radius: 50px; 
-            margin-bottom: 15px; 
-            white-space: nowrap; /* Bắt buộc trên 1 dòng */
-            /* Hiệu ứng nhấp nháy phát sáng */
-            animation: text-blink 1.5s infinite alternate; 
-        }
-        @keyframes text-blink { 
-            0% { opacity: 1; filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)); transform: scale(1); } 
-            100% { opacity: 0.6; filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0)); transform: scale(1.02); } 
-        }
-        
-        /* --- HIỆU CHỈNH NỘI DUNG QUẺ (Tránh rớt 1 chữ xuống dòng) --- */
-        .fortune-content p { 
-            font-size: 15px; /* Giảm 1px so với cũ */
-            line-height: 1.4;
-            margin: 10px 0; 
-            font-weight: 600; 
-            border-bottom: 1px dashed #ccc; 
-            padding-bottom: 5px; 
-            text-wrap: balance; /* Trợ thủ đắc lực dàn đều chữ, chống rớt 1 chữ */
-        }
-        
+        .fortune-rank { display: inline-block; font-size: 32px; font-weight: 900; font-family: 'Dancing Script', cursive, sans-serif; background: linear-gradient(to right, #d00000, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: 2px solid #d00000; padding: 5px 25px; border-radius: 50px; margin-bottom: 15px; white-space: nowrap; animation: text-blink 1.5s infinite alternate; }
+        @keyframes text-blink { 0% { opacity: 1; filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)); transform: scale(1); } 100% { opacity: 0.6; filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0)); transform: scale(1.02); } }
+        .fortune-content p { font-size: 15px; line-height: 1.4; margin: 10px 0; font-weight: 600; border-bottom: 1px dashed #ccc; padding-bottom: 5px; text-wrap: balance; }
         .fortune-content b { color: #d00000; font-size: 17px; }
         .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: bold; font-size: 15px; text-wrap: balance; }
-        
         .btn-get-money-card { margin-top: auto; margin-bottom: 20px; background: linear-gradient(to right, #d00000, #ff0000); color: #fff; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 16px; animation: pulse-gold 1.5s infinite; }
         @keyframes card-reveal { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
         
         .flower { position: absolute; top: -10vh; z-index: 10; pointer-events: none; opacity: 0.8; }
-        .firework-shell { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5; }
+        .firework-shell { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 10000; }
         .firework-particle { position: absolute; border-radius: 50%; animation: realistic-burst 1.2s ease-out forwards, twinkle 0.2s infinite alternate; }
         @keyframes realistic-burst { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 60% { transform: translate(var(--x), var(--y)) scale(0.8); opacity: 0.8; } 100% { transform: translate(var(--x), calc(var(--y) + 100px)) scale(0.4); opacity: 0; } }
         @keyframes twinkle { from { opacity: 1; } to { opacity: 0.7; } }
@@ -246,6 +238,17 @@
 </head>
 
 <body onclick="playAudioForce()">
+
+    <div class="couplet couplet-left" id="coupletLeft">
+        <div class="couplet-cap-top"></div>
+        <span>VẠN</span><span>SỰ</span><span>NHƯ</span><span>Ý</span>
+        <div class="couplet-cap-bottom"></div>
+    </div>
+    <div class="couplet couplet-right" id="coupletRight">
+        <div class="couplet-cap-top"></div>
+        <span>AN</span><span>KHANG</span><span>THỊNH</span><span>VƯỢNG</span>
+        <div class="couplet-cap-bottom"></div>
+    </div>
 
     <div id="shakingModal">
         <div class="fortune-container">
@@ -277,17 +280,12 @@
 
     <div id="qrOverlay">
         <div class="btn-close-qr" onclick="closeQR()">×</div>
-        
         <div class="qr-title-large" id="qrTitle">Lì xì tặng em</div>
-        
+        <div class="qr-note-top">(Sử dụng APP Viettel Money để quét QR<br>Chạm vào mã để phóng to, hoặc nhấn giữ để lưu ảnh)</div>
         <img src="" alt="QR Code" class="qr-img-large" id="qrImgMain" onclick="openLightbox(this.src)">
-        
-        <div class="qr-note">(Quét bằng APP Viettel Money<br>Chạm vào mã QR để phóng to)</div>
-        
-        <a href="" download="LiXi_Tet_2026.jpg" class="btn-download-bottom" id="btnDownload">
-            <span>⬇️</span> Tải mã QR về
-        </a>
-        
+        <div class="btn-download-bottom" onclick="forceDownloadQR()">
+            <span>⬇️</span> Tải mã QR
+        </div>
         <div class="final-message" id="finalMsg"></div>
     </div>
 
@@ -300,7 +298,7 @@
     <div id="envelope" onclick="openEnvelope()">
         <div class="envelope-icon">🧧</div>
         <div class="year-text">Xuân Bính Ngọ<br>2026</div>
-        <div class="click-hint">Ấn vào đây <br> để nhận lộc đầu năm nha </div>
+        <div class="click-hint">Xin mời ấn vào đây 😍</div>
     </div>
 
     <div id="content">
@@ -314,14 +312,27 @@
         <div class="wishes">
             <span id="type-text"></span>
             <span id="writing-pen" class="writing-pen">🖌️</span>
-        </div>
 
-        <div id="btnLucky" class="btn-lucky" onclick="startShaking()">
-            ✨ Rút Quẻ Lộc Đầu Năm 🧧
+            <div id="interactive-section" style="display: none;">
+                
+                <div id="boardArea">
+                    <div class="year-label">2026 - </div>
+                    <div id="wordContainer" class="scramble-container"></div>
+                    <div id="gameInstruction" class="game-instruction">(Chạm vào 2 chữ cái để đổi vị trí cho nhau thành từ có nghĩa)</div>
+                </div>
+
+                <div id="finalTextContainer" style="display: none;">
+                    <span class="static-highlight" id="finalText"></span>
+                </div>
+
+                <div id="btnLucky" class="btn-lucky" onclick="startShaking()">
+                    ✨ Rút Quẻ Lộc Đầu Năm 🧧
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="speakerHint" class="speaker-hint">Click mở loa để nghe nhạc nha</div>
+    <div id="speakerHint" class="speaker-hint">Click để nghe nhạc</div>
     <div id="soundBtn" class="sound-control" onclick="toggleSound(event)">🔇</div>
 
     <audio id="tetMusic" loop>
@@ -337,7 +348,8 @@
         const PERSON_DATA = {
             "sep_tung": {
                 group: "boss",
-                wish: "Năm mới em kính chúc Anh cùng gia đình dồi dào sức khỏe - hạnh phúc - bình an - vạn sự như ý. Chúc Phòng mình sẽ hoàn thành vượt mọi chỉ tiêu và đạt nhiều thành tích cao trong năm 2026. Em cảm ơn Anh đã luôn chia sẻ và hỗ trợ ạ.",
+                wish: "Nhân dịp năm mới, em kính chúc Anh cùng Gia đình dồi dào sức khỏe, hạnh phúc, bình an, vạn sự như ý. Em chúc Anh sẽ có 1 năm 2026 thật thành công, dẫn dắt Phòng KTCN của chúng ta hoàn thành vượt mọi chỉ tiêu và đạt được nhiều thành tích cao ạ. Em cũng cảm ơn Anh đã luôn tạo điều kiện, đồng hành và hỗ trợ chúng em trong suốt 1 năm qua ạ ❤️.",
+                highlightText: "Vượt Kế hoạch",
                 fortune: {
                     word: "Thống Lĩnh",
                     content: "<p><b>👑 Sự Nghiệp:</b><br>Quyết đoán, dẫn dắt đội ngũ vươn xa.</p><p><b>💰 Tài Lộc:</b><br>Vững vàng, gia tăng không ngừng.</p><p><b>🏡 Gia Đạo:</b><br>An khang, thịnh vượng, sum vầy.</p>",
@@ -346,7 +358,8 @@
             },
             "sep_doanh": {
                 group: "boss",
-                wish: "Năm mới em kính chúc Anh cùng gia đình dồi dào sức khỏe - hạnh phúc - bình an - vạn sự như ý. Chúc Team mình sẽ luôn đoàn kết, cùng hỗ trợ nhau hoàn thành tốt mọi nhiệm vụ trong năm 2026. Em cảm ơn Anh đã luôn chia sẻ và hỗ trợ ạ.",
+                wish: "Nhân dịp năm mới, em kính chúc Anh cùng Gia đình dồi dào sức khỏe, hạnh phúc, bình an, vạn sự như ý. Em chúc Anh sẽ có 1 năm 2026 thật thành công, dẫn dắt Team chúng ta luôn gắn bó, đoàn kết, hoàn thành tốt mọi nhiệm vụ được giao. Em cũng cảm ơn Anh đã luôn tạo điều kiện, lắng nghe, đồng hành và hỗ trợ em trong suốt 1 năm qua ạ ❤️.",
+                highlightText: "Vượt Kế hoạch",
                 fortune: {
                     word: "Đắc Thắng",
                     content: "<p><b>🤝 Đồng Đội:</b><br>Trên dưới một lòng, sức mạnh vô song.</p><p><b>🚀 Công Việc:</b><br>Thuận buồm xuôi gió, thăng tiến cao.</p><p><b>💰 Tiền Bạc:</b><br>Rủng rỉnh, đầu tư đâu thắng đó.</p>",
@@ -355,7 +368,8 @@
             },
             "e_linh": {
                 group: "member",
-                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
+                wish: "Nhân dịp năm mới, anh chúc Linh có thật nhiều sức khỏe, hạnh phúc và bình an. Chúc cho những kế hoạch, dự định trong năm 2026 của em sẽ đều được thực hiện, gặt hái được nhiều kết quả hơn nữa trong công việc và nhanh chóng master \"OTC\" nha 😁. Chúc riêng chuyện tình cảm của 2 em sẽ luôn mặn nồng, hạnh phúc, cùng đồng hành và chia sẻ với nhau nhiều hơn trong cuộc sống.",
+                highlightText: "Tự Tin",
                 fortune: {
                     word: "Như Ý",
                     content: "<p><b>🌸 Tình Duyên:</b><br>Hoa nở rộ, người thương sẽ tới.</p><p><b>💻 Code:</b><br>Mượt mà, không bug, deploy một phát ăn ngay.</p><p><b>💰 Lương Thưởng:</b><br>Tăng đều đều, tiền tiêu rủng rỉnh.</p>",
@@ -364,25 +378,18 @@
             },
             "e_kimanh": {
                 group: "member",
-                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
+                wish: "Nhân dịp năm mới, anh chúc Kim Anh có thật nhiều sức khỏe, niềm vui và gặp nhiều may mắn. Với công việc, anh chúc em sẽ bứt phá hơn, cẩn thận hơn, điều gì đã làm tốt thì tiếp tục phát huy, điều gì còn thiếu sót thì sẽ trau dồi, cải thiện để tốt hơn mỗi ngày nhé. Và quan trọng sớm tìm được 1 anh người yêu đẹp zai, nhiều xiền, và chiều chuộng em nha 😝",
+                highlightText: "Bứt Phá",
                 fortune: {
                     word: "Cát Tường",
                     content: "<p><b>💄 Nhan Sắc:</b><br>Ngày càng thăng hạng, rạng rỡ xinh tươi.</p><p><b>💼 Sự Nghiệp:</b><br>Quý nhân phù trợ, thăng tiến vù vù.</p><p><b>🍀 May Mắn:</b><br>Đi đâu cũng gặp điều lành.</p>",
                     poem: "\"Cát tường như ý, vạn sự an<br>Tài lộc quanh năm, phúc ngập tràn\""
                 }
             },
-            "e_trung": {
-                group: "member",
-                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
-                fortune: {
-                    word: "Đột Phá",
-                    content: "<p><b>🧠 Trí Tuệ:</b><br>Sáng suốt, giải quyết mọi vấn đề hóc búa.</p><p><b>🏃 Sức Khỏe:</b><br>Dẻo dai, bền bỉ như ngựa chiến.</p><p><b>📈 Thành Công:</b><br>Đạt được cột mốc quan trọng mới.</p>",
-                    poem: "\"Chí lớn tung hoành trời đất rộng<br>Công danh sự nghiệp sáng bừng lên\""
-                }
-            },
             "e_vinh": {
                 group: "member",
-                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
+                wish: "Nhân dịp năm mới, anh chúc Vinh có thật nhiều sức khỏe, hạnh phúc và bình an, mọi chuyện không vui trong năm cũ hãy cho qua hết nhé, để đón nhận những điều mới mẻ, vui vẻ trong năm mới. Chúc em sẽ có 1 năm 2026 mạnh mẽ, tự tin, cố gắng nhiều hơn nữa để thực hiện mọi mục tiêu, kế hoạch, đạt được nhiều thành tích cao trong công việc. Và đặc biệt, chuyện tình cảm sớm được đơm hoa kết trái nha 😜",
+                highlightText: "Mạnh Mẽ",
                 fortune: {
                     word: "Tài Lộc",
                     content: "<p><b>💰 Ví Tiền:</b><br>Lúc nào cũng dày, tiêu hoài không hết.</p><p><b>🛠️ Kỹ Năng:</b><br>Level up vù vù, trùm mọi dự án.</p><p><b>😄 Tinh Thần:</b><br>Luôn lạc quan, yêu đời phơi phới.</p>",
@@ -391,25 +398,44 @@
             },
             "e_duc": {
                 group: "member",
-                wish: "Năm mới chúc em sức khỏe - nhiều niềm vui - gặp thật nhiều may mắn, công việc suôn sẻ, thuận lợi, hoàn thành tốt mọi bài toán được giao, và không để lọt con bug nào :D",
+                wish: "Nhân dịp năm mới, anh chúc Đức có thật nhiều sức khỏe, nhiều niềm vui và gặp nhiều may mắn. Chúc em 1 năm 2026 trưởng thành hơn, tự tin hơn. Biết được điểm mạnh để phát huy, điểm yếu để trau dồi và cải thiện ngày một tốt hơn nhé.",
+                highlightText: "Trưởng Thành",
                 fortune: {
                     word: "Bình An",
                     content: "<p><b>🧘 Tâm Trí:</b><br>An yên, không lo âu, stress free.</p><p><b>🛡️ Công Việc:</b><br>Vững chắc, ổn định, được tin tưởng.</p><p><b>💖 Tình Cảm:</b><br>Ấm áp, được mọi người yêu quý.</p>",
                     poem: "\"Bình an hai chữ giá ngàn vàng<br>Phú quý vinh hoa tự xếp hàng\""
                 }
+            },
+            "e_trung": {
+                group: "member",
+                wish: "Nhân dịp năm mới, anh chúc Trung có thật nhiều sức khỏe, hạnh phúc, bình an, và đánh \"bài\" đâu thắng đó nha 😅. Chúc em sẽ có 1 năm 2026 bứt phá, mọi thứ đều \"auto\" mượt mà, thực hiện được tất cả các dự định, kế hoạch của cá nhân cũng như trong công việc, hoàn thành tốt mọi bài toán/ nhiệm vụ được giao.",
+                highlightText: "AUTO Mượt Mà",
+                fortune: {
+                    word: "Đột Phá",
+                    content: "<p><b>🧠 Trí Tuệ:</b><br>Sáng suốt, giải quyết mọi vấn đề hóc búa.</p><p><b>🏃 Sức Khỏe:</b><br>Dẻo dai, bền bỉ như ngựa chiến.</p><p><b>📈 Thành Công:</b><br>Đạt được cột mốc quan trọng mới.</p>",
+                    poem: "\"Chí lớn tung hoành trời đất rộng<br>Công danh sự nghiệp sáng bừng lên\""
+                }
+            },
+            "e_huy": {
+                group: "member",
+                wish: "Nhân dịp năm mới, anh chúc Huy cùng gia đình nhỏ có thật nhiều sức khỏe, hạnh phúc và bình an. Chúc em sẽ thật trưởng thành và chững chạc để đón nhận 1 cương vị, vai trò mới trong thời gian tới nhé 😊. Với công việc, anh chúc em sẽ sớm tìm được cho bản thân hướng đi phù hợp và đúng đắn, dù ở bất kỳ môi trường nào, vẫn luôn tự tin, nỗ lực và gặt hái được nhiều thành công 💪.",
+                highlightText: "Trách Nhiệm",
+                fortune: {
+                    word: "Vững Bước",
+                    content: "<p><b>👨‍👩‍👧 Gia Đình:</b><br>Hạnh phúc viên mãn, đón nhận tin vui.</p><p><b>💼 Sự Nghiệp:</b><br>Vững vàng, định hướng rõ ràng, thành công phía trước.</p><p><b>💪 Bản Lĩnh:</b><br>Trưởng thành, vững vàng trước mọi thử thách.</p>",
+                    poem: "\"Trách nhiệm trên vai chí thêm bền<br>Thành công gõ cửa rạng tương lai\""
+                }
             }
         };
 
-        const textPart2 = "2026 - Mã đáo thành công";
         const typeSpeed = 35; 
-
         let charIndex = 0;
         let isTypingPart2 = false; 
         let selectedPerson = ""; 
         
         window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const idParam = urlParams.get('id');
+            let idParam = new URLSearchParams(window.location.search).get('id');
+            if (idParam) idParam = idParam.trim().toLowerCase();
 
             if (idParam && PERSON_DATA[idParam]) {
                 selectedPerson = idParam;
@@ -418,7 +444,7 @@
             }
 
             setInterval(createFlower, 350);
-            setInterval(createFirework, 800);
+            
             music.play().then(() => { 
                 isPlaying = true; updateSoundIcon(true);
             }).catch(() => {
@@ -447,6 +473,10 @@
         function openEnvelope() {
             playAudioForce();
             speakerHint.style.display = 'none'; 
+            
+            document.getElementById('coupletLeft').style.display = 'none';
+            document.getElementById('coupletRight').style.display = 'none';
+
             document.getElementById('envelope').style.display = 'none';
             document.getElementById('content').style.display = 'block';
             showImageAndStartGreeting();
@@ -456,7 +486,7 @@
             const imgContainer = document.getElementById("extra-image-container");
             const greetingImg = document.getElementById("mainImage"); 
 
-            if (selectedPerson === 'sep_tung') {
+            if (PERSON_DATA[selectedPerson].group === 'boss') {
                 greetingImg.src = 'Anh-1.jpg'; 
             } else {
                 greetingImg.src = 'Anh-2.jpg'; 
@@ -469,50 +499,183 @@
         function typeWriter() {
             const container = document.getElementById("type-text");
             const pen = document.getElementById("writing-pen");
-            const textPart1 = PERSON_DATA[selectedPerson].wish;
+            
+            const personInfo = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh'];
+            const textPart1 = personInfo.wish;
 
             if (!isTypingPart2) {
                 if (charIndex < textPart1.length) {
                     container.innerHTML += textPart1.charAt(charIndex);
                     charIndex++;
                     setTimeout(typeWriter, typeSpeed);
+                    
+                    if(charIndex % 20 === 0) {
+                        const contentDiv = document.getElementById('content');
+                        contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' });
+                    }
                 } else {
                     isTypingPart2 = true;
-                    charIndex = 0; 
-                    const newSpan = document.createElement("span");
-                    newSpan.className = "highlight-text"; 
-                    newSpan.id = "highlight-span";
-                    container.appendChild(newSpan); 
-                    newSpan.appendChild(pen);
-                    setTimeout(typeWriter, typeSpeed);
-                }
-            } 
-            else {
-                const highlightSpan = document.getElementById("highlight-span");
-                if (charIndex < textPart2.length) {
-                    const char = textPart2.charAt(charIndex);
-                    const textNode = document.createTextNode(char);
-                    highlightSpan.insertBefore(textNode, pen);
-                    charIndex++;
-                    setTimeout(typeWriter, typeSpeed);
-                } else {
                     pen.style.display = "none";
-                    
-                    const btnLucky = document.getElementById("btnLucky");
-                    btnLucky.style.display = "inline-block";
-                    
-                    const contentDiv = document.getElementById('content');
-                    contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' });
+                    initGameOrShowBoss();
                 }
+            }
+        }
+
+        // --- GAME LOGIC ---
+        let currentSelected = null;
+        let wordOrder = [];
+        let correctOrder = [];
+
+        function initGameOrShowBoss() {
+            const data = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh'];
+            const interactiveSection = document.getElementById("interactive-section");
+            const boardArea = document.getElementById("boardArea");
+            const finalTextContainer = document.getElementById("finalTextContainer");
+            const finalText = document.getElementById("finalText");
+            const btnLucky = document.getElementById("btnLucky");
+            const contentDiv = document.getElementById('content');
+
+            interactiveSection.style.display = "block";
+
+            if (data.group === 'boss') {
+                boardArea.style.display = "none";
+                
+                finalText.innerText = "2026 - " + data.highlightText;
+                finalTextContainer.style.display = "block";
+                btnLucky.style.display = "block"; 
+                
+                setTimeout(() => {
+                    contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' });
+                }, 200);
+            } else {
+                boardArea.style.display = "block";
+                
+                correctOrder = data.highlightText.split('');
+                let letters = correctOrder.filter(c => c !== ' ');
+                let originalLetters = letters.join('');
+                
+                shuffleArray(letters);
+                while(letters.join('') === originalLetters && letters.length > 1) {
+                    shuffleArray(letters);
+                }
+                
+                wordOrder = correctOrder.map(c => c === ' ' ? ' ' : letters.pop());
+                renderGame();
+                
+                setTimeout(() => {
+                    contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' });
+                }, 200);
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function renderGame() {
+            const container = document.getElementById("wordContainer");
+            container.innerHTML = ''; 
+            
+            wordOrder.forEach((char, index) => {
+                if (char === ' ') {
+                    const space = document.createElement("div");
+                    space.className = "space-chip";
+                    container.appendChild(space);
+                } else {
+                    const chip = document.createElement("div");
+                    chip.className = "letter-chip";
+                    if (index === currentSelected) chip.classList.add("selected");
+                    chip.innerText = char;
+                    chip.onclick = () => handleWordClick(index);
+                    container.appendChild(chip);
+                }
+            });
+        }
+
+        function handleWordClick(index) {
+            if (document.getElementById("btnLucky").style.display === "block") return;
+            if (wordOrder[index] === ' ') return;
+
+            if (currentSelected === null) {
+                currentSelected = index;
+                renderGame();
+            } else {
+                if (currentSelected !== index) {
+                    let temp = wordOrder[currentSelected];
+                    wordOrder[currentSelected] = wordOrder[index];
+                    wordOrder[index] = temp;
+                    currentSelected = null;
+                    renderGame();
+                    checkWin();
+                } else {
+                    currentSelected = null;
+                    renderGame();
+                }
+            }
+        }
+
+        function checkWin() {
+            if (wordOrder.join('') === correctOrder.join('')) {
+                const chips = document.querySelectorAll(".letter-chip");
+                chips.forEach(chip => chip.classList.add("correct"));
+                
+                const instr = document.getElementById("gameInstruction");
+                instr.innerText = "Tuyệt vời! Chúc mừng em!";
+                instr.style.color = "#28a745";
+                
+                setTimeout(() => {
+                    document.getElementById("boardArea").style.display = "none";
+                    
+                    const backdrop = document.createElement("div");
+                    backdrop.className = "celebration-backdrop";
+                    document.body.appendChild(backdrop);
+
+                    const fullText = "2026 - " + correctOrder.join('');
+                    const popup = document.createElement("div");
+                    popup.className = "celebration-popup";
+                    popup.innerText = fullText;
+                    document.body.appendChild(popup);
+                    
+                    createFirework();
+                    setTimeout(createFirework, 800);
+                    setTimeout(createFirework, 1600);
+                    setTimeout(createFirework, 2400);
+
+                    setTimeout(() => {
+                        popup.remove(); 
+                        backdrop.remove(); 
+                        
+                        const finalTextContainer = document.getElementById("finalTextContainer");
+                        const finalText = document.getElementById("finalText");
+                        finalText.innerText = fullText;
+                        finalTextContainer.style.display = "block";
+                        
+                        const btnLucky = document.getElementById("btnLucky");
+                        btnLucky.style.display = "block";
+                        
+                        const contentDiv = document.getElementById('content');
+                        contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' });
+
+                        setInterval(createFirework, 1500);
+
+                    }, 3000); 
+
+                }, 800);
             }
         }
 
         function startShaking() {
             document.getElementById('shakingModal').style.display = 'flex';
-            const data = PERSON_DATA[selectedPerson].fortune;
-            document.getElementById('fortune-word').innerHTML = data.word;
-            document.getElementById('fortune-details').innerHTML = data.content;
-            document.getElementById('fortune-poem').innerHTML = data.poem;
+            
+            const personInfo = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh'];
+            const data = personInfo.fortune;
+            
+            document.getElementById('fortune-word').innerHTML = data.word || "Bình An";
+            document.getElementById('fortune-details').innerHTML = data.content || "<p><b>🍀 May Mắn:</b><br>Mọi sự hanh thông.</p>";
+            document.getElementById('fortune-poem').innerHTML = data.poem || "\"Phúc lộc dồi dào vạn sự an\"";
 
             setTimeout(function() {
                 document.getElementById('shakingModal').style.display = 'none';
@@ -521,29 +684,48 @@
         }
 
         function revealQR() {
-            const personInfo = PERSON_DATA[selectedPerson];
+            const personInfo = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh'];
             const group = personInfo.group;
 
             const qrTitle = document.getElementById('qrTitle');
             const qrImgMain = document.getElementById('qrImgMain');
-            const btnDownload = document.getElementById('btnDownload');
             const finalMsg = document.getElementById('finalMsg');
 
             if (group === 'boss') {
                 qrTitle.innerText = "Khai Xuân Đắc Lộc";
                 qrImgMain.src = "qr-sep.jpg";
-                btnDownload.href = "qr-sep.jpg";
-                finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng đây là tấm lòng thành của em gửi tới Anh nhân dịp đầu xuân năm mới. Kính chúc Anh một năm Bính Ngọ 2026 thật nhiều sức khỏe, hạnh phúc và thành công rực rỡ!";
+                finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng đây là tấm lòng của em gửi tới Anh nhân dịp đầu xuân năm mới. Kính chúc Anh một năm Bính Ngọ 2026 thật nhiều sức khỏe, hạnh phúc và thành công rực rỡ! 😊";
             } else {
-                qrTitle.innerText = "Lì xì may mắn đầu năm";
+                qrTitle.innerText = "May mắn đầu xuân";
                 qrImgMain.src = "qr-member.jpg";
-                btnDownload.href = "qr-member.jpg";
-                finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng hy vọng nó sẽ mang lại cho em chút niềm vui và may mắn trong ngày đầu năm. Chúc em một năm mới tràn đầy năng lượng và code không bao giờ có bug nhé! ^^";
+                finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng hy vọng nó sẽ mang lại cho em chút niềm vui và may mắn trong ngày đầu năm 😉";
             }
 
             document.getElementById('resultModal').style.display = 'none';
             document.getElementById('content').style.display = 'none';
             document.getElementById('qrOverlay').style.display = 'flex';
+        }
+
+        function forceDownloadQR() {
+            const imgSrc = document.getElementById('qrImgMain').src;
+            fetch(imgSrc)
+                .then(resp => resp.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'LiXi_Tet_2026.jpg'; 
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(() => {
+                    const a = document.createElement('a');
+                    a.href = imgSrc;
+                    a.download = 'LiXi_Tet_2026.jpg';
+                    a.click();
+                });
         }
 
         function closeQR() {
