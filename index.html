@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gieo Quẻ Đầu Năm 2026</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧧</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
     <style>
         /* ==========================================================
            1. CẤU HÌNH CHUNG & TỐI ƯU HIỆU NĂNG
            ========================================================== */
-        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100dvh; background: linear-gradient(135deg, #8a0000 0%, #ff1a1a 100%); font-family: 'Segoe UI', Roboto, Arial, sans-serif; overflow: hidden; text-align: center; color: white; }
+        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100dvh; background: linear-gradient(135deg, #8a0000 0%, #ff1a1a 100%); font-family: 'Be Vietnam Pro', sans-serif; overflow: hidden; text-align: center; color: white; }
         
         /* Ngựa Phi */
         .horse-container { position: absolute; bottom: 15px; left: -300px; z-index: 5; pointer-events: none; display: flex; gap: -20px; animation: runAcross 7s linear infinite; will-change: transform; }
@@ -25,7 +26,7 @@
 
         /* Nút Loa & Gợi ý */
         .sound-control { position: fixed; top: 20px; right: 20px; width: 25px; height: 25px; background: rgba(0, 0, 0, 0.6); border: 2px solid #ffd700; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 18px; cursor: pointer; z-index: 200; transition: transform 0.2s; animation: pulse-btn 2s infinite; }
-        .speaker-hint { position: fixed; top: 20px; right: 50px; z-index: 200; color: #fff; font-size: 12px; font-weight: bold; background: #d00000; padding: 2px 5px; border-radius: 40px; border: 1px solid #ffd700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); pointer-events: none; display: flex; align-items: center; gap: 5px; animation: hint-bounce 1s infinite alternate; white-space: nowrap; }
+        .speaker-hint { position: fixed; top: 20px; right: 50px; z-index: 200; color: #fff; font-size: 12px; font-weight: 700; background: #d00000; padding: 2px 5px; border-radius: 40px; border: 1px solid #ffd700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); pointer-events: none; display: flex; align-items: center; gap: 5px; animation: hint-bounce 1s infinite alternate; white-space: nowrap; }
         .speaker-hint::after { content: '➡️'; font-size: 18px; }
         @keyframes hint-bounce { 0% { transform: translateX(0); } 100% { transform: translateX(-5px); } }
         @keyframes pulse-btn { 0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
@@ -34,49 +35,55 @@
         #envelope { width: 300px; height: 450px; background: linear-gradient(to bottom, #b30000, #e60000); border: 4px solid #ffd700; border-radius: 20px; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 50px rgba(0,0,0,0.7); transition: transform 0.3s; z-index: 20; position: relative; margin-bottom: 80px; }
         #envelope:hover { transform: scale(1.05); }
         .envelope-icon { font-size: 80px; margin-bottom: -10px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3)); }
-        .year-text { font-size: 35px; font-weight: 900; color: #ffd700; text-shadow: 3px 3px 0px #8b0000; font-family: 'Arial Black', sans-serif; margin-bottom: 10px; }
-        .click-hint { font-size: 18px; font-weight: bold; margin-top: 20px; animation: blink 1.5s infinite; }
+        .year-text { font-size: 35px; font-weight: 800; color: #ffd700; text-shadow: 3px 3px 0px #8b0000; font-family: 'Be Vietnam Pro', sans-serif; margin-bottom: 10px; }
+        .click-hint { font-size: 16px; font-weight: 700; margin-top: 20px; animation: blink 1.5s infinite; }
         @keyframes blink { 50% { opacity: 0.5; } }
 
         /* Câu Đối */
-        .couplet { position: fixed; top: 50%; width: 48px; background: linear-gradient(to bottom, #b30000, #990000); border: 3px solid #ffd700; border-radius: 4px; color: #ffd700; font-family: 'Times New Roman', serif; font-weight: 900; text-align: center; padding: 15px 0; box-shadow: 4px 4px 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.3); z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: floatCouplet 3s ease-in-out infinite alternate; will-change: transform; }
+        .couplet { position: fixed; top: 50%; width: 45px; background: linear-gradient(to bottom, #b30000, #990000); border: 3px solid #ffd700; border-radius: 4px; color: #ffd700; font-family: 'Times New Roman', serif; font-weight: 900; text-align: center; padding: 15px 0; box-shadow: 4px 4px 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.3); z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: floatCouplet 3s ease-in-out infinite alternate; will-change: transform; }
         .couplet-left { left: 8px; } .couplet-right { right: 8px; animation-delay: -1.5s; }
         .couplet span { display: block; font-size: 13px; line-height: 1.2; text-shadow: 1px 1px 2px rgba(0,0,0,0.6); width: 100%; white-space: nowrap; }
-        .couplet-cap-top, .couplet-cap-bottom { position: absolute; left: 50%; transform: translateX(-50%); width: 58px; height: 8px; background: linear-gradient(to right, #ffd700, #e6c300, #ffd700); border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .couplet-cap-top, .couplet-cap-bottom { position: absolute; left: 50%; transform: translateX(-50%); width: 55px; height: 8px; background: linear-gradient(to right, #ffd700, #e6c300, #ffd700); border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .couplet-cap-top { top: -5px; } .couplet-cap-bottom { bottom: -5px; }
         @keyframes floatCouplet { 0% { transform: translateY(calc(-50% - 10px)); } 100% { transform: translateY(calc(-50% + 10px)); } }
 
         /* ==========================================================
            2. NỘI DUNG LỜI CHÚC & GAME
            ========================================================== */
-        #content { display: none; background: #fffaf0; padding: 20px 20px; border-radius: 20px; box-shadow: 0 0 60px rgba(255, 204, 0, 0.9); width: 360px; max-width: 90%; border: 3px solid #d41414; position: relative; z-index: 20; margin-bottom: 10px; max-height: 85dvh; overflow-y: auto; scroll-behavior: smooth; }
+        #content { display: none; background: #fffaf0; padding: 25px 20px; border-radius: 20px; box-shadow: 0 0 60px rgba(255, 204, 0, 0.9); width: 360px; max-width: 90%; border: 3px solid #d41414; position: relative; z-index: 20; margin-bottom: 10px; max-height: 85dvh; overflow-y: auto; scroll-behavior: smooth; }
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } }
-        h1.title-tet { color: #d00000; font-size: 24px; font-weight: bold; margin-bottom: 5px; margin-top: 0px;}
+        h1.title-tet { color: #d00000; font-size: 24px; font-weight: 800; margin-bottom: 5px; margin-top: 0px;}
         .horse-icons-top { font-size: 28px; margin: 0px 0 10px 0; }
-        .wishes { font-size: 16px; line-height: 1.6; color: #333; font-style: italic; font-weight: 600; background: #fff; padding: 15px; border-radius: 10px; border: 1px dashed #d00000; margin-bottom: 15px; text-align: left; }
+        .wishes { font-size: 15.5px; line-height: 1.65; color: #333; font-style: italic; font-weight: 600; background: #fff; padding: 15px; border-radius: 10px; border: 1px dashed #d00000; margin-bottom: 15px; text-align: left; }
         .writing-pen { display: inline-block; font-size: 20px; margin-left: 5px; animation: write-move 0.3s infinite alternate; }
         @keyframes write-move { 0% { transform: rotate(0deg) translateY(0); } 100% { transform: rotate(15deg) translateY(-5px); } }
         #extra-image-container { display: none; margin-bottom: 15px; text-align: center;}
         .my-custom-img { width: 100%; max-width: 100%; border-radius: 10px; border: 3px solid #d00000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: block; margin: 0 auto; cursor: zoom-in; opacity: 0; filter: blur(20px) brightness(1.2); transform: scale(1.1); animation: cinematicReveal 1.5s ease-out forwards; }
-        .image-caption { margin-top: 8px; font-size: 15px; font-weight: 800; color: #b30000; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); font-style: italic; opacity: 0; animation: fadeIn 1s ease-out forwards; animation-delay: 1s; }
+        .image-caption { margin-top: 8px; font-size: 14px; font-weight: 700; color: #b30000; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); font-style: italic; opacity: 0; animation: fadeIn 1s ease-out forwards; animation-delay: 1s; }
         @keyframes cinematicReveal { 0% { opacity: 0; filter: blur(20px) brightness(1.5); transform: scale(1.15); } 50% { opacity: 0.8; filter: blur(5px) brightness(1.1); } 100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1); } }
 
         /* GAME CHỮ & NÚT */
         #interactive-section { border-top: 1px dashed #d00000; padding-top: 15px; margin-top: 15px; }
-        .year-label { display: block; text-align: center; font-size: 22px; font-weight: bold; color: #d00000; margin-top: 0px; margin-bottom: 10px; }
+        .year-label { display: block; text-align: center; font-size: 22px; font-weight: 800; color: #d00000; margin-top: 0px; margin-bottom: 10px; }
         .scramble-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-bottom: 5px; padding: 0; }
-        .letter-chip { background: linear-gradient(to bottom, #ffd700, #fdb931); color: #d00000; font-weight: bold; font-size: 16px; padding: 5px 8px; border-radius: 6px; border: 1px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); cursor: pointer; user-select: none; transition: all 0.2s; display: flex; justify-content: center; align-items: center; min-width: 14px; text-align: center; }
+        .letter-chip { background: linear-gradient(to bottom, #ffd700, #fdb931); color: #d00000; font-weight: 800; font-size: 16px; padding: 5px 8px; border-radius: 6px; border: 1px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); cursor: pointer; user-select: none; transition: all 0.2s; display: flex; justify-content: center; align-items: center; min-width: 14px; text-align: center; }
         .letter-chip.selected { border: 1px solid #d00000; background: #fff; color: #d00000; transform: scale(1.15) translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.3); z-index: 10; }
         .letter-chip.correct { background: #28a745 !important; color: white !important; border-color: #fff !important; cursor: default; animation: popSuccess 0.5s forwards; }
         @keyframes popSuccess { 50% { transform: scale(1.15); background: #20c997; } 100% { transform: scale(1); } }
-        .space-chip { width: 10px; } 
+        
+        /* Chỉnh lại khoảng trắng và dấu gạch ngang trong game */
+        .space-chip { width: 6px; } 
+        .dash-chip { font-weight: bold; color: #d00000; display: flex; align-items: center; justify-content: center; margin: 0 2px; }
+
+        .scramble-container.long-text .letter-chip { font-size: 13px; padding: 4px 6px; min-width: 10px; margin-bottom: 2px; }
+
         .game-instruction { font-size: 13px; font-style: italic; color: #666; margin-top: 12px; margin-bottom: 10px; animation: blink 2s infinite; padding: 0; text-align: center; display: block; }
         .celebration-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9998; opacity: 0; animation: fadeInOutBackdrop 3s ease-in-out forwards; }
         @keyframes fadeInOutBackdrop { 0% { opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
-        .celebration-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); font-size: 38px; font-weight: 900; color: #ffd700; text-shadow: 0 0 20px #ff0000, 2px 2px 0px #8b0000, -2px -2px 0px #8b0000; z-index: 9999; white-space: nowrap; pointer-events: none; animation: zoomPopCenter 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .celebration-popup { position: fixed; top: 50%; left: 50%; width: 100%; text-align: center; transform: translate(-50%, -50%) scale(0); font-size: 34px; font-weight: 800; color: #ffd700; text-shadow: 0 0 20px #ff0000, 2px 2px 0px #8b0000, -2px -2px 0px #8b0000; z-index: 9999; pointer-events: none; animation: zoomPopCenter 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; line-height: 1.4;}
         @keyframes zoomPopCenter { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 15% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 85% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; } }
-        .static-highlight { display: block; text-align: center; font-size: 26px; font-weight: 900; color: #d00000; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); margin-top: 5px; margin-bottom: 20px; animation: popIn 0.5s; text-wrap: balance; }
-        .btn-lucky { display: none; padding: 12px 30px; margin: 0 auto; background: linear-gradient(to right, #ffd700, #fdb931); color: #d00000; font-weight: bold; border-radius: 50px; border: 2px solid #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); font-size: 16px; transition: transform 0.2s; animation: pulse-gold 1.5s infinite; }
+        .static-highlight { display: block; text-align: center; font-size: 24px; font-weight: 800; color: #d00000; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); margin-top: 5px; margin-bottom: 20px; animation: popIn 0.5s; text-wrap: balance; }
+        .btn-lucky { display: none; padding: 12px 30px; margin: 0 auto; background: linear-gradient(to right, #ffd700, #fdb931); color: #d00000; font-weight: 800; border-radius: 50px; border: 2px solid #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); font-size: 16px; transition: transform 0.2s; animation: pulse-gold 1.5s infinite; }
         @keyframes pulse-gold { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 
         /* --- XIN KEO & TRẢ QUẺ --- */
@@ -87,22 +94,22 @@
         .stick-sample { position: absolute; width: 10px; height: 80px; background: #f0e68c; border-radius: 5px; border: 1px solid #d4a017; }
         .stick-sample:nth-child(1) { left: 10px; transform: rotate(-15deg); top: 10px; } .stick-sample:nth-child(2) { left: 25px; transform: rotate(0deg); top: 0px; } .stick-sample:nth-child(3) { left: 40px; transform: rotate(15deg); top: 10px; }
         @keyframes shake-hard { 0% { transform: rotate(0deg) translateY(0); } 25% { transform: rotate(-10deg) translateY(-10px); } 50% { transform: rotate(0deg) translateY(0); } 75% { transform: rotate(10deg) translateY(10px); } 100% { transform: rotate(0deg) translateY(0); } }
-        .shaking-text { color: #ffd700; font-size: 22px; font-weight: bold; margin-top: 40px; text-shadow: 0 0 10px #d00000; animation: blink 1s infinite; }
+        .shaking-text { color: #ffd700; font-size: 22px; font-weight: 700; margin-top: 40px; text-shadow: 0 0 10px #d00000; animation: blink 1s infinite; }
         
         #resultModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 3000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
         .bamboo-card { width: 300px; min-height: 450px; background: #fdf5e6; border: 8px solid #d4a017; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; padding: 0; box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); transform: scale(0.1); opacity: 0; animation: card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; overflow: hidden; }
-        .card-header { width: 100%; height: 70px; background: #d00000; display: flex; justify-content: center; align-items: center; color: #ffd700; font-size: 35px; font-weight: 900; border-bottom: 4px solid #d4a017; text-transform: uppercase; }
+        .card-header { width: 100%; height: 70px; background: #d00000; display: flex; justify-content: center; align-items: center; color: #ffd700; font-size: 32px; font-weight: 800; border-bottom: 4px solid #d4a017; text-transform: uppercase; }
         .card-body { padding: 20px; width: 100%; box-sizing: border-box; text-align: center; color: #5c4033; background-image: linear-gradient(#fdf5e6 1px, transparent 1px), linear-gradient(90deg, #fdf5e6 1px, transparent 1px); background-size: 20px 20px; }
-        .fortune-rank { display: inline-block; font-size: 32px; font-weight: 900; font-family: 'Dancing Script', cursive, sans-serif; background: linear-gradient(to right, #d00000, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: 2px solid #d00000; padding: 5px 25px; border-radius: 50px; margin-bottom: 15px; white-space: nowrap; animation: text-blink 1.5s infinite alternate; }
+        .fortune-rank { display: inline-block; font-size: 36px; font-weight: 900; font-family: 'Dancing Script', cursive, sans-serif; background: linear-gradient(to right, #d00000, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: 2px solid #d00000; padding: 5px 25px; border-radius: 50px; margin-bottom: 15px; white-space: nowrap; animation: text-blink 1.5s infinite alternate; }
         @keyframes text-blink { 0% { opacity: 1; filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)); transform: scale(1); } 100% { opacity: 0.6; filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0)); transform: scale(1.02); } }
-        .fortune-content p { font-size: 15px; line-height: 1.4; margin: 10px 0; font-weight: 600; border-bottom: 1px dashed #ccc; padding-bottom: 5px; text-wrap: balance; }
-        .fortune-content b { color: #d00000; font-size: 17px; }
-        .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: bold; font-size: 15px; text-wrap: balance; }
-        .btn-get-money-card { margin-top: auto; margin-bottom: 20px; background: linear-gradient(to right, #d00000, #ff0000); color: #fff; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 16px; animation: pulse-gold 1.5s infinite; }
+        .fortune-content p { font-size: 14px; line-height: 1.45; margin: 10px 0; font-weight: 600; border-bottom: 1px dashed #ccc; padding-bottom: 5px; text-wrap: balance; }
+        .fortune-content b { color: #d00000; font-size: 16px; font-weight: 800; }
+        .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: 700; font-size: 15px; text-wrap: balance; }
+        .btn-get-money-card { margin-top: auto; margin-bottom: 20px; background: linear-gradient(to right, #d00000, #ff0000); color: #fff; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: 800; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 16px; animation: pulse-gold 1.5s infinite; }
         @keyframes card-reveal { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
 
         /* ==========================================================
-           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D (ĐÃ TỐI ƯU & SCALE LỚN)
+           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D (ĐÃ TỐI ƯU CĂN CHỈNH)
            ========================================================== */
         #treeOverlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 4000;
@@ -114,43 +121,44 @@
         
         /* Cỏ non */
         #treeOverlay::after { 
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 18vh; 
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 15vh; 
             background: linear-gradient(to top, #2d5a27, #5c9955); 
             clip-path: ellipse(150% 100% at 50% 100%); z-index: 1; pointer-events: none;
         }
 
-        /* TIÊU ĐỀ: ĐƯA LÊN CAO HƠN (top: 3vh) */
+        /* TIÊU ĐỀ: Căn giữa tuyệt đối trên cùng màn hình */
         .tree-title { 
-            position: absolute; top: 1vh; left: 50%; transform: translateX(-50%); white-space: nowrap;
-            color: #d41414; font-size: 42px; font-weight: 900; 
+            position: absolute; top: 4vh; left: 0; width: 100%; text-align: center;
+            color: #d41414; font-size: 38px; font-weight: 900; 
             text-shadow: 2px 2px 0px #fff, 0 0 15px rgba(255,255,255,0.9); 
             font-family: 'Dancing Script', cursive; animation: pulse-gold 2s infinite; z-index: 10; pointer-events: none;
         }
 
-        /* ROOT ANCHOR: Phóng to toàn bộ chậu lên 30% bằng scale */
-        .tree-root-anchor {
-            position: absolute; bottom: 5%; left: 50%; width: 100%; max-width: 500px; 
-            transform: translateX(-50%) scale(1.3); transform-origin: bottom center;
-            z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+        /* KHUNG CHỨA TOÀN BỘ CÂY VÀ CHẬU */
+        .tree-area {
+            position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%);
+            width: 100vw; min-width: 600px; max-width: 900px; /* Kiểm soát độ vươn của cành trên mobile */
+            height: 70vh; max-height: 800px;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+            z-index: 2;
         }
 
-        /* CHI TIẾT CHẬU HOA 3D */
-        .pot-lip-back { width: 170px; height: 25px; background: #6b2f15; border-radius: 50%; position: absolute; bottom: 110px; z-index: 1; }
-        .pot-soil { width: 155px; height: 18px; background: #2b1408; border-radius: 50%; position: absolute; bottom: 108px; z-index: 2; box-shadow: inset 0 0 10px rgba(0,0,0,0.8);}
-        .pot-lip-front { width: 180px; height: 30px; background: linear-gradient(to right, #a0522d, #d2691e, #a0522d); border-radius: 50%; position: absolute; bottom: 100px; z-index: 4; box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 2px 2px rgba(255,255,255,0.2); }
-        .pot-body { width: 150px; height: 110px; background: linear-gradient(to right, #703311, #b34d10, #703311); border-radius: 10px 10px 65px 65px; position: absolute; bottom: 0; z-index: 4; display: flex; justify-content: center; align-items: center; box-shadow: inset -15px -10px 20px rgba(0,0,0,0.5), 0 20px 25px rgba(0,0,0,0.6); }
-        .pot-body::after { content: '2026'; color: #ffd700; font-size: 32px; font-weight: 900; font-family: 'Arial Black', sans-serif; text-shadow: -1px -1px 0 #cc9900, 2px 2px 3px rgba(0,0,0,0.6); margin-top: 15px;}
+        /* CHI TIẾT CHẬU HOA 3D (Z-index xen kẽ) */
+        .pot-lip-back { position: absolute; bottom: 95px; left: 50%; transform: translateX(-50%); width: 150px; height: 22px; background: #6b2f15; border-radius: 50%; z-index: 1; }
+        .pot-soil { position: absolute; bottom: 93px; left: 50%; transform: translateX(-50%); width: 135px; height: 16px; background: #2b1408; border-radius: 50%; z-index: 2; box-shadow: inset 0 0 10px rgba(0,0,0,0.8);}
+        .pot-lip-front { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 160px; height: 26px; background: linear-gradient(to right, #a0522d, #d2691e, #a0522d); border-radius: 50%; z-index: 4; box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 2px 2px rgba(255,255,255,0.2); }
+        .pot-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 130px; height: 95px; background: linear-gradient(to right, #703311, #b34d10, #703311); border-radius: 10px 10px 65px 65px; z-index: 4; display: flex; justify-content: center; align-items: center; box-shadow: inset -15px -10px 20px rgba(0,0,0,0.5), 0 20px 25px rgba(0,0,0,0.6); }
+        .pot-body::after { content: '2026'; color: #ffd700; font-size: 26px; font-weight: 900; font-family: 'Arial Black', sans-serif; text-shadow: -1px -1px 0 #cc9900, 2px 2px 3px rgba(0,0,0,0.6); margin-top: 10px;}
 
-        /* CÂY ĐÀO SVG (Cắm vào chính giữa chậu) */
+        /* CÂY ĐÀO SVG (Cắm vào chính giữa đất) */
         .tree-svg-container, .tree-canopy {
-            position: absolute; bottom: 110px; 
-            width: 150vw; max-width: 1200px; min-width: 850px; 
-            height: 75vh; max-height: 850px;
-            left: 50%; transform: translateX(-50%);
-            z-index: 3; pointer-events: none;
+            position: absolute; bottom: 90px; 
+            width: 100%; height: calc(100% - 90px);
+            pointer-events: none;
         }
-        .tree-svg-container svg { width: 100%; height: 100%; filter: drop-shadow(3px 15px 10px rgba(0,0,0,0.3)); overflow: visible; }
+        .tree-svg-container { z-index: 3; }
         .tree-canopy { z-index: 5; }
+        .tree-svg-container svg { width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(3px 15px 10px rgba(0,0,0,0.3)); }
 
         /* HOA ĐÀO & LÁ (Sinh bằng JS) */
         .svg-flower, .svg-leaf { position: absolute; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2)); transform-origin: center; will-change: transform; }
@@ -164,11 +172,11 @@
         /* LÌ XÌ TREO TRÊN CÂY */
         .tree-envelope-wrapper { position: absolute; display: flex; flex-direction: column; align-items: center; z-index: 20; transform-origin: top center; pointer-events: auto; animation: env-swing 3s ease-in-out infinite alternate; cursor: pointer; will-change: transform;}
         .env-string { width: 2px; height: 25px; background: #ffd700; box-shadow: 0 0 2px rgba(0,0,0,0.5); }
-        .tree-envelope { width: 34px; height: 50px; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; border-radius: 4px; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: 0 5px 15px rgba(255,0,0,0.4); transition: transform 0.2s; animation: env-blink 1.5s infinite alternate;}
+        .tree-envelope { width: 32px; height: 48px; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; border-radius: 4px; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: 0 5px 15px rgba(255,0,0,0.4); transition: transform 0.2s; animation: env-blink 1.5s infinite alternate;}
         .tree-envelope-wrapper:hover { animation: none; z-index: 30; transform: scale(1.2); }
         .tree-envelope-wrapper:hover .tree-envelope { box-shadow: 0 0 20px #ffd700; }
-        .tree-envelope::before { content: ''; position: absolute; top: -2px; left: -2px; border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 15px solid #b30000; pointer-events: none; }
-        .epass-logo { color: #ffaa00; font-weight: 900; font-size: 9px; text-shadow: 1px 1px 0px #5a0000; transform: rotate(-10deg); pointer-events: none; }
+        .tree-envelope::before { content: ''; position: absolute; top: -2px; left: -2px; border-left: 16px solid transparent; border-right: 16px solid transparent; border-top: 14px solid #b30000; pointer-events: none; }
+        .epass-logo { color: #ffaa00; font-weight: 800; font-size: 8px; text-shadow: 1px 1px 0px #5a0000; transform: rotate(-10deg); pointer-events: none; }
         
         @keyframes env-swing { 0% { transform: rotate(-6deg); } 100% { transform: rotate(6deg); } }
         @keyframes env-blink { 0% { box-shadow: 0 0 5px #ffd700; } 100% { box-shadow: 0 0 15px #ffd700, 0 0 20px rgba(255,0,0,0.6); } }
@@ -177,7 +185,7 @@
         .env-clone-wrap { width: 34px; height: 50px; z-index: 9999; display: flex; flex-direction: column; align-items: center; transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1); transform-origin: center; will-change: transform, top, left;}
         .env-clone { width: 100%; height: 100%; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; border-radius: 4px; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; }
         .env-clone::before { content: ''; position: absolute; top: -2px; left: -2px; border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 15px solid #b30000; transition: transform 0.6s; transform-origin: top; z-index: 2; }
-        .env-clone .epass-logo { color: #ffaa00; font-weight: 900; font-size: 9px; text-shadow: 1px 1px 0px #5a0000; transform: rotate(-10deg); z-index: 3; transition: opacity 0.3s;}
+        .env-clone .epass-logo { color: #ffaa00; font-weight: 800; font-size: 9px; text-shadow: 1px 1px 0px #5a0000; transform: rotate(-10deg); z-index: 3; transition: opacity 0.3s;}
         .qr-pop-out { position: absolute; width: 28px; height: 28px; background: white; z-index: 1; opacity: 0; transition: all 0.6s ease-out; padding: 2px; border: 1px solid #ccc; border-radius: 2px;}
         
         .env-clone-wrap.fly-and-open { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(6); }
@@ -192,19 +200,19 @@
         .btn-close-qr { position: absolute; top: 30px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; opacity: 0.8; transition: 0.3s; text-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 2005; }
         .btn-close-qr:hover { opacity: 1; transform: scale(1.1); }
         .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
-        .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
+        .qr-note-top { color: #fff; font-style: italic; font-size: 14px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
         .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 20px; cursor: zoom-in; transition: transform 0.2s; }
         .qr-img-large:hover { transform: scale(1.02); }
         #qrLightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s; }
         .lightbox-img-content { width: auto; height: auto; max-width: 90%; max-height: 80vh; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); background-color: #fff; animation: zoomInPopup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: zoom-out; }
         @keyframes zoomInPopup { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .lightbox-hint-text { color: #ccc; margin-top: 15px; font-style: italic; font-size: 14px; animation: blink 2s infinite; }
-        .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 10px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
+        .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 10px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
         .btn-download-bottom:hover { transform: scale(1.05); background: #b30000; }
-        .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
+        .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 14px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Tối ưu hiệu năng Hoa rơi nền ngoài */
+        /* Hoa rơi nền ngoài */
         .flower { position: absolute; top: -10vh; z-index: 10; pointer-events: none; opacity: 0.8; will-change: transform; }
         @keyframes fall { to { transform: translateY(110vh) rotate(var(--fall-rot)); } }
 
@@ -244,7 +252,7 @@
 
     <div id="content">
         <h1 class="title-tet">Chúc Mừng Năm Mới<br>Xuân Bính Ngọ 2026!</h1><div class="horse-icons-top">🐎 🐎 🐎</div>
-        <div id="extra-image-container"><img src="Anh-2.jpg" id="mainImage" alt="Hình ảnh team" class="my-custom-img" onclick="openLightbox(this.src)"><div id="imageCaption" class="image-caption"></div></div>
+        <div id="extra-image-container"><img src="" id="mainImage" class="my-custom-img" onclick="openLightbox(this.src)"><div id="imageCaption" class="image-caption"></div></div>
         <div class="wishes">
             <span id="type-text"></span><span id="writing-pen" class="writing-pen">🖌️</span>
             <div id="interactive-section" style="display: none;">
@@ -260,20 +268,20 @@
         <div class="bamboo-card">
             <div class="card-header"><div>Lộc</div></div>
             <div class="card-body"><div class="fortune-rank" id="fortune-word">Chữ Lộc</div><div class="fortune-content" id="fortune-details"></div><div class="poem" id="fortune-poem"></div></div>
-            <button class="btn-get-money-card" onclick="showTreeOverlay()">Nhận Lộc Xuân 🧧</button>
+            <button class="btn-get-money-card" onclick="showTreeOverlay()">Nhận Lộc Đầu Xuân 🧧</button>
         </div>
     </div>
 
     <div id="treeOverlay">
         <h2 class="tree-title">Hái Lộc Đầu Xuân</h2>
         
-        <div class="tree-root-anchor">
+        <div class="tree-area">
             
             <div class="pot-lip-back"></div>
             <div class="pot-soil"></div>
             
             <div class="tree-svg-container">
-                <svg viewBox="0 0 1000 800" preserveAspectRatio="none" width="100%" height="100%">
+                <svg viewBox="0 0 1000 800" preserveAspectRatio="xMidYMax meet">
                     <defs>
                         <linearGradient id="bark" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stop-color="#2a160d"/>
@@ -283,11 +291,11 @@
                             <stop offset="100%" stop-color="#1f0f08"/>
                         </linearGradient>
                     </defs>
-                    <path d="M 540 800 C 550 700, 550 600, 550 500 C 560 350, 650 250, 850 150 C 930 110, 1000 80, 1030 50 C 970 90, 900 140, 800 180 C 670 230, 590 300, 570 380 C 540 280, 410 180, 210 80 C 140 50, 90 20, 70 10 C 120 50, 210 90, 310 140 C 410 210, 480 300, 510 420 C 500 550, 470 700, 460 800 Z" fill="url(#bark)"/>
-                    <path d="M 550 500 C 560 400, 610 300, 710 200 C 780 140, 840 90, 880 50 C 840 90, 760 150, 700 220 C 640 290, 590 380, 570 460 Z" fill="url(#bark)"/>
-                    <path d="M 510 420 C 460 350, 360 280, 240 220 C 180 190, 120 160, 80 130 C 140 170, 210 210, 300 260 C 390 320, 450 380, 480 460 Z" fill="url(#bark)"/>
-                    <path d="M 570 380 C 640 340, 740 310, 860 280 C 940 260, 1010 240, 1040 220 C 980 250, 910 280, 810 310 C 710 340, 610 370, 580 420 Z" fill="url(#bark)"/>
-                    <path d="M 555 350 C 540 250, 510 150, 460 50 C 440 20, 410 0, 390 -10 C 420 20, 460 60, 490 120 C 520 200, 540 280, 555 380 Z" fill="url(#bark)"/>
+                    <path d="M 460 800 C 460 700, 470 600, 480 500 C 490 350, 580 250, 780 150 C 860 110, 930 80, 960 50 C 900 90, 830 140, 730 180 C 600 230, 520 300, 500 380 C 470 280, 340 180, 140 80 C 70 50, 20 20, 0 10 C 50 50, 140 90, 240 140 C 340 210, 410 300, 440 420 C 430 550, 440 700, 450 800 Z" fill="url(#bark)"/>
+                    <path d="M 480 500 C 490 400, 540 300, 640 200 C 710 140, 770 90, 810 50 C 770 90, 690 150, 630 220 C 570 290, 520 380, 500 460 Z" fill="url(#bark)"/>
+                    <path d="M 440 420 C 390 350, 290 280, 170 220 C 110 190, 50 160, 10 130 C 70 170, 140 210, 230 260 C 320 320, 380 380, 410 460 Z" fill="url(#bark)"/>
+                    <path d="M 500 380 C 570 340, 670 310, 790 280 C 870 260, 940 240, 970 220 C 910 250, 840 280, 740 310 C 640 340, 540 370, 510 420 Z" fill="url(#bark)"/>
+                    <path d="M 485 350 C 470 250, 440 150, 390 50 C 370 20, 340 0, 320 -10 C 350 20, 390 60, 420 120 C 450 200, 470 280, 485 380 Z" fill="url(#bark)"/>
                 </svg>
             </div>
 
@@ -314,26 +322,27 @@
         var flowerInterval, treePetalInterval, fireworkIntervalMain;
 
         const PERSON_DATA = {
-            "sep_tung": { group: "boss", wish: "Nhân dịp năm mới, em kính chúc Anh cùng Gia đình dồi dào sức khỏe, hạnh phúc, bình an, vạn sự như ý. Em chúc Anh sẽ có 1 năm 2026 thật thành công, dẫn dắt Phòng KTCN của chúng ta hoàn thành vượt mọi chỉ tiêu và đạt được nhiều thành tích cao ạ. Em cũng cảm ơn Anh đã luôn tạo điều kiện, đồng hành và hỗ trợ chúng em trong suốt 1 năm qua ạ ❤️.", highlightText: "Vượt Kế hoạch", qr: "qr-sep.jpg", fortune: { word: "Thống Lĩnh", content: "<p><b>👑 Sự Nghiệp:</b><br>Quyết đoán, dẫn dắt đội ngũ vươn xa.</p><p><b>💰 Tài Lộc:</b><br>Vững vàng, gia tăng không ngừng.</p><p><b>🏡 Gia Đạo:</b><br>An khang, thịnh vượng, sum vầy.</p>", poem: "\"Cầm quân vững lái thuyền ra biển<br>Vạn sự hanh thông, phúc lộc tiền\"" } },
-            "sep_doanh": { group: "boss", wish: "Nhân dịp năm mới, em kính chúc Anh cùng Gia đình dồi dào sức khỏe, hạnh phúc, bình an, vạn sự như ý. Em chúc Anh sẽ có 1 năm 2026 thật thành công, dẫn dắt Team chúng ta luôn gắn bó, đoàn kết, hoàn thành tốt mọi nhiệm vụ được giao. Em cũng cảm ơn Anh đã luôn tạo điều kiện, lắng nghe, đồng hành và hỗ trợ em trong suốt 1 năm qua ạ ❤️.", highlightText: "Vượt Kế hoạch", qr: "qr-sep.jpg", fortune: { word: "Đắc Thắng", content: "<p><b>🤝 Đồng Đội:</b><br>Trên dưới một lòng, sức mạnh vô song.</p><p><b>🚀 Công Việc:</b><br>Thuận buồm xuôi gió, thăng tiến cao.</p><p><b>💰 Tiền Bạc:</b><br>Rủng rỉnh, đầu tư đâu thắng đó.</p>", poem: "\"Phó tướng tài ba, mưu lược giỏi<br>Công thành danh toại, lộc đầy nhà\"" } },
-            "sep_thang": { group: "boss", wish: "Nhân dịp năm mới, em kính chúc Anh cùng Gia đình dồi dào sức khỏe, an khang, thịnh vượng. Em chúc Anh một năm 2026 sẽ có những định hướng chiến lược sáng suốt, tiếp tục đồng hành và dẫn dắt tập thể Phòng chúng ta chinh phục những cột mốc thành công mới. Cảm ơn Anh đã luôn nhiệt huyết và hỗ trợ chúng em ạ ❤️.", highlightText: "Vượt Kế hoạch", qr: "qr-sep.jpg", fortune: { word: "Đỉnh Cao", content: "<p><b>🌟 Tầm Nhìn:</b><br>Chiến lược nhạy bén, mở ra nhiều cơ hội bứt phá.</p><p><b>📈 Thành Tựu:</b><br>Công danh rạng rỡ, dẫn dắt tập thể chinh phục đỉnh cao.</p><p><b>🏡 Gia Đạo:</b><br>Bình an, êm ấm, niềm vui đong đầy.</p>", poem: "\"Chí lớn đồng lòng vươn biển lớn<br>Đỉnh cao sự nghiệp rạng ngời danh\"" } },
-            "e_linh": { group: "member", wish: "Nhân dịp năm mới, anh chúc Linh có thật nhiều sức khỏe, hạnh phúc và bình an. Chúc cho những kế hoạch, dự định trong năm 2026 của em sẽ đều được thực hiện, gặt hái được nhiều kết quả hơn nữa trong công việc và nhanh chóng master \"OTC\" nha 😁. Chúc riêng chuyện tình cảm của 2 em sẽ luôn mặn nồng, hạnh phúc, cùng đồng hành và chia sẻ với nhau nhiều hơn trong cuộc sống.", highlightText: "An Nhiên", qr: "qr-linh.jpg", fortune: { word: "Mỹ Mãn", content: "<p><b>💞 Tình Yêu:</b><br>Thêm phần mặn nồng, gắn kết, anh người yêu luôn thấu hiểu và cưng chiều.</p><p><b>💃 Nhan Sắc & Sức Khỏe:</b><br>Ngày càng rạng rỡ, nhuận sắc, thể lực dồi dào.</p><p><b>💰 Tiền Tài:</b><br>Tài lộc hanh thông, ví lúc nào cũng căng phồng.</p>", poem: "\"Tình nồng thắm thiết mặn mà<br>Tiền tài rủng rỉnh, ngọc ngà sắc xuân\"" } },
-            "e_kimanh": { group: "member", wish: "Nhân dịp năm mới, anh chúc Kim Anh có thật nhiều sức khỏe, niềm vui và gặp nhiều may mắn. Với công việc, anh chúc em sẽ bứt phá hơn, cẩn thận hơn, điều gì đã làm tốt thì tiếp tục phát huy, điều gì còn thiếu sót thì sẽ trau dồi, cải thiện để tốt hơn mỗi ngày nhé. Và quan trọng sớm tìm được 1 anh người yêu đẹp zai, nhiều xiền, và chiều chuộng em nha 😝", highlightText: "Bứt Phá", qr: "qr-kimanh.jpg", fortune: { word: "Hanh Thông", content: "<p><b>💖 Tình Duyên:</b><br>Buổi hẹn hò lãng mạn nở hoa, sớm ngày chính thức chung đôi.</p><p><b>💻 Công Việc:</b><br>Suôn sẻ thuận lợi, 'bàn tay vàng' test đâu chuẩn đấy, zero bug!</p><p><b>🍀 May Mắn & Tiền Tài:</b><br>Sức khỏe dẻo dai, phú quý ngập tràn, làm đâu thắng đó.</p>", poem: "\"Tình duyên chớm nở ngọt ngào<br>Công việc mượt mà, lộc vào như mưa\"" } },
-            "e_vinh": { group: "member", wish: "Nhân dịp năm mới, anh chúc Vinh có thật nhiều sức khỏe, hạnh phúc và bình an, mọi chuyện không vui trong năm cũ hãy cho qua hết nhé, để đón nhận những điều mới mẻ, vui vẻ trong năm mới. Chúc em sẽ có 1 năm 2026 mạnh mẽ, tự tin, cố gắng nhiều hơn nữa để thực hiện mọi mục tiêu, kế hoạch, đạt được nhiều thành tích cao trong công việc. Và đặc biệt, chuyện tình cảm sớm được đơm hoa kết trái nha 😜", highlightText: "Mạnh Mẽ", qr: "qr-vinh.jpg", fortune: { word: "An Yên", content: "<p><b>🌻 Tinh Thần & Gia Đình:</b><br>Gác lại muộn phiền, cõi lòng bình an, đón nhận vô vàn niềm vui mới.</p><p><b>💘 Tình Duyên:</b><br>Khoảng cách gần ngay chốn công sở, duyên lành đưa tới, sớm chung lối về.</p><p><b>💼 Công Việc & Tài Lộc:</b><br>Thuận buồm xuôi gió, thăng tiến không ngừng, tiền bạc rủng rỉnh.</p>", poem: "\"Qua cơn mưa, trời lại sáng trong<br>Tình duyên gõ cửa, cõi lòng an vui\"" } },
-            "e_duc": { group: "member", wish: "Nhân dịp năm mới, anh chúc Đức có thật nhiều sức khỏe, nhiều niềm vui và gặp nhiều may mắn. Chúc em 1 năm 2026 trưởng thành hơn, tự tin hơn. Biết được điểm mạnh để phát huy, điểm yếu để trau dồi và cải thiện ngày một tốt hơn nhé.", highlightText: "Trưởng Thành", qr: "qr-duc.jpg", fortune: { word: "Khởi Sắc", content: "<p><b>🚀 Công Việc:</b><br>Khởi đầu mới rực rỡ với bản hợp đồng chính thức! Ngày càng trưởng thành, tự tin vươn xa.</p><p><b>💕 Tình Yêu:</b><br>Ngọt ngào đắm say, hạnh phúc đong đầy bên nửa kia yêu thương.</p><p><b>🍀 Sức Khỏe & May Mắn:</b><br>Thể chất khang kiện, đi tới đâu vạn sự cát tường tới đó.</p>", poem: "\"Chính thức cất cánh bay xa<br>Tự tin vững bước, tình ca ngọt ngào\"" } },
-            "e_trung": { group: "member", wish: "Nhân dịp năm mới, anh chúc Trung có thật nhiều sức khỏe, hạnh phúc, bình an, và đánh \"bài\" đâu thắng đó nha 😅. Chúc em sẽ có 1 năm 2026 bứt phá, mọi thứ đều \"auto\" mượt mà, thực hiện được tất cả các dự định, kế hoạch của cá nhân cũng như trong công việc, hoàn thành tốt mọi bài toán/ nhiệm vụ được giao.", highlightText: "AUTO Mượt Mà", qr: "qr-trung.jpg", fortune: { word: "Thành Đạt", content: "<p><b>📈 Công Danh:</b><br>Viên mãn vẹn toàn, sự nghiệp thăng hoa bứt phá trong năm mới.</p><p><b>⚙️ Automation:</b><br>Code chạy 'auto' mượt mà, pass mọi case hóc búa, không lo gãy script.</p><p><b>💪 Sức Khỏe & Tình Duyên:</b><br>Thể lực sung mãn, tình duyên phơi phới, rạng rỡ nụ cười.</p>", poem: "\"Công danh sự nghiệp vươn xa<br>Auto chạy mượt, tình đà nở hoa\"" } },
-            "e_huy": { group: "member", wish: "Nhân dịp năm mới, anh chúc Huy cùng gia đình nhỏ có thật nhiều sức khỏe, hạnh phúc và bình an. Chúc em sẽ thật trưởng thành và chững chạc để đón nhận 1 cương vị, vai trò mới trong thời gian tới nhé 😊. Với công việc, anh chúc em sẽ sớm tìm được cho bản thân hướng đi phù hợp và đúng đắn, dù ở bất kỳ môi trường nào, vẫn luôn tự tin, nỗ lực và gặt hái được nhiều thành công 💪.", highlightText: "Trách Nhiệm", qr: "qr-huy.jpg", fortune: { word: "Vững Bước", content: "<p><b>👨‍👩‍👧 Gia Đình:</b><br>Hạnh phúc viên mãn, đón nhận tin vui.</p><p><b>💼 Sự Nghiệp:</b><br>Vững vàng, định hướng rõ ràng, thành công phía trước.</p><p><b>💪 Bản Lĩnh:</b><br>Trưởng thành, vững vàng trước mọi thử thách.</p>", poem: "\"Trách nhiệm trên vai chí thêm bền<br>Thành công gõ cửa rạng tương lai\"" } }
+            "sep_tung": { skipGame: true, img: "Anh-1.jpg", caption: "Biệt đội KTCN - Kiến tạo tương lai 🚀", wish: "Nhân dịp đầu xuân năm mới, em kính chúc Anh và Gia đình một năm dồi dào sức khỏe, an khang thịnh vượng và vạn sự như ý. Chúc Anh bước sang năm 2026 với thật nhiều thành công rực rỡ, tiếp tục vững tay chèo dẫn dắt Phòng KTCN vượt mọi chỉ tiêu và gặt hái những đỉnh cao mới. Em vô cùng trân trọng và biết ơn Anh đã luôn lắng nghe, tạo điều kiện và đồng hành cùng chúng em trong suốt hành trình vừa qua ạ! ❤️", highlightText: "Vượt Kế Hoạch", qr: "qr-sep.jpg", fortune: { word: "Thống Lĩnh", content: "<p><b>👑 Sự Nghiệp:</b><br>Quyết đoán, dẫn dắt đội ngũ vươn xa.</p><p><b>💰 Tài Lộc:</b><br>Vững vàng, gia tăng không ngừng.</p><p><b>🏡 Gia Đạo:</b><br>An khang, thịnh vượng, sum vầy.</p>", poem: "\"Cầm quân vững lái thuyền ra biển<br>Vạn sự hanh thông, phúc lộc tiền\"" } },
+            "sep_doanh": { skipGame: false, img: "Anh-1.jpg", caption: "Biệt đội KTCN - Kiến tạo tương lai 🚀", wish: "Nhân dịp đầu xuân năm mới, em kính chúc Anh và Gia đình dồi dào sức khỏe, hạnh phúc viên mãn và bình an. Chúc Anh một năm Bính Ngọ 2026 bứt phá thành công, dẫn dắt Team mình ngày càng gắn kết, vững mạnh và xuất sắc hoàn thành mọi mục tiêu được giao. Em thực sự biết ơn Anh vì đã luôn kiên nhẫn lắng nghe, hỗ trợ và dìu dắt em trong suốt năm qua ạ! ❤️", highlightText: "Vượt Kế Hoạch", qr: "qr-sep.jpg", fortune: { word: "Đắc Thắng", content: "<p><b>🤝 Đồng Đội:</b><br>Trên dưới một lòng, sức mạnh vô song.</p><p><b>🚀 Công Việc:</b><br>Thuận buồm xuôi gió, thăng tiến cao.</p><p><b>💰 Tiền Bạc:</b><br>Rủng rỉnh, đầu tư đâu thắng đó.</p>", poem: "\"Phó tướng tài ba, mưu lược giỏi<br>Công thành danh toại, lộc đầy nhà\"" } },
+            "sep_thang": { skipGame: true, img: "Anh-1.jpg", caption: "Biệt đội KTCN - Kiến tạo tương lai 🚀", wish: "Nhân dịp năm mới Bính Ngọ, em kính chúc Anh cùng Gia đình vạn sự hanh thông, an khang và thịnh vượng. Em chúc Anh một năm 2026 ngập tràn năng lượng, giữ vững những định hướng chiến lược sắc bén để cùng tập thể Phòng KTCN chinh phục những cột mốc vinh quang mới. Cảm ơn Anh vì sự nhiệt huyết và luôn hết lòng hỗ trợ chúng em ạ! ❤️", highlightText: "Vượt Kế Hoạch", qr: "qr-sep.jpg", fortune: { word: "Đỉnh Cao", content: "<p><b>🌟 Tầm Nhìn:</b><br>Chiến lược nhạy bén, mở ra nhiều cơ hội bứt phá.</p><p><b>📈 Thành Tựu:</b><br>Công danh rạng rỡ, dẫn dắt tập thể chinh phục đỉnh cao.</p><p><b>🏡 Gia Đạo:</b><br>Bình an, êm ấm, niềm vui đong đầy.</p>", poem: "\"Chí lớn đồng lòng vươn biển lớn<br>Đỉnh cao sự nghiệp rạng ngời danh\"" } },
+            "tun": { skipGame: false, img: "tun.jpg", caption: "Vợ Yêu Của Anh ❤️", wish: "Nhân dịp năm mới, anh chúc vợ yêu của anh luôn xinh đẹp, rạng rỡ và ngập tràn niềm vui. Cảm ơn em vì đã luôn kiên nhẫn đồng hành cùng anh suốt hơn 4 năm qua, cùng anh san sẻ mọi buồn vui, thăng trầm trong cuộc sống. Anh xin lỗi vì đôi lúc sự vô tâm của anh đã làm em phải buồn và suy nghĩ. Anh mong rằng trên chặng đường dài phía trước, dù giông bão hay bình yên, vợ chồng mình vẫn sẽ luôn nắm chặt tay nhau, mạnh mẽ vượt qua tất cả. Anh yêu vợ rất nhiều! ❤️", highlightText: "Ngọt Ngào - Tài Lộc - Sức Khỏe", qr: "qr-tun.jpg", fortune: { word: "Viên Mãn", content: "<p><b>💖 Tình Cảm:</b><br>Gia đạo ấm êm, vợ chồng gắn kết, luôn ngọt ngào như lúc mới yêu.</p><p><b>💰 Tiền Tài & Công Danh:</b><br>Công việc thuận lợi, sự nghiệp thăng hoa, tài lộc dồi dào, đếm tiền mỏi tay.</p><p><b>💪 Sức Khỏe:</b><br>Luôn bình an, khỏe mạnh, năng lượng tràn trề để tận hưởng cuộc sống.</p>", poem: "\"Trăm năm chung bước chung tình<br>Tiền tài, sức khỏe, gia đình ấm êm\"" } },
+            "e_linh": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Năm mới đến rồi, anh chúc Linh luôn rạng rỡ, khỏe mạnh và bình an nhé! Chúc cho mọi dự định, kế hoạch trong năm 2026 của em đều sẽ thành hiện thực. Mong em ngày càng thăng hoa trong công việc và sớm 'master' mảng OTC nha 😁. Đặc biệt, chúc chuyện tình cảm của hai em lúc nào cũng mặn nồng, ngọt ngào, luôn thấu hiểu và đồng hành cùng nhau vượt qua mọi cột mốc trong cuộc sống nhé! ❤️", highlightText: "An Nhiên", qr: "qr-linh.jpg", fortune: { word: "Mỹ Mãn", content: "<p><b>💞 Tình Yêu:</b><br>Thêm phần mặn nồng, gắn kết, anh người yêu luôn thấu hiểu và cưng chiều.</p><p><b>💃 Nhan Sắc & Sức Khỏe:</b><br>Ngày càng rạng rỡ, nhuận sắc, thể lực dồi dào.</p><p><b>💰 Tiền Tài:</b><br>Tài lộc hanh thông, ví lúc nào cũng căng phồng.</p>", poem: "\"Tình nồng thắm thiết mặn mà<br>Tiền tài rủng rỉnh, ngọc ngà sắc xuân\"" } },
+            "e_kimanh": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Chào xuân Bính Ngọ, anh chúc Kim Anh một năm ngập tràn sức khỏe, niềm vui và thật nhiều may mắn! Mong em trong công việc sẽ càng thêm bứt phá, sắc bén và tỉ mỉ hơn nữa – hãy luôn phát huy những thế mạnh và không ngừng hoàn thiện bản thân mỗi ngày nhé. Và điều quan trọng nhất: chúc em sớm chính thức 'chốt đơn' được một anh người yêu cực phẩm, ấm áp và luôn cưng chiều em hết mực nha! 😝", highlightText: "Bứt Phá", qr: "qr-kimanh.jpg", fortune: { word: "Hanh Thông", content: "<p><b>💖 Tình Duyên:</b><br>Buổi hẹn hò lãng mạn nở hoa, sớm ngày chính thức chung đôi.</p><p><b>💻 Công Việc:</b><br>Suôn sẻ thuận lợi, 'bàn tay vàng' test đâu chuẩn đấy, zero bug!</p><p><b>🍀 May Mắn & Tiền Tài:</b><br>Sức khỏe dẻo dai, phú quý ngập tràn, làm đâu thắng đó.</p>", poem: "\"Tình duyên chớm nở ngọt ngào<br>Công việc mượt mà, lộc vào như mưa\"" } },
+            "e_vinh": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Nhân dịp năm mới, anh chúc Vinh và gia đình luôn dồi dào sức khỏe, an yên và hạnh phúc. Những nỗi buồn của năm cũ hãy nhẹ nhàng gác lại em nhé, để mở lòng đón nhận muôn vàn niềm vui và hy vọng rực rỡ trong năm Bính Ngọ. Chúc em một năm 2026 thật mạnh mẽ, tự tin bứt phá để gặt hái nhiều thành tựu lớn trong công việc. Đặc biệt, chúc cho hạt giống tình cảm em đang ươm mầm sẽ sớm đơm hoa kết trái ngọt ngào nha! 😜", highlightText: "Mạnh Mẽ", qr: "qr-vinh.jpg", fortune: { word: "An Yên", content: "<p><b>🌻 Tinh Thần & Gia Đình:</b><br>Gác lại muộn phiền, cõi lòng bình an, đón nhận vô vàn niềm vui mới.</p><p><b>💘 Tình Duyên:</b><br>Khoảng cách gần ngay chốn công sở, duyên lành đưa tới, sớm chung lối về.</p><p><b>💼 Công Việc & Tài Lộc:</b><br>Thuận buồm xuôi gió, thăng tiến không ngừng, tiền bạc rủng rỉnh.</p>", poem: "\"Qua cơn mưa, trời lại sáng trong<br>Tình duyên gõ cửa, cõi lòng an vui\"" } },
+            "e_duc": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Chúc mừng năm mới Đức! Anh chúc em một năm thật nhiều sức khỏe, luôn vui vẻ và vạn sự hanh thông. Năm 2026 này, chúc em ngày càng chững chạc, tự tin và tỏa sáng hơn nữa trên cương vị chính thức mới. Hãy luôn biết cách phát huy thế mạnh, rèn giũa bản thân để không ngừng thăng tiến nhé. Và tất nhiên, chúc cho tình yêu của em lúc nào cũng đong đầy hạnh phúc và ngọt ngào! 🎉", highlightText: "Trưởng Thành", qr: "qr-duc.jpg", fortune: { word: "Khởi Sắc", content: "<p><b>🚀 Công Việc:</b><br>Khởi đầu mới rực rỡ với bản hợp đồng chính thức! Ngày càng trưởng thành, tự tin vươn xa.</p><p><b>💕 Tình Yêu:</b><br>Ngọt ngào đắm say, hạnh phúc đong đầy bên nửa kia yêu thương.</p><p><b>🍀 Sức Khỏe & May Mắn:</b><br>Thể chất khang kiện, đi tới đâu vạn sự cát tường tới đó.</p>", poem: "\"Chính thức cất cánh bay xa<br>Tự tự vững bước, tình ca ngọt ngào\"" } },
+            "e_trung": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Năm mới Bính Ngọ, anh chúc Trung luôn dồi dào sức khỏe, bình an, vạn sự như ý, và đặc biệt là lên sới 'bài' nào thắng đậm sới đó nha 😅. Chúc em một năm 2026 bứt phá rực rỡ, mọi công việc, dự định cá nhân lẫn các bài toán automation đều 'auto' chạy mượt mà, pass xanh lè mọi cases và hoàn thành xuất sắc mọi mục tiêu nhé! 🚀", highlightText: "AUTO Mượt Mà", qr: "qr-trung.jpg", fortune: { word: "Thành Đạt", content: "<p><b>📈 Công Danh:</b><br>Viên mãn vẹn toàn, sự nghiệp thăng hoa bứt phá trong năm mới.</p><p><b>⚙️ Automation:</b><br>Code chạy 'auto' mượt mà, pass mọi case hóc búa, không lo gãy script.</p><p><b>💪 Sức Khỏe & Tình Duyên:</b><br>Thể lực sung mãn, tình duyên phơi phới, rạng rỡ nụ cười.</p>", poem: "\"Công danh sự nghiệp vươn xa<br>Auto chạy mượt, tình đà nở hoa\"" } },
+            "e_huy": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Nhân dịp xuân mới, anh chúc Huy cùng tổ ấm nhỏ của mình một năm bình an, mạnh khỏe và ngập tràn hạnh phúc. Chúc em sẽ ngày càng bản lĩnh, chững chạc để sẵn sàng tỏa sáng trong những cương vị và vai trò mới sắp tới 😊. Dù rẽ hướng theo bất kỳ con đường nào, anh tin với sự tự tin và nỗ lực bền bỉ, em chắc chắn sẽ gặt hái được những thành công rực rỡ nhất! 💪", highlightText: "Trách Nhiệm", qr: "qr-huy.jpg", fortune: { word: "Vững Bước", content: "<p><b>👨‍👩‍👧 Gia Đình:</b><br>Hạnh phúc viên mãn, đón nhận tin vui.</p><p><b>💼 Sự Nghiệp:</b><br>Vững vàng, định hướng rõ ràng, thành công phía trước.</p><p><b>💪 Bản Lĩnh:</b><br>Trưởng thành, vững vàng trước mọi thử thách.</p>", poem: "\"Trách nhiệm trên vai chí thêm bền<br>Thành công gõ cửa rạng tương lai\"" } }
         };
 
-        const typeSpeed = 35; let charIndex = 0; let isTypingPart2 = false; let selectedPerson = ""; let treeInitialized = false;
+        let charIndex = 0; let isTypingPart2 = false; let selectedPerson = ""; let treeInitialized = false;
+        const typeSpeed = 30;
+        const ignoreChars = [' ', '-']; // Bỏ qua dấu gạch ngang và khoảng trắng khi trộn game
         
         window.onload = function() {
             let idParam = new URLSearchParams(window.location.search).get('id');
             selectedPerson = (idParam && PERSON_DATA[idParam.trim().toLowerCase()]) ? idParam.trim().toLowerCase() : 'e_linh';
             
-            // Hoa rơi nền ngoài
             flowerInterval = setInterval(createFlower, 450); 
-            
             music.play().then(() => { isPlaying = true; updateSoundIcon(true); }).catch(() => { updateSoundIcon(false); });
         };
 
@@ -349,7 +358,6 @@
             document.getElementById('envelope').style.display = 'none'; 
             document.getElementById('content').style.display = 'block'; 
             
-            // Xuyên suốt: Pháo hoa nổ ngay từ đầu và lặp lại
             fireworkIntervalMain = setInterval(createFirework, 1800); 
             createFirework(); setTimeout(createFirework, 600); setTimeout(createFirework, 1200);
             
@@ -357,34 +365,39 @@
         }
 
         function showImageAndStartGreeting() {
-            const imgContainer = document.getElementById("extra-image-container"); const greetingImg = document.getElementById("mainImage"); const caption = document.getElementById("imageCaption");
-            if (PERSON_DATA[selectedPerson].group === 'boss') { greetingImg.src = 'Anh-1.jpg'; caption.innerText = "Biệt đội KTCN - Kiến tạo tương lai 🚀"; } else { greetingImg.src = 'Anh-2.jpg'; caption.innerText = "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫"; }
+            const data = PERSON_DATA[selectedPerson];
+            const imgContainer = document.getElementById("extra-image-container"); 
+            const greetingImg = document.getElementById("mainImage"); 
+            const caption = document.getElementById("imageCaption");
+            
+            greetingImg.src = data.img; 
+            caption.innerText = data.caption;
             imgContainer.style.display = "block"; setTimeout(typeWriter, 500);
         }
 
         function typeWriter() {
             const container = document.getElementById("type-text"); const pen = document.getElementById("writing-pen");
-            const personInfo = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh']; const textPart1 = personInfo.wish;
+            const data = PERSON_DATA[selectedPerson]; const textPart1 = data.wish;
             if (!isTypingPart2) {
                 if (charIndex < textPart1.length) { container.innerHTML += textPart1.charAt(charIndex); charIndex++; setTimeout(typeWriter, typeSpeed); if(charIndex % 20 === 0) { const contentDiv = document.getElementById('content'); contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' }); } } 
                 else { isTypingPart2 = true; pen.style.display = "none"; initGameOrShowBoss(); }
             }
         }
 
-        /* --- GAME LOGIC & HIỆU ỨNG SẾP --- */
+        /* --- GAME LOGIC --- */
         let currentSelected = null; let wordOrder = []; let correctOrder = [];
         function initGameOrShowBoss() {
-            const data = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh'];
+            const data = PERSON_DATA[selectedPerson];
             const interactiveSection = document.getElementById("interactive-section"); const boardArea = document.getElementById("boardArea");
             const finalTextContainer = document.getElementById("finalTextContainer"); const finalText = document.getElementById("finalText");
             const btnLucky = document.getElementById("btnLucky"); const contentDiv = document.getElementById('content');
+            
             interactiveSection.style.display = "block";
             
-            if (data.group === 'boss') {
+            if (data.skipGame) {
                 boardArea.style.display = "none"; 
                 const fullText = "2026 - " + data.highlightText;
                 
-                // Hiệu ứng ăn mừng cho Sếp (Giống hệt user khi giải xong game)
                 const backdrop = document.createElement("div"); backdrop.className = "celebration-backdrop"; document.body.appendChild(backdrop);
                 const popup = document.createElement("div"); popup.className = "celebration-popup"; popup.innerText = fullText; document.body.appendChild(popup);
                 createFirework(); setTimeout(createFirework, 800); setTimeout(createFirework, 1600);
@@ -396,32 +409,49 @@
                 }, 3000);
             } else {
                 boardArea.style.display = "block"; correctOrder = data.highlightText.split('');
-                let letters = correctOrder.filter(c => c !== ' '); let originalLetters = letters.join('');
+                
+                // Thu nhỏ chữ nếu đoạn text quá dài
+                if (correctOrder.length > 15) {
+                    document.getElementById("wordContainer").classList.add("long-text");
+                }
+
+                let letters = correctOrder.filter(c => !ignoreChars.includes(c)); 
+                let originalLetters = letters.join('');
                 shuffleArray(letters); while(letters.join('') === originalLetters && letters.length > 1) { shuffleArray(letters); }
-                wordOrder = correctOrder.map(c => c === ' ' ? ' ' : letters.pop()); renderGame(); setTimeout(() => { contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' }); }, 200);
+                wordOrder = correctOrder.map(c => ignoreChars.includes(c) ? c : letters.pop()); 
+                renderGame(); setTimeout(() => { contentDiv.scrollTo({ top: contentDiv.scrollHeight, behavior: 'smooth' }); }, 200);
             }
         }
+        
         function shuffleArray(array) { for (let i = array.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [array[i], array[j]] = [array[j], array[i]]; } }
+        
         function renderGame() {
             const container = document.getElementById("wordContainer"); container.innerHTML = ''; 
             wordOrder.forEach((char, index) => {
-                if (char === ' ') { const space = document.createElement("div"); space.className = "space-chip"; container.appendChild(space); } else {
+                if (ignoreChars.includes(char)) { 
+                    const space = document.createElement("div"); 
+                    space.className = char === '-' ? "dash-chip" : "space-chip"; 
+                    if (char === '-') space.innerText = '-';
+                    container.appendChild(space); 
+                } else {
                     const chip = document.createElement("div"); chip.className = "letter-chip"; if (index === currentSelected) chip.classList.add("selected");
                     chip.innerText = char; chip.onclick = () => handleWordClick(index); container.appendChild(chip);
                 }
             });
         }
+
         function handleWordClick(index) {
-            if (document.getElementById("btnLucky").style.display === "block") return; if (wordOrder[index] === ' ') return;
+            if (document.getElementById("btnLucky").style.display === "block") return; if (ignoreChars.includes(wordOrder[index])) return;
             if (currentSelected === null) { currentSelected = index; renderGame(); } else {
                 if (currentSelected !== index) { let temp = wordOrder[currentSelected]; wordOrder[currentSelected] = wordOrder[index]; wordOrder[index] = temp; currentSelected = null; renderGame(); checkWin(); } 
                 else { currentSelected = null; renderGame(); }
             }
         }
+
         function checkWin() {
             if (wordOrder.join('') === correctOrder.join('')) {
                 document.querySelectorAll(".letter-chip").forEach(chip => chip.classList.add("correct"));
-                const instr = document.getElementById("gameInstruction"); instr.innerText = "Tuyệt vời! Chúc mừng em!"; instr.style.color = "#28a745";
+                const instr = document.getElementById("gameInstruction"); instr.innerText = "Tuyệt vời! Chúc mừng!"; instr.style.color = "#28a745";
                 setTimeout(() => {
                     document.getElementById("boardArea").style.display = "none"; const backdrop = document.createElement("div"); backdrop.className = "celebration-backdrop"; document.body.appendChild(backdrop);
                     const fullText = "2026 - " + correctOrder.join(''); const popup = document.createElement("div"); popup.className = "celebration-popup"; popup.innerText = fullText; document.body.appendChild(popup);
@@ -438,7 +468,7 @@
 
         function startShaking() {
             document.getElementById('shakingModal').style.display = 'flex';
-            const personInfo = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh']; const data = personInfo.fortune;
+            const data = PERSON_DATA[selectedPerson].fortune;
             document.getElementById('fortune-word').innerHTML = data.word || "Bình An";
             document.getElementById('fortune-details').innerHTML = data.content || "<p><b>🍀 May Mắn:</b><br>Mọi sự hanh thông.</p>";
             document.getElementById('fortune-poem').innerHTML = data.poem || "\"Phúc lộc dồi dào vạn sự an\"";
@@ -450,10 +480,9 @@
             document.getElementById('resultModal').style.display = 'none'; document.getElementById('content').style.display = 'none';
             document.getElementById('treeOverlay').style.display = 'flex';
             
-            clearInterval(flowerInterval); // Dừng hoa rơi màn ngoài
-            clearInterval(fireworkIntervalMain); // Dừng pháo hoa khi vào xem cây
+            clearInterval(flowerInterval); 
+            clearInterval(fireworkIntervalMain); 
             
-            // Tạo hoa rơi riêng cho màn hình Cây
             treePetalInterval = setInterval(createTreeFallingPetal, 300);
 
             if (!treeInitialized) { generateTree(); treeInitialized = true; }
@@ -463,20 +492,19 @@
             const canopy = document.getElementById('treeCanopy'); canopy.innerHTML = '';
             
             const zones = [
-                {x: 10, y: 10, w: 35, h: 40},   // Nhánh Trái
-                {x: 55, y: 5, w: 40, h: 35},    // Nhánh Phải Cao
-                {x: 55, y: 35, w: 35, h: 25},   // Nhánh Phải Thấp
-                {x: 35, y: 0, w: 25, h: 40},    // Nhánh Giữa vươn lên
-                {x: 40, y: 40, w: 20, h: 30}    // Gốc cành
+                {x: 10, y: 10, w: 35, h: 40},   
+                {x: 55, y: 5, w: 40, h: 35},    
+                {x: 55, y: 35, w: 35, h: 25},   
+                {x: 35, y: 0, w: 25, h: 40},    
+                {x: 40, y: 40, w: 20, h: 30}    
             ];
 
-            // TĂNG MẬT ĐỘ HOA LÊN 180 (nhiều hoa hơn)
             for (let i = 0; i < 180; i++) {
                 let zone = zones[Math.floor(Math.random() * zones.length)];
                 let cx = zone.x + Math.random() * zone.w;
                 let cy = zone.y + Math.random() * zone.h;
 
-                const isFlower = Math.random() > 0.30; // 70% hoa, 30% lá
+                const isFlower = Math.random() > 0.30; 
                 let element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 let useTag = document.createElementNS("http://www.w3.org/2000/svg", "use");
                 
@@ -492,13 +520,12 @@
                 element.appendChild(useTag); canopy.appendChild(element);
             }
 
-            // TĂNG SỐ LƯỢNG LÌ XÌ LÊN 16 BAO (Nhiều lì xì hơn)
-            const personInfo = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh']; const qrImage = personInfo.qr;
+            const qrImage = PERSON_DATA[selectedPerson].qr;
             const envPos = [
-                [20, 25], [30, 15], [40, 40], [25, 45], // Cụm Trái
-                [65, 12], [80, 20], [90, 35], [75, 45], [60, 50], // Cụm Phải
-                [48, 5], [55, 25], [45, 25], // Giữa cao
-                [35, 30], [50, 60], [85, 55], [15, 35] // Rải rác điểm xuyết
+                [20, 25], [30, 15], [40, 40], [25, 45], 
+                [65, 12], [80, 20], [90, 35], [75, 48], [60, 52], 
+                [48, 5], [55, 25], [45, 25], 
+                [35, 30], [50, 60], [85, 55], [15, 35] 
             ];
             
             for (let i = 0; i < envPos.length; i++) {
@@ -527,13 +554,20 @@
 
         /* --- XỬ LÝ QR & HIỆU ỨNG CHUNG --- */
         function showQRModalReal(qrImageSrc) {
-            const personInfo = PERSON_DATA[selectedPerson] || PERSON_DATA['e_linh']; const group = personInfo.group;
+            const data = PERSON_DATA[selectedPerson];
             const qrTitle = document.getElementById('qrTitle'); const qrImgMain = document.getElementById('qrImgMain'); const finalMsg = document.getElementById('finalMsg');
             qrImgMain.src = qrImageSrc;
-            if (group === 'boss') { qrTitle.innerText = "Khai Xuân Đắc Lộc"; finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng đây là tấm lòng của em gửi tới Anh nhân dịp đầu xuân năm mới. Kính chúc Anh một năm Bính Ngọ 2026 thật nhiều sức khỏe, hạnh phúc và thành công rực rỡ! 😊"; } 
-            else { qrTitle.innerText = "May mắn đầu xuân"; finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng hy vọng nó sẽ mang lại cho em chút niềm vui và may mắn trong ngày đầu năm 😉"; }
+            
+            if (selectedPerson === 'tun') {
+                qrTitle.innerText = "Lì Xì Cho Vợ Yêu"; finalMsg.innerText = "Chúc vợ yêu của anh năm mới ngập tràn niềm vui, lúc nào cũng cười tươi rạng rỡ và mãi là hậu phương vững chắc nhất của gia đình mình nhé! ❤️";
+            } else if (data.group === 'boss') { 
+                qrTitle.innerText = "Khai Xuân Đắc Lộc"; finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng đây là tấm lòng của em gửi tới Anh nhân dịp đầu xuân năm mới. Kính chúc Anh một năm Bính Ngọ 2026 thật nhiều sức khỏe, hạnh phúc và thành công rực rỡ! 😊"; 
+            } else { 
+                qrTitle.innerText = "May mắn đầu xuân"; finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng hy vọng nó sẽ mang lại cho em chút niềm vui và may mắn trong ngày đầu năm 😉"; 
+            }
             document.getElementById('qrOverlay').style.display = 'flex';
         }
+
         function forceDownloadQR() {
             const imgSrc = document.getElementById('qrImgMain').src;
             fetch(imgSrc).then(resp => resp.blob()).then(blob => {
@@ -544,7 +578,6 @@
         function openLightbox(imgSrc) { document.getElementById("lightboxImg").src = imgSrc; document.getElementById("qrLightbox").style.display = "flex"; }
         function closeLightbox() { document.getElementById("qrLightbox").style.display = "none"; }
         
-        // Tối ưu tạo hoa rơi nền ngoài
         function createFlower() {
             const flower = document.createElement('div'); flower.className = 'flower'; flower.innerHTML = Math.random() > 0.5 ? '🌸' : '🌼'; 
             flower.style.left = Math.random() * 100 + 'vw'; flower.style.fontSize = (Math.random() * 20 + 10) + 'px';
@@ -553,7 +586,6 @@
             document.body.appendChild(flower); setTimeout(() => { flower.remove(); }, duration * 1000);
         }
 
-        // Tạo cánh hoa SVG rơi lả tả trong màn hình Cây
         function createTreeFallingPetal() {
             let element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             let useTag = document.createElementNS("http://www.w3.org/2000/svg", "use");
@@ -572,7 +604,6 @@
             setTimeout(() => { element.remove(); }, duration * 1000);
         }
 
-        // Tối ưu pháo hoa (Dùng CSS Variable để đỡ Repaint)
         function createFirework() {
             const shell = document.createElement('div'); shell.className = 'firework-shell'; shell.style.left = Math.random() * 90 + 5 + 'vw'; shell.style.top = Math.random() * 60 + 10 + 'vh'; document.body.appendChild(shell);
             const colors = ['#ff0000', '#ffff00', '#00ff00', '#00ffff', '#ff00ff', '#ffaa00', '#ffffff']; const color = colors[Math.floor(Math.random() * colors.length)];
