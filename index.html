@@ -33,30 +33,36 @@
         @keyframes hint-bounce { 0% { transform: translateX(0); } 100% { transform: translateX(-5px); } }
         @keyframes pulse-btn { 0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 
-        /* Bao Lì Xì Khởi Đầu */
-        #envelope { width: 300px; height: 450px; background: linear-gradient(to bottom, #b30000, #e60000); border: 4px solid #ffd700; border-radius: 20px; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 50px rgba(0,0,0,0.7); transition: transform 0.3s; z-index: 20; position: relative; margin-bottom: 80px; }
+        /* Bao Lì Xì Khởi Đầu (Đã thu nhỏ) */
+        #envelope { width: 250px; height: 380px; background: linear-gradient(to bottom, #b30000, #e60000); border: 4px solid #ffd700; border-radius: 20px; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 50px rgba(0,0,0,0.7); transition: transform 0.3s; z-index: 20; position: relative; margin-bottom: 80px; }
         #envelope:hover { transform: scale(1.05); }
-        .envelope-icon { font-size: 80px; margin-bottom: -10px; text-shadow: 0 4px 4px rgba(0,0,0,0.3); }
-        .year-text { font-size: 35px; font-weight: 800; color: #ffd700; text-shadow: 3px 3px 0px #8b0000; font-family: 'Be Vietnam Pro', sans-serif; margin-bottom: 10px; }
-        .click-hint { font-size: 16px; font-weight: 700; margin-top: 20px; animation: blink 1.5s infinite; }
+        .envelope-icon { font-size: 70px; margin-bottom: -10px; text-shadow: 0 4px 4px rgba(0,0,0,0.3); }
+        .year-text { font-size: 30px; font-weight: 800; color: #ffd700; text-shadow: 3px 3px 0px #8b0000; font-family: 'Be Vietnam Pro', sans-serif; margin-bottom: 10px; }
+        .click-hint { font-size: 15px; font-weight: 700; margin-top: 20px; animation: blink 1.5s infinite; }
         @keyframes blink { 50% { opacity: 0.5; } }
 
-        /* Câu Đối */
-        .couplet { position: fixed; top: 50%; width: 45px; background: linear-gradient(to bottom, #b30000, #990000); border: 3px solid #ffd700; border-radius: 4px; color: #ffd700; font-family: 'Times New Roman', serif; font-weight: 900; text-align: center; padding: 15px 0; box-shadow: 4px 4px 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.3); z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: floatCouplet 3s ease-in-out infinite alternate; will-change: transform; }
+        /* Câu Đối (Đã mở rộng khung, thu nhỏ chữ) */
+        .couplet { position: fixed; top: 50%; width: 55px; background: linear-gradient(to bottom, #b30000, #990000); border: 3px solid #ffd700; border-radius: 4px; color: #ffd700; font-family: 'Times New Roman', serif; font-weight: 900; text-align: center; padding: 12px 0; box-shadow: 4px 4px 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.3); z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: floatCouplet 3s ease-in-out infinite alternate; will-change: transform; }
         .couplet-left { left: 8px; } .couplet-right { right: 8px; animation-delay: -1.5s; }
-        .couplet span { display: block; font-size: 13px; line-height: 1.2; text-shadow: 1px 1px 2px rgba(0,0,0,0.6); width: 100%; white-space: nowrap; }
-        .couplet-cap-top, .couplet-cap-bottom { position: absolute; left: 50%; transform: translateX(-50%); width: 55px; height: 8px; background: linear-gradient(to right, #ffd700, #e6c300, #ffd700); border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .couplet span { display: block; font-size: 11px; line-height: 1.2; text-shadow: 1px 1px 2px rgba(0,0,0,0.6); width: 100%; white-space: nowrap; padding: 1px 0;}
+        .couplet-cap-top, .couplet-cap-bottom { position: absolute; left: 50%; transform: translateX(-50%); width: 65px; height: 8px; background: linear-gradient(to right, #ffd700, #e6c300, #ffd700); border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .couplet-cap-top { top: -5px; } .couplet-cap-bottom { bottom: -5px; }
         @keyframes floatCouplet { 0% { transform: translateY(calc(-50% - 10px)); } 100% { transform: translateY(calc(-50% + 10px)); } }
+
+        /* Hiệu Ứng Lật Trang 3D Mượt Mà (Dùng chung cho các màn hình) */
+        .page-flip-effect { animation: flipPage 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform-origin: center; backface-visibility: hidden; }
+        @keyframes flipPage { 
+            0% { transform: perspective(1000px) rotateY(90deg) scale(0.9); opacity: 0; } 
+            100% { transform: perspective(1000px) rotateY(0deg) scale(1); opacity: 1; } 
+        }
 
         /* ==========================================================
            2. NỘI DUNG LỜI CHÚC & GAME
            ========================================================== */
         #content { display: none; background: #fffaf0; padding: 25px 20px; border-radius: 20px; box-shadow: 0 0 60px rgba(255, 204, 0, 0.9); width: 360px; max-width: 92%; border: 3px solid #d41414; position: relative; z-index: 20; margin-bottom: 10px; max-height: 85vh; overflow-y: auto; scroll-behavior: smooth; }
-        @keyframes popIn { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } }
-        h1.title-tet { color: #d00000; font-size: 24px; font-weight: 800; margin-bottom: 5px; margin-top: 0px;}
+        h1.title-tet { color: #d00000; font-size: 24px; font-weight: 800; margin-bottom: 5px; margin-top: 0px; text-wrap: balance;}
         .horse-icons-top { font-size: 28px; margin: 0px 0 10px 0; }
-        .wishes { font-size: 15.5px; line-height: 1.65; color: #333; font-style: italic; font-weight: 600; background: #fff; padding: 15px; border-radius: 10px; border: 1px dashed #d00000; margin-bottom: 15px; text-align: left; }
+        .wishes { font-size: 14.8px; line-height: 1.6; color: #333; font-style: italic; font-weight: 600; background: #fff; padding: 15px; border-radius: 10px; border: 1px dashed #d00000; margin-bottom: 15px; text-align: left; text-wrap: pretty; hyphens: auto; }
         .writing-pen { display: inline-block; font-size: 20px; margin-left: 5px; animation: write-move 0.3s infinite alternate; }
         @keyframes write-move { 0% { transform: rotate(0deg) translateY(0); } 100% { transform: rotate(15deg) translateY(-5px); } }
         #extra-image-container { display: none; margin-bottom: 15px; text-align: center;}
@@ -77,18 +83,15 @@
         .dash-chip { font-weight: bold; color: #d00000; display: flex; align-items: center; justify-content: center; margin: 0 2px; }
         .scramble-container.long-text .letter-chip { font-size: 13px; padding: 4px 6px; min-width: 10px; margin-bottom: 2px; }
 
-        .game-instruction { font-size: 13px; font-style: italic; color: #666; margin-top: 12px; margin-bottom: 10px; animation: blink 2s infinite; padding: 0; text-align: center; display: block; }
+        .game-instruction { font-size: 13px; font-style: italic; color: #666; margin-top: 12px; margin-bottom: 10px; animation: blink 2s infinite; padding: 0; text-align: center; display: block; text-wrap: balance;}
         .celebration-backdrop { position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.75); z-index: 9998; opacity: 0; animation: fadeInOutBackdrop 3s ease-in-out forwards; }
         @keyframes fadeInOutBackdrop { 0% { opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
         
-        /* Cố định chữ không bị nhảy dòng trên popup */
         .celebration-popup { position: fixed; top: 50%; left: 50%; width: 100vw; text-align: center; transform: translate(-50%, -50%) scale(0); font-size: clamp(22px, 7vw, 34px); font-weight: 800; color: #ffd700; text-shadow: 0 0 20px #ff0000, 2px 2px 0px #8b0000, -2px -2px 0px #8b0000; z-index: 9999; pointer-events: none; animation: zoomPopCenter 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; line-height: 1.4; white-space: nowrap; }
         @keyframes zoomPopCenter { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 15% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 85% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; } }
         
-        /* Cố định "2026 - ..." trong màn hình lời chúc */
-        .static-highlight { display: block; text-align: center; font-size: clamp(18px, 6vw, 22px); font-weight: 800; color: #d00000; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); margin-top: 5px; margin-bottom: 20px; animation: popIn 0.5s; white-space: nowrap; }
+        .static-highlight { display: block; text-align: center; font-size: clamp(18px, 6vw, 22px); font-weight: 800; color: #d00000; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); margin-top: 5px; margin-bottom: 20px; white-space: nowrap; }
         
-        /* Cố định nút Rút quẻ để không bị xuống dòng */
         .btn-lucky { display: none; padding: 12px 15px; margin: 0 auto; background: linear-gradient(to right, #ffd700, #fdb931); color: #d00000; font-weight: 800; border-radius: 50px; border: 2px solid #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); font-size: clamp(14px, 4vw, 16px); transition: transform 0.2s; animation: pulse-gold 1.5s infinite; white-space: nowrap; max-width: 100%; }
         @keyframes pulse-gold { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 
@@ -105,7 +108,7 @@
         .tube-lip-back { position: absolute; bottom: 130px; left: 0; width: 90px; height: 22px; background: #331908; border-radius: 50%; z-index: 1; }
         .tube-lip-front { position: absolute; bottom: 128px; left: -2px; width: 94px; height: 26px; background: linear-gradient(to right, #8a5024, #f4c28d, #8a5024); border-radius: 50%; z-index: 5; box-shadow: 0 4px 6px rgba(0,0,0,0.5), inset 0 2px 3px rgba(255,255,255,0.3); border: 2px solid #4a2810; }
 
-        /* Các thẻ tre bên trong */
+        /* Các thẻ tre bên trong (Mặc định thẻ trúng thưởng ẩn mình như thẻ thường) */
         .sticks-bundle { position: absolute; bottom: 135px; left: 50%; transform: translateX(-50%); width: 70px; height: 110px; z-index: 2; }
         .stick-item { position: absolute; bottom: -15px; width: 10px; height: 110px; background: linear-gradient(to right, #deb887, #fff8dc, #deb887); border-radius: 5px 5px 2px 2px; border: 1px solid #a0522d; box-shadow: 1px 2px 4px rgba(0,0,0,0.4); transform-origin: bottom center; }
         
@@ -113,8 +116,14 @@
         .stick-2 { left: 20px; transform: rotate(-7deg); height: 120px; }
         .stick-3 { left: 42px; transform: rotate(8deg); height: 115px; }
         .stick-4 { left: 55px; transform: rotate(16deg); }
-        .winner-stick { left: 30px; transform: rotate(0deg); height: 110px; z-index: 3; background: linear-gradient(to right, #ffd700, #fff, #ffd700); border: 1px solid #d00000; }
-        .winner-stick::after { content: ''; position: absolute; top: 5px; left: 2px; width: 4px; height: 20px; background: #d00000; border-radius: 2px; }
+        
+        /* Cấu hình thẻ trúng thưởng mặc định giống hệt thẻ thường để tạo bất ngờ */
+        .winner-stick { left: 30px; transform: rotate(0deg); height: 110px; z-index: 3; background: linear-gradient(to right, #deb887, #fff8dc, #deb887); border: 1px solid #a0522d; }
+        .winner-stick::after { display: none; } /* Ẩn vạch đỏ */
+        
+        /* Khi được rút ra mới hiện màu vàng sáng và vạch đỏ */
+        .winner-stick.draw-out { background: linear-gradient(to right, #ffd700, #fff, #ffd700); border-color: #d00000; animation: pull-stick-out 1.2s cubic-bezier(0.175, 0.885, 0.32, 1) forwards !important; }
+        .winner-stick.draw-out::after { display: block; content: ''; position: absolute; top: 5px; left: 2px; width: 4px; height: 20px; background: #d00000; border-radius: 2px; }
 
         /* Chữ Đang xóc quẻ */
         .shaking-text { color: #ffd700; font-size: 22px; font-weight: 700; margin-top: 50px; text-shadow: 0 0 10px #d00000; animation: blink 1s infinite; }
@@ -135,7 +144,6 @@
         @keyframes jump-4 { from { transform: translateY(0) rotate(16deg); } to { transform: translateY(-20px) rotate(18deg); } }
         @keyframes jump-winner { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-25px) rotate(2deg); } }
 
-        .winner-stick.draw-out { animation: pull-stick-out 1.2s cubic-bezier(0.175, 0.885, 0.32, 1) forwards !important; }
         @keyframes pull-stick-out { 
             0% { transform: translateY(0) rotate(0deg); } 
             100% { transform: translateY(-150px) rotate(0deg) scale(1.3); box-shadow: 0 0 20px #ffd700; z-index: 10; } 
@@ -143,19 +151,21 @@
         
         /* Cân chỉnh lại form thẻ lộc tre to hơn một chút */
         #resultModal { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 3000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
-        .bamboo-card { width: 320px; max-width: 92%; min-height: 440px; background: #fdf5e6; border: 8px solid #d4a017; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; padding: 0; box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); transform: scale(0.1); opacity: 0; animation: card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; overflow: hidden; }
+        .bamboo-card { width: 320px; max-width: 92%; min-height: 440px; background: #fdf5e6; border: 8px solid #d4a017; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; padding: 0; box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); overflow: hidden; }
+        /* Hiệu ứng lật thẻ tre 3D thay vì trượt từ dưới lên */
+        .bamboo-card.flip-reveal { animation: flipPage 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
         .card-header { width: 100%; height: 70px; background: #d00000; display: flex; justify-content: center; align-items: center; color: #ffd700; font-size: 32px; font-weight: 800; border-bottom: 4px solid #d4a017; text-transform: uppercase; }
         .card-body { padding: 20px; width: 100%; box-sizing: border-box; text-align: center; color: #5c4033; background-image: linear-gradient(#fdf5e6 1px, transparent 1px), linear-gradient(90deg, #fdf5e6 1px, transparent 1px); background-size: 20px 20px; }
         .fortune-rank { display: inline-block; font-size: 36px; font-weight: 900; font-family: 'Dancing Script', cursive, sans-serif; background: linear-gradient(to right, #d00000, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: 2px solid #d00000; padding: 5px 25px; border-radius: 50px; margin-bottom: 15px; white-space: nowrap; animation: text-blink 1.5s infinite alternate; }
         @keyframes text-blink { 0% { opacity: 1; filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)); transform: scale(1); } 100% { opacity: 0.6; filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0)); transform: scale(1.02); } }
         
-        /* Bỏ text-wrap: balance để chữ không bị rớt dòng sai ý muốn */
-        .fortune-content p { font-size: 15px; line-height: 1.45; margin: 10px 0; font-weight: 600; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
+        /* Tránh rớt chữ bằng text-wrap: pretty */
+        .fortune-content p { font-size: 14.8px; line-height: 1.5; margin: 10px 0; font-weight: 600; border-bottom: 1px dashed #ccc; padding-bottom: 5px; text-wrap: pretty; }
         .fortune-content b { color: #d00000; font-size: 16px; font-weight: 800; }
-        .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: 700; font-size: 15px; }
+        .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: 700; font-size: 15px; text-wrap: balance; }
         
         .btn-get-money-card { margin-top: auto; margin-bottom: 20px; background: linear-gradient(to right, #d00000, #ff0000); color: #fff; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: 800; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 16px; animation: pulse-gold 1.5s infinite; white-space: nowrap; max-width: 90%; }
-        @keyframes card-reveal { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
 
         /* ==========================================================
            3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D
@@ -241,7 +251,7 @@
         .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; white-space: nowrap; }
         
         /* Ghi chú QR gọn gàng dễ hiểu */
-        .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.5; padding: 0 20px; }
+        .qr-note-top { color: #fff; font-style: italic; font-size: 14.5px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.5; padding: 0 20px; text-wrap: balance;}
         .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 20px; transition: transform 0.2s; -webkit-touch-callout: default; -webkit-user-select: auto; user-select: auto; pointer-events: auto; }
         
         #qrLightbox { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s; }
@@ -250,7 +260,7 @@
         .lightbox-hint-text { color: #ccc; margin-top: 15px; font-style: italic; font-size: 14px; animation: blink 2s infinite; }
         
         .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 12px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; white-space: nowrap; max-width: 90%; }
-        .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
+        .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 14.8px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; text-wrap: pretty;}
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Hoa rơi nền ngoài */
@@ -407,7 +417,11 @@
             document.getElementById('coupletLeft').style.display = 'none'; 
             document.getElementById('coupletRight').style.display = 'none'; 
             document.getElementById('envelope').style.display = 'none'; 
-            document.getElementById('content').style.display = 'block'; 
+            
+            // Hiệu ứng lật trang 3D khi mở
+            const contentBox = document.getElementById('content');
+            contentBox.style.display = 'block'; 
+            contentBox.classList.add('page-flip-effect');
             
             fireworkIntervalMain = setInterval(createFirework, 1800); 
             createFirework(); setTimeout(createFirework, 600); setTimeout(createFirework, 1200);
@@ -516,7 +530,7 @@
             }
         }
 
-        /* --- LOGIC RÚT QUẺ VỚI ỐNG TRE MỚI --- */
+        /* --- LOGIC RÚT QUẺ VỚI ỐNG TRE MỚI & ÂM THANH--- */
         function startShaking() {
             const shakingModal = document.getElementById('shakingModal');
             const resultModal = document.getElementById('resultModal');
@@ -527,7 +541,7 @@
             // Hiện màn xóc
             shakingModal.style.display = 'flex';
             
-            // Xóa các class animation từ lượt chơi trước (nếu có)
+            // Xóa các class animation từ lượt chơi trước
             bambooTube.classList.remove('is-shaking');
             winningStick.classList.remove('draw-out');
             
@@ -541,52 +555,55 @@
             void bambooTube.offsetWidth; // Ép trình duyệt reflow
             bambooTube.classList.add('is-shaking');
             
-            // Bật âm thanh xóc quẻ
+            // GIẢM ÂM LƯỢNG NHẠC NỀN TẾT VÀ BẬT TIẾNG XÓC
+            if (music && isPlaying) { music.volume = 0.2; }
             if (shakeAudio) {
                 shakeAudio.currentTime = 0;
                 shakeAudio.volume = 1.0;
-                shakeAudio.play().catch(e => console.log("Lỗi tự động phát âm thanh:", e));
+                shakeAudio.play().catch(e => console.log("Lỗi tự động phát âm thanh xóc:", e));
             }
 
-            // Giai đoạn 1: Sau 4 giây, DỪNG xóc và RÚT THẺ lên
+            // Giai đoạn 1: Sau 4 giây, DỪNG xóc, KHÔI PHỤC âm lượng và RÚT THẺ lên
             setTimeout(function() {
                 bambooTube.classList.remove('is-shaking');
                 if (shakeAudio) shakeAudio.pause(); // Tắt tiếng xóc
+                if (music && isPlaying) { music.volume = 1.0; } // Trả lại nhạc nền
                 
-                // Kích hoạt hiệu ứng thẻ tre bay lên
+                // Kích hoạt hiệu ứng thẻ tre "trúng thưởng" hóa vàng và bay lên
                 winningStick.classList.add('draw-out');
                 
             }, 4000);
 
-            // Giai đoạn 2: Sau 5.2 giây (cho thẻ bay lên xong), CHUYỂN MÀN HÌNH
+            // Giai đoạn 2: Sau 5.2 giây, CHUYỂN MÀN HÌNH VỚI HIỆU ỨNG LẬT TRANG
             setTimeout(function() { 
                 shakingModal.style.display = 'none'; 
                 resultModal.style.display = 'flex'; 
                 
-                // Hiển thị thẻ kết quả
+                // Kích hoạt lật trang cho thẻ lộc
                 const bambooCard = document.querySelector('.bamboo-card');
-                bambooCard.style.animation = 'none';
+                bambooCard.classList.remove('flip-reveal');
                 void bambooCard.offsetWidth;
-                bambooCard.style.animation = 'card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+                bambooCard.classList.add('flip-reveal');
             }, 5200);
         }
 
-        /* --- CÂY ĐÀO 3D & LÌ XÌ (ĐÃ TỐI ƯU SIÊU NHẸ) --- */
+        /* --- CÂY ĐÀO 3D & LÌ XÌ --- */
         function showTreeOverlay() {
             document.getElementById('resultModal').style.display = 'none'; document.getElementById('content').style.display = 'none';
             document.getElementById('treeOverlay').style.display = 'flex';
             
+            // Hiệu ứng lật trang mượt cho toàn bộ cụm chậu cây đào
+            document.querySelector('.tree-area').classList.add('page-flip-effect');
+            
             clearInterval(flowerInterval); 
             clearInterval(fireworkIntervalMain); 
             
-            // Giảm tần suất rơi hoa để bớt ngốn GPU
             treePetalInterval = setInterval(createTreeFallingPetal, 600);
 
             if (!treeInitialized) { 
                 generateTree(); 
                 treeInitialized = true; 
             } else {
-                // Phục hồi lại các bao lì xì đã bị mở trước đó nếu người dùng chơi lại
                 document.querySelectorAll('.tree-envelope-wrapper').forEach(wrap => {
                     wrap.classList.remove('opened');
                     wrap.style.opacity = '1';
@@ -605,7 +622,6 @@
                 {x: 45, y: 40, w: 15, h: 20}    
             ];
 
-            // Rút gọn từ 180 thẻ xuống còn 80 thẻ, giúp máy Android khỏe re
             for (let i = 0; i < 80; i++) {
                 let zone = zones[Math.floor(Math.random() * zones.length)];
                 let cx = zone.x + Math.random() * zone.w;
@@ -684,7 +700,9 @@
             } else { 
                 qrTitle.innerText = "May mắn đầu xuân"; finalMsg.innerText = "Tuy giá trị lì xì không lớn, nhưng hy vọng nó sẽ mang lại cho em chút niềm vui và may mắn trong ngày đầu năm 😉"; 
             }
-            document.getElementById('qrOverlay').style.display = 'flex';
+            
+            const qrOverlay = document.getElementById('qrOverlay');
+            qrOverlay.style.display = 'flex';
 
             clearInterval(flowerInterval);
             flowerInterval = setInterval(createFlower, 450);
@@ -695,8 +713,6 @@
 
         function forceDownloadQR() {
             const imgSrc = document.getElementById('qrImgMain').src;
-            
-            // XỬ LÝ ZALO/FACEBOOK in-app browser
             const ua = navigator.userAgent || navigator.vendor || window.opera;
             const isInAppBrowser = /Zalo|FBAN|FBAV/i.test(ua);
 
@@ -733,7 +749,6 @@
             document.body.appendChild(flower); setTimeout(() => { flower.remove(); }, duration * 1000);
         }
 
-        // ĐỔI SANG DÙNG EMOJI THAY VÌ SVG CHO HOA RƠI TRÊN CÂY ĐỂ CHỐNG LAG
         function createTreeFallingPetal() {
             let element = document.createElement("div");
             element.className = "tree-falling-petal";
