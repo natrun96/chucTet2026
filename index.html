@@ -10,11 +10,11 @@
     
     <style>
         /* ==========================================================
-           1. CẤU HÌNH CHUNG & TỐI ƯU HIỆU NĂNG CHO ANDROID
+           1. CẤU HÌNH CHUNG & TỐI ƯU HIỆU NĂNG CHO ANDROID/IOS
            ========================================================== */
         * { box-sizing: border-box; }
         html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
-        body { position: fixed; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #8a0000 0%, #ff1a1a 100%); font-family: 'Be Vietnam Pro', sans-serif; text-align: center; color: white; }
+        body { display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #8a0000 0%, #ff1a1a 100%); font-family: 'Be Vietnam Pro', sans-serif; text-align: center; color: white; }
         
         /* Ngựa Phi */
         .horse-container { position: absolute; bottom: 15px; left: -300px; z-index: 5; pointer-events: none; display: flex; gap: -20px; animation: runAcross 7s linear infinite; }
@@ -52,7 +52,7 @@
         /* ==========================================================
            2. NỘI DUNG LỜI CHÚC & GAME
            ========================================================== */
-        #content { display: none; background: #fffaf0; padding: 25px 20px; border-radius: 20px; box-shadow: 0 0 60px rgba(255, 204, 0, 0.9); width: 360px; max-width: 90%; border: 3px solid #d41414; position: relative; z-index: 20; margin-bottom: 10px; max-height: 85vh; overflow-y: auto; scroll-behavior: smooth; }
+        #content { display: none; background: #fffaf0; padding: 25px 20px; border-radius: 20px; box-shadow: 0 0 60px rgba(255, 204, 0, 0.9); width: 360px; max-width: 92%; border: 3px solid #d41414; position: relative; z-index: 20; margin-bottom: 10px; max-height: 85vh; overflow-y: auto; scroll-behavior: smooth; }
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } }
         h1.title-tet { color: #d00000; font-size: 24px; font-weight: 800; margin-bottom: 5px; margin-top: 0px;}
         .horse-icons-top { font-size: 28px; margin: 0px 0 10px 0; }
@@ -80,13 +80,19 @@
         .game-instruction { font-size: 13px; font-style: italic; color: #666; margin-top: 12px; margin-bottom: 10px; animation: blink 2s infinite; padding: 0; text-align: center; display: block; }
         .celebration-backdrop { position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.75); z-index: 9998; opacity: 0; animation: fadeInOutBackdrop 3s ease-in-out forwards; }
         @keyframes fadeInOutBackdrop { 0% { opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
-        .celebration-popup { position: fixed; top: 50%; left: 50%; width: 100vw; text-align: center; transform: translate(-50%, -50%) scale(0); font-size: 34px; font-weight: 800; color: #ffd700; text-shadow: 0 0 20px #ff0000, 2px 2px 0px #8b0000, -2px -2px 0px #8b0000; z-index: 9999; pointer-events: none; animation: zoomPopCenter 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; line-height: 1.4;}
+        
+        /* Cố định chữ không bị nhảy dòng trên popup */
+        .celebration-popup { position: fixed; top: 50%; left: 50%; width: 100vw; text-align: center; transform: translate(-50%, -50%) scale(0); font-size: clamp(22px, 7vw, 34px); font-weight: 800; color: #ffd700; text-shadow: 0 0 20px #ff0000, 2px 2px 0px #8b0000, -2px -2px 0px #8b0000; z-index: 9999; pointer-events: none; animation: zoomPopCenter 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; line-height: 1.4; white-space: nowrap; }
         @keyframes zoomPopCenter { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 15% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 85% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; } }
-        .static-highlight { display: block; text-align: center; font-size: 24px; font-weight: 800; color: #d00000; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); margin-top: 5px; margin-bottom: 20px; animation: popIn 0.5s; text-wrap: balance; }
-        .btn-lucky { display: none; padding: 12px 30px; margin: 0 auto; background: linear-gradient(to right, #ffd700, #fdb931); color: #d00000; font-weight: 800; border-radius: 50px; border: 2px solid #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); font-size: 16px; transition: transform 0.2s; animation: pulse-gold 1.5s infinite; }
+        
+        /* Cố định "2026 - ..." trong màn hình lời chúc */
+        .static-highlight { display: block; text-align: center; font-size: clamp(18px, 6vw, 22px); font-weight: 800; color: #d00000; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); margin-top: 5px; margin-bottom: 20px; animation: popIn 0.5s; white-space: nowrap; }
+        
+        /* Cố định nút Rút quẻ để không bị xuống dòng */
+        .btn-lucky { display: none; padding: 12px 15px; margin: 0 auto; background: linear-gradient(to right, #ffd700, #fdb931); color: #d00000; font-weight: 800; border-radius: 50px; border: 2px solid #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); font-size: clamp(14px, 4vw, 16px); transition: transform 0.2s; animation: pulse-gold 1.5s infinite; white-space: nowrap; max-width: 100%; }
         @keyframes pulse-gold { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 
-        /* --- XIN KEO & TRẢ QUẺ (ĐÃ CỐ ĐỊNH WIDTH/HEIGHT VỚI MỌI MÁY) --- */
+        /* --- XIN KEO & TRẢ QUẺ --- */
         #shakingModal { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
         .fortune-container { width: 100px; height: 160px; background: linear-gradient(to right, #b30000, #d00000, #b30000); border: 4px solid #ffd700; border-radius: 10px 10px 30px 30px; position: relative; animation: shake-hard 0.4s ease-in-out infinite; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
         .fortune-container::before { content: ''; position: absolute; top: -15px; left: 5px; width: 82px; height: 25px; background: #800000; border: 4px solid #ffd700; border-radius: 50%; z-index: 2; }
@@ -96,20 +102,24 @@
         @keyframes shake-hard { 0% { transform: rotate(0deg) translateY(0); } 25% { transform: rotate(-10deg) translateY(-10px); } 50% { transform: rotate(0deg) translateY(0); } 75% { transform: rotate(10deg) translateY(10px); } 100% { transform: rotate(0deg) translateY(0); } }
         .shaking-text { color: #ffd700; font-size: 22px; font-weight: 700; margin-top: 40px; text-shadow: 0 0 10px #d00000; animation: blink 1s infinite; }
         
+        /* Cân chỉnh lại form thẻ lộc tre to hơn một chút */
         #resultModal { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 3000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
-        .bamboo-card { width: 300px; min-height: 450px; background: #fdf5e6; border: 8px solid #d4a017; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; padding: 0; box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); transform: scale(0.1); opacity: 0; animation: card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; overflow: hidden; }
+        .bamboo-card { width: 320px; max-width: 92%; min-height: 440px; background: #fdf5e6; border: 8px solid #d4a017; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; padding: 0; box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); transform: scale(0.1); opacity: 0; animation: card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; overflow: hidden; }
         .card-header { width: 100%; height: 70px; background: #d00000; display: flex; justify-content: center; align-items: center; color: #ffd700; font-size: 32px; font-weight: 800; border-bottom: 4px solid #d4a017; text-transform: uppercase; }
         .card-body { padding: 20px; width: 100%; box-sizing: border-box; text-align: center; color: #5c4033; background-image: linear-gradient(#fdf5e6 1px, transparent 1px), linear-gradient(90deg, #fdf5e6 1px, transparent 1px); background-size: 20px 20px; }
         .fortune-rank { display: inline-block; font-size: 36px; font-weight: 900; font-family: 'Dancing Script', cursive, sans-serif; background: linear-gradient(to right, #d00000, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; border: 2px solid #d00000; padding: 5px 25px; border-radius: 50px; margin-bottom: 15px; white-space: nowrap; animation: text-blink 1.5s infinite alternate; }
         @keyframes text-blink { 0% { opacity: 1; filter: drop-shadow(0 0 5px rgba(255, 0, 0, 0.8)); transform: scale(1); } 100% { opacity: 0.6; filter: drop-shadow(0 0 0px rgba(255, 0, 0, 0)); transform: scale(1.02); } }
-        .fortune-content p { font-size: 14px; line-height: 1.45; margin: 10px 0; font-weight: 600; border-bottom: 1px dashed #ccc; padding-bottom: 5px; text-wrap: balance; }
+        
+        /* Bỏ text-wrap: balance để chữ không bị rớt dòng sai ý muốn */
+        .fortune-content p { font-size: 15px; line-height: 1.45; margin: 10px 0; font-weight: 600; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
         .fortune-content b { color: #d00000; font-size: 16px; font-weight: 800; }
-        .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: 700; font-size: 15px; text-wrap: balance; }
-        .btn-get-money-card { margin-top: auto; margin-bottom: 20px; background: linear-gradient(to right, #d00000, #ff0000); color: #fff; border: none; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: 800; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 16px; animation: pulse-gold 1.5s infinite; }
+        .poem { margin-top: 15px; font-style: italic; color: #800000; font-weight: 700; font-size: 15px; }
+        
+        .btn-get-money-card { margin-top: auto; margin-bottom: 20px; background: linear-gradient(to right, #d00000, #ff0000); color: #fff; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: 800; box-shadow: 0 4px 10px rgba(0,0,0,0.3); font-size: 16px; animation: pulse-gold 1.5s infinite; white-space: nowrap; max-width: 90%; }
         @keyframes card-reveal { 0% { transform: translateY(200px) scale(0.5); opacity: 0; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
 
         /* ==========================================================
-           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D (ĐÃ TỐI ƯU CĂN CHỈNH)
+           3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D
            ========================================================== */
         #treeOverlay {
             display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 4000;
@@ -130,7 +140,7 @@
             position: absolute; top: 4vh; left: 0; width: 100%; text-align: center;
             color: #d41414; font-size: 38px; font-weight: 900; 
             text-shadow: 2px 2px 0px #fff, 0 0 15px rgba(255,255,255,0.9); 
-            font-family: 'Dancing Script', cursive; animation: pulse-gold 2s infinite; z-index: 10; pointer-events: none;
+            font-family: 'Dancing Script', cursive; animation: pulse-gold 2s infinite; z-index: 10; pointer-events: none; white-space: nowrap;
         }
 
         .tree-area {
@@ -148,14 +158,13 @@
         .pot-body { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 130px; height: 95px; background: linear-gradient(to right, #703311, #b34d10, #703311); border-radius: 10px 10px 65px 65px; z-index: 4; display: flex; justify-content: center; align-items: center; box-shadow: inset -15px -10px 20px rgba(0,0,0,0.5), 0 20px 25px rgba(0,0,0,0.6); }
         .pot-body::after { content: '2026'; color: #ffd700; font-size: 26px; font-weight: 900; font-family: 'Arial Black', sans-serif; text-shadow: -1px -1px 0 #cc9900, 2px 2px 3px rgba(0,0,0,0.6); margin-top: 10px;}
 
-        /* CÂY ĐÀO SVG (Cắm vào chính giữa đất) */
+        /* CÂY ĐÀO SVG */
         .tree-svg-container, .tree-canopy {
             position: absolute; bottom: 90px; width: 100%; height: calc(100% - 90px); pointer-events: none;
         }
         .tree-svg-container { z-index: 3; }
         .tree-canopy { z-index: 5; }
         
-        /* ĐÃ LOẠI BỎ FILTER DROP-SHADOW để chống LAG trên Android */
         .tree-svg-container svg { width: 100%; height: 100%; display: block; overflow: visible; }
         .svg-flower, .svg-leaf { position: absolute; transform-origin: center; animation: blossom-pulse 3s infinite alternate; }
         .tree-falling-petal { position: absolute; top: -5vh; z-index: 8; pointer-events: none; }
@@ -175,13 +184,12 @@
         @keyframes env-swing { 0% { transform: rotate(-6deg); } 100% { transform: rotate(6deg); } }
         @keyframes env-blink { 0% { box-shadow: 0 0 5px #ffd700; } 100% { box-shadow: 0 0 15px #ffd700, 0 0 20px rgba(255,0,0,0.6); } }
 
-        /* LÌ XÌ CLONE BAY RA MÀN HÌNH (ĐÃ TỐI ƯU SIÊU NHẸ) */
+        /* LÌ XÌ CLONE BAY RA MÀN HÌNH */
         .env-clone-wrap { width: 34px; height: 50px; z-index: 9999; display: flex; flex-direction: column; align-items: center; transition: all 2s ease-in-out; transform-origin: center;}
         .env-clone { width: 100%; height: 100%; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; border-radius: 4px; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; transition: box-shadow 0.5s;}
         .env-clone::before { content: ''; position: absolute; top: -2px; left: -2px; border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 15px solid #b30000; z-index: 2; }
         .env-clone .epass-logo { color: #ffaa00; font-weight: 800; font-size: 9px; text-shadow: 1px 1px 0px #5a0000; transform: rotate(-10deg); z-index: 3;}
         
-        /* Phóng to ra màn hình & Xóa bóng đổ để giảm lag trên Mobile */
         .env-clone-wrap.fly-and-open { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(5); opacity: 0; }
         .env-clone-wrap.fly-and-open .env-clone { box-shadow: none !important; }
 
@@ -191,9 +199,10 @@
         #qrOverlay { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(50, 0, 0, 0.9); z-index: 5000; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.8s; overflow-y: auto; padding: 20px 0; }
         .btn-close-qr { position: absolute; top: 30px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; opacity: 0.8; transition: 0.3s; text-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 2005; }
         .btn-close-qr:hover { opacity: 1; transform: scale(1.1); }
-        .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
+        .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; white-space: nowrap; }
         
-        .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
+        /* Ghi chú QR gọn gàng dễ hiểu */
+        .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.5; padding: 0 20px; }
         .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 20px; transition: transform 0.2s; -webkit-touch-callout: default; -webkit-user-select: auto; user-select: auto; pointer-events: auto; }
         
         #qrLightbox { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s; }
@@ -201,11 +210,11 @@
         @keyframes zoomInPopup { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .lightbox-hint-text { color: #ccc; margin-top: 15px; font-style: italic; font-size: 14px; animation: blink 2s infinite; }
         
-        .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 10px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
+        .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 12px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; white-space: nowrap; max-width: 90%; }
         .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hoa rơi nền ngoài (Đã tăng z-index để phủ lên màn QR) */
+        /* Hoa rơi nền ngoài */
         .flower { position: absolute; top: -10vh; z-index: 5001; pointer-events: none; opacity: 0.8; will-change: transform; }
         @keyframes fall { to { transform: translateY(110vh) rotate(var(--fall-rot)); } }
 
@@ -295,7 +304,7 @@
 
     <div id="qrOverlay">
         <div class="btn-close-qr" onclick="closeQR()">×</div><div class="qr-title-large" id="qrTitle">Lì xì tặng em</div>
-        <div class="qr-note-top">(Sử dụng APP Viettel Money để quét QR<br>Mở bằng Zalo: Bấm nút "Tải mã QR" bên dưới)</div>
+        <div class="qr-note-top">(Mở App Viettel Money để quét mã<br>Nhấn giữ ảnh hoặc bấm nút bên dưới để lưu)</div>
         <img src="" alt="QR Code" class="qr-img-large" id="qrImgMain">
         <div class="btn-download-bottom" onclick="forceDownloadQR()"><span>⬇️</span> Tải mã QR</div><div class="final-message" id="finalMsg"></div>
     </div>
@@ -315,7 +324,7 @@
             "e_linh": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Năm mới đến rồi, anh chúc Linh luôn rạng rỡ, khỏe mạnh và bình an nhé! Chúc cho mọi dự định, kế hoạch trong năm 2026 của em đều sẽ thành hiện thực. Mong em ngày càng thăng hoa trong công việc và sớm 'master' mảng OTC nha 😁. Đặc biệt, chúc chuyện tình cảm của hai em lúc nào cũng mặn nồng, ngọt ngào, luôn thấu hiểu và đồng hành cùng nhau vượt qua mọi cột mốc trong cuộc sống nhé! ❤️", highlightText: "VIÊN MÃN", qr: "qr-linh.jpg", fortune: { word: "Mỹ Mãn", content: "<p><b>💞 Tình Yêu:</b><br>Thêm phần mặn nồng, gắn kết, anh người yêu luôn thấu hiểu và cưng chiều.</p><p><b>💃 Nhan Sắc & Sức Khỏe:</b><br>Ngày càng rạng rỡ, nhuận sắc, thể lực dồi dào.</p><p><b>💰 Tiền Tài:</b><br>Tài lộc hanh thông, ví lúc nào cũng căng phồng.</p>", poem: "\"Tình nồng thắm thiết mặn mà<br>Tiền tài rủng rỉnh, ngọc ngà sắc xuân\"" } },
             "e_kimanh": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Chào xuân Bính Ngọ, anh chúc Kim Anh một năm ngập tràn sức khỏe, niềm vui và thật nhiều may mắn! Mong em trong công việc sẽ càng thêm bứt phá, sắc bén và tỉ mỉ hơn nữa – hãy luôn phát huy những thế mạnh và không ngừng hoàn thiện bản thân mỗi ngày nhé. Và điều quan trọng nhất: chúc em sớm chính thức 'chốt đơn' được một anh người yêu cực phẩm, ấm áp và luôn cưng chiều em hết mực nha! 😝", highlightText: "RỰC RỠ", qr: "qr-kimanh.jpg", fortune: { word: "Hanh Thông", content: "<p><b>💖 Tình Duyên:</b><br>Buổi hẹn hò lãng mạn nở hoa, sớm ngày chính thức chung đôi.</p><p><b>💻 Công Việc:</b><br>Suôn sẻ thuận lợi, 'bàn tay vàng' test đâu chuẩn đấy, zero bug!</p><p><b>🍀 May Mắn & Tiền Tài:</b><br>Sức khỏe dẻo dai, phú quý ngập tràn, làm đâu thắng đó.</p>", poem: "\"Tình duyên chớm nở ngọt ngào<br>Công việc mượt mà, lộc vào như mưa\"" } },
             "e_vinh": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Nhân dịp năm mới, anh chúc Vinh và gia đình luôn dồi dào sức khỏe, an yên và hạnh phúc. Những nỗi buồn của năm cũ hãy nhẹ nhàng gác lại em nhé, để mở lòng đón nhận muôn vàn niềm vui và hy vọng rực rỡ trong năm Bính Ngọ. Chúc em một năm 2026 thật mạnh mẽ, tự bứt phá để gặt hái nhiều thành tựu lớn trong công việc. Đặc biệt, chúc cho hạt giống tình cảm em đang ươm mầm sẽ sớm đơm hoa kết trái ngọt ngào nha! 😜", highlightText: "MẠNH MẼ", qr: "qr-vinh.jpg", fortune: { word: "An Yên", content: "<p><b>🌻 Tinh Thần & Gia Đình:</b><br>Gác lại muộn phiền, cõi lòng bình an, đón nhận vô vàn niềm vui mới.</p><p><b>💘 Tình Duyên:</b><br>Khoảng cách gần ngay chốn công sở, duyên lành đưa tới, sớm chung lối về.</p><p><b>💼 Công Việc & Tài Lộc:</b><br>Thuận buồm xuôi gió, thăng tiến không ngừng, tiền bạc rủng rỉnh.</p>", poem: "\"Qua cơn mưa, trời lại sáng trong<br>Tình duyên gõ cửa, cõi lòng an vui\"" } },
-            "e_duc": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Chúc mừng năm mới Đức! Anh chúc em một năm thật nhiều sức khỏe, luôn vui vẻ và vạn sự hanh thông. Năm 2026 này, chúc em ngày càng chững chạc, tự tin và tỏa sáng hơn nữa trên cương vị chính thức mới. Hãy luôn biết cách phát huy thế mạnh, rèn giũa bản thân để không ngừng thăng tiến nhé. Và tất nhiên, chúc cho tình yêu của em lúc nào cũng đong đầy hạnh phúc và ngọt ngào! 🎉", highlightText: "VỮNG BƯỚC", qr: "qr-duc.jpg", fortune: { word: "Khởi Sắc", content: "<p><b>🚀 Công Việc:</b><br>Khởi đầu mới rực rỡ với bản hợp đồng chính thức! Ngày càng trưởng thành, tự tin vươn xa.</p><p><b>💕 Tình Yêu:</b><br>Ngọt ngào đắm say, hạnh phúc đong đầy bên nửa kia yêu thương.</p><p><b>🍀 Sức Khỏe & May Mắn:</b><br>Thể chất khang kiện, đi tới đâu vạn sự cát tường tới đó.</p>", poem: "\"Chính thức cất cánh bay xa<br>Tự tin vững bước, tình ca ngọt ngào\"" } },
+            "e_duc": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Chúc mừng năm mới Đức! Anh chúc em một năm thật nhiều sức khỏe, luôn vui vẻ và vạn sự hanh thông. Năm 2026 này, chúc em ngày càng chững chạc, tự tin và tỏa sáng hơn nữa trên cương vị chính thức mới. Hãy luôn biết cách phát huy thế mạnh, rèn giũa bản thân để không ngừng thăng tiến nhé. Và tất nhiên, chúc cho tình yêu của em lúc nào cũng đong đầy hạnh phúc và ngọt ngào! 🎉", highlightText: "VỮNG BƯỚC", qr: "qr-duc.jpg", fortune: { word: "Khởi Sắc", content: "<p><b>🚀 Công Việc:</b><br>Khởi đầu mới rực rỡ với bản hợp đồng chính thức! Ngày càng trưởng thành, tự tin vươn xa.</p><p><b>💕 Tình Yêu:</b><br>Ngọt ngào đắm say, hạnh phúc đong đầy bên nửa kia yêu thương.</p><p><b>🍀 Sức Khỏe & May Mắn:</b><br>Thể chất khang kiện, đi tới đâu vạn sự cát tường tới đó.</p>", poem: "\"Chính thức cất cánh bay xa<br>Tự tự vững bước, tình ca ngọt ngào\"" } },
             "e_trung": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Năm mới Bính Ngọ, anh chúc Trung luôn dồi dào sức khỏe, bình an, vạn sự như ý, và đặc biệt là lên sới 'bài' nào thắng đậm sới đó nha 😅. Chúc em một năm 2026 bứt phá rực rỡ, mọi công việc, dự định cá nhân lẫn các bài toán automation đều 'auto' chạy mượt mà, pass xanh lè mọi cases và hoàn thành xuất sắc mọi mục tiêu nhé! 🚀", highlightText: "MƯỢT MÀ", qr: "qr-trung.jpg", fortune: { word: "Thành Đạt", content: "<p><b>📈 Công Danh:</b><br>Viên mãn vẹn toàn, sự nghiệp thăng hoa bứt phá trong năm mới.</p><p><b>⚙️ Automation:</b><br>Code chạy 'auto' mượt mà, pass mọi case hóc búa, không lo gãy script.</p><p><b>💪 Sức Khỏe & Tình Duyên:</b><br>Thể lực sung mãn, tình duyên phơi phới, rạng rỡ nụ cười.</p>", poem: "\"Công danh sự nghiệp vươn xa<br>Auto chạy mượt, tình đà nở hoa\"" } },
             "e_huy": { skipGame: false, img: "Anh-2.jpg", caption: "Biệt Đội Săn Bug - Quét Sạch Mọi Lỗi 🐛🔫", wish: "Nhân dịp xuân mới, anh chúc Huy cùng tổ ấm nhỏ của mình một năm bình an, mạnh khỏe và ngập tràn hạnh phúc. Chúc em sẽ ngày càng bản lĩnh, chững chạc để sẵn sàng tỏa sáng trong những cương vị và vai trò mới sắp tới 😊. Dù rẽ hướng theo bất kỳ con đường nào, anh tin với sự tự tin và nỗ lực bền bỉ, em chắc chắn sẽ gặt hái được những thành công rực rỡ nhất! 💪", highlightText: "BẢN LĨNH", qr: "qr-huy.jpg", fortune: { word: "Vững Bước", content: "<p><b>👨‍👩‍👧 Gia Đình:</b><br>Hạnh phúc viên mãn, đón nhận tin vui.</p><p><b>💼 Sự Nghiệp:</b><br>Vững vàng, định hướng rõ ràng, thành công phía trước.</p><p><b>💪 Bản Lĩnh:</b><br>Trưởng thành, vững vàng trước mọi thử thách.</p>", poem: "\"Trách nhiệm trên vai chí thêm bền<br>Thành công gõ cửa rạng tương lai\"" } }
         };
@@ -460,7 +469,7 @@
             setTimeout(function() { document.getElementById('shakingModal').style.display = 'none'; document.getElementById('resultModal').style.display = 'flex'; }, 3000);
         }
 
-        /* --- CÂY ĐÀO 3D & LÌ XÌ (ĐÃ TỐI ƯU SIÊU NHẸ) --- */
+        /* --- CÂY ĐÀO 3D & LÌ XÌ --- */
         function showTreeOverlay() {
             document.getElementById('resultModal').style.display = 'none'; document.getElementById('content').style.display = 'none';
             document.getElementById('treeOverlay').style.display = 'flex';
@@ -468,7 +477,6 @@
             clearInterval(flowerInterval); 
             clearInterval(fireworkIntervalMain); 
             
-            // Giảm tần suất rơi hoa để bớt ngốn GPU
             treePetalInterval = setInterval(createTreeFallingPetal, 600);
 
             if (!treeInitialized) { generateTree(); treeInitialized = true; }
@@ -485,7 +493,6 @@
                 {x: 45, y: 40, w: 15, h: 20}    
             ];
 
-            // Rút gọn từ 180 thẻ xuống còn 80 thẻ, giúp máy Android khỏe re
             for (let i = 0; i < 80; i++) {
                 let zone = zones[Math.floor(Math.random() * zones.length)];
                 let cx = zone.x + Math.random() * zone.w;
@@ -574,8 +581,6 @@
 
         function forceDownloadQR() {
             const imgSrc = document.getElementById('qrImgMain').src;
-            
-            // XỬ LÝ ZALO/FACEBOOK in-app browser
             const ua = navigator.userAgent || navigator.vendor || window.opera;
             const isInAppBrowser = /Zalo|FBAN|FBAV/i.test(ua);
 
@@ -612,7 +617,6 @@
             document.body.appendChild(flower); setTimeout(() => { flower.remove(); }, duration * 1000);
         }
 
-        // ĐỔI SANG DÙNG EMOJI THAY VÌ SVG CHO HOA RƠI TRÊN CÂY ĐỂ CHỐNG LAG
         function createTreeFallingPetal() {
             let element = document.createElement("div");
             element.className = "tree-falling-petal";
