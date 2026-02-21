@@ -33,7 +33,7 @@
         @keyframes hint-bounce { 0% { transform: translateX(0); } 100% { transform: translateX(-5px); } }
         @keyframes pulse-btn { 0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 
-        /* Bao Lì Xì Khởi Đầu (Đã thu nhỏ) */
+        /* Bao Lì Xì Khởi Đầu */
         #envelope { width: 250px; height: 380px; background: linear-gradient(to bottom, #b30000, #e60000); border: 4px solid #ffd700; border-radius: 20px; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 50px rgba(0,0,0,0.7); transition: transform 0.3s; z-index: 20; position: relative; margin-bottom: 80px; }
         #envelope:hover { transform: scale(1.05); }
         .envelope-icon { font-size: 70px; margin-bottom: -10px; text-shadow: 0 4px 4px rgba(0,0,0,0.3); }
@@ -41,7 +41,7 @@
         .click-hint { font-size: 15px; font-weight: 700; margin-top: 20px; animation: blink 1.5s infinite; }
         @keyframes blink { 50% { opacity: 0.5; } }
 
-        /* Câu Đối (Đã mở rộng khung, thu nhỏ chữ) */
+        /* Câu Đối */
         .couplet { position: fixed; top: 50%; width: 55px; background: linear-gradient(to bottom, #b30000, #990000); border: 3px solid #ffd700; border-radius: 4px; color: #ffd700; font-family: 'Times New Roman', serif; font-weight: 900; text-align: center; padding: 12px 0; box-shadow: 4px 4px 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.3); z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: floatCouplet 3s ease-in-out infinite alternate; will-change: transform; }
         .couplet-left { left: 8px; } .couplet-right { right: 8px; animation-delay: -1.5s; }
         .couplet span { display: block; font-size: 11px; line-height: 1.2; text-shadow: 1px 1px 2px rgba(0,0,0,0.6); width: 100%; white-space: nowrap; padding: 1px 0;}
@@ -49,11 +49,18 @@
         .couplet-cap-top { top: -5px; } .couplet-cap-bottom { bottom: -5px; }
         @keyframes floatCouplet { 0% { transform: translateY(calc(-50% - 10px)); } 100% { transform: translateY(calc(-50% + 10px)); } }
 
-        /* Hiệu Ứng Lật Trang 3D Mượt Mà (Dùng chung cho các màn hình) */
+        /* Hiệu Ứng Lật Trang 3D Mượt Mà */
         .page-flip-effect { animation: flipPage 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform-origin: center; backface-visibility: hidden; }
         @keyframes flipPage { 
             0% { transform: perspective(1000px) rotateY(90deg) scale(0.9); opacity: 0; } 
             100% { transform: perspective(1000px) rotateY(0deg) scale(1); opacity: 1; } 
+        }
+
+        /* KHẮC PHỤC LỖI CÂY ĐÀO: Hiệu ứng lật trang riêng giữ thuộc tính canh giữa translateX(-50%) */
+        .tree-flip-effect { animation: flipTree 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform-origin: center; backface-visibility: hidden; }
+        @keyframes flipTree { 
+            0% { transform: translateX(-50%) perspective(1000px) rotateY(90deg) scale(0.9); opacity: 0; } 
+            100% { transform: translateX(-50%) perspective(1000px) rotateY(0deg) scale(1); opacity: 1; } 
         }
 
         /* ==========================================================
@@ -592,8 +599,8 @@
             document.getElementById('resultModal').style.display = 'none'; document.getElementById('content').style.display = 'none';
             document.getElementById('treeOverlay').style.display = 'flex';
             
-            // Hiệu ứng lật trang mượt cho toàn bộ cụm chậu cây đào
-            document.querySelector('.tree-area').classList.add('page-flip-effect');
+            // Hiệu ứng lật trang cho cây đào (giữ lại translateX)
+            document.querySelector('.tree-area').classList.add('tree-flip-effect');
             
             clearInterval(flowerInterval); 
             clearInterval(fireworkIntervalMain); 
