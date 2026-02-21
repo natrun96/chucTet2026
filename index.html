@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Gieo Quẻ Đầu Năm 2026</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧧</text></svg>">
     
@@ -10,16 +10,18 @@
     
     <style>
         /* ==========================================================
-           1. CẤU HÌNH CHUNG & TỐI ƯU HIỆU NĂNG
+           1. CẤU HÌNH CHUNG & TỐI ƯU HIỆU NĂNG CHO ANDROID
            ========================================================== */
-        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100dvh; background: linear-gradient(135deg, #8a0000 0%, #ff1a1a 100%); font-family: 'Be Vietnam Pro', sans-serif; overflow: hidden; text-align: center; color: white; }
+        * { box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+        body { position: fixed; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #8a0000 0%, #ff1a1a 100%); font-family: 'Be Vietnam Pro', sans-serif; text-align: center; color: white; }
         
         /* Ngựa Phi */
-        .horse-container { position: absolute; bottom: 15px; left: -300px; z-index: 5; pointer-events: none; display: flex; gap: -20px; animation: runAcross 7s linear infinite; will-change: transform; }
-        .horse-unit { font-size: 80px; display: inline-block; transform: scaleX(-1); filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.5)); will-change: transform; }
+        .horse-container { position: absolute; bottom: 15px; left: -300px; z-index: 5; pointer-events: none; display: flex; gap: -20px; animation: runAcross 7s linear infinite; }
+        .horse-unit { font-size: 80px; display: inline-block; transform: scaleX(-1); }
         .galloping { animation: gallop 0.6s ease-in-out infinite alternate; }
-        .horse-red { filter: hue-rotate(-50deg) saturate(2) drop-shadow(5px 5px 5px rgba(0,0,0,0.5)); }
-        .horse-gold { filter: hue-rotate(45deg) saturate(3) brightness(1.2) drop-shadow(5px 5px 5px rgba(0,0,0,0.5)); animation-delay: 0.1s; }
+        .horse-red { filter: hue-rotate(-50deg) saturate(2); }
+        .horse-gold { filter: hue-rotate(45deg) saturate(3) brightness(1.2); animation-delay: 0.1s; }
         .horse-brown { animation-delay: 0.2s; }
         @keyframes runAcross { 0% { transform: translateX(0); } 100% { transform: translateX(calc(100vw + 500px)); } }
         @keyframes gallop { 0% { transform: scaleX(-1) translateY(0) rotate(0deg); } 100% { transform: scaleX(-1) translateY(-20px) rotate(5deg); } }
@@ -34,7 +36,7 @@
         /* Bao Lì Xì Khởi Đầu */
         #envelope { width: 300px; height: 450px; background: linear-gradient(to bottom, #b30000, #e60000); border: 4px solid #ffd700; border-radius: 20px; cursor: pointer; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 50px rgba(0,0,0,0.7); transition: transform 0.3s; z-index: 20; position: relative; margin-bottom: 80px; }
         #envelope:hover { transform: scale(1.05); }
-        .envelope-icon { font-size: 80px; margin-bottom: -10px; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3)); }
+        .envelope-icon { font-size: 80px; margin-bottom: -10px; text-shadow: 0 4px 4px rgba(0,0,0,0.3); }
         .year-text { font-size: 35px; font-weight: 800; color: #ffd700; text-shadow: 3px 3px 0px #8b0000; font-family: 'Be Vietnam Pro', sans-serif; margin-bottom: 10px; }
         .click-hint { font-size: 16px; font-weight: 700; margin-top: 20px; animation: blink 1.5s infinite; }
         @keyframes blink { 50% { opacity: 0.5; } }
@@ -50,7 +52,7 @@
         /* ==========================================================
            2. NỘI DUNG LỜI CHÚC & GAME
            ========================================================== */
-        #content { display: none; background: #fffaf0; padding: 25px 20px; border-radius: 20px; box-shadow: 0 0 60px rgba(255, 204, 0, 0.9); width: 360px; max-width: 90%; border: 3px solid #d41414; position: relative; z-index: 20; margin-bottom: 10px; max-height: 85dvh; overflow-y: auto; scroll-behavior: smooth; }
+        #content { display: none; background: #fffaf0; padding: 25px 20px; border-radius: 20px; box-shadow: 0 0 60px rgba(255, 204, 0, 0.9); width: 360px; max-width: 90%; border: 3px solid #d41414; position: relative; z-index: 20; margin-bottom: 10px; max-height: 85vh; overflow-y: auto; scroll-behavior: smooth; }
         @keyframes popIn { 0% { opacity: 0; transform: scale(0.5); } 100% { opacity: 1; transform: scale(1); } }
         h1.title-tet { color: #d00000; font-size: 24px; font-weight: 800; margin-bottom: 5px; margin-top: 0px;}
         .horse-icons-top { font-size: 28px; margin: 0px 0 10px 0; }
@@ -58,9 +60,9 @@
         .writing-pen { display: inline-block; font-size: 20px; margin-left: 5px; animation: write-move 0.3s infinite alternate; }
         @keyframes write-move { 0% { transform: rotate(0deg) translateY(0); } 100% { transform: rotate(15deg) translateY(-5px); } }
         #extra-image-container { display: none; margin-bottom: 15px; text-align: center;}
-        .my-custom-img { width: 100%; max-width: 100%; border-radius: 10px; border: 3px solid #d00000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: block; margin: 0 auto; cursor: zoom-in; opacity: 0; filter: blur(20px) brightness(1.2); transform: scale(1.1); animation: cinematicReveal 1.5s ease-out forwards; }
+        .my-custom-img { width: 100%; max-width: 100%; border-radius: 10px; border: 3px solid #d00000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); display: block; margin: 0 auto; cursor: zoom-in; opacity: 0; filter: brightness(1.2); transform: scale(1.1); animation: cinematicReveal 1.5s ease-out forwards; }
         .image-caption { margin-top: 8px; font-size: 14px; font-weight: 700; color: #b30000; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); font-style: italic; opacity: 0; animation: fadeIn 1s ease-out forwards; animation-delay: 1s; }
-        @keyframes cinematicReveal { 0% { opacity: 0; filter: blur(20px) brightness(1.5); transform: scale(1.15); } 50% { opacity: 0.8; filter: blur(5px) brightness(1.1); } 100% { opacity: 1; filter: blur(0) brightness(1); transform: scale(1); } }
+        @keyframes cinematicReveal { 0% { opacity: 0; transform: scale(1.15); } 100% { opacity: 1; transform: scale(1); } }
 
         /* GAME CHỮ & NÚT */
         #interactive-section { border-top: 1px dashed #d00000; padding-top: 15px; margin-top: 15px; }
@@ -76,16 +78,16 @@
         .scramble-container.long-text .letter-chip { font-size: 13px; padding: 4px 6px; min-width: 10px; margin-bottom: 2px; }
 
         .game-instruction { font-size: 13px; font-style: italic; color: #666; margin-top: 12px; margin-bottom: 10px; animation: blink 2s infinite; padding: 0; text-align: center; display: block; }
-        .celebration-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9998; opacity: 0; animation: fadeInOutBackdrop 3s ease-in-out forwards; }
+        .celebration-backdrop { position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.75); z-index: 9998; opacity: 0; animation: fadeInOutBackdrop 3s ease-in-out forwards; }
         @keyframes fadeInOutBackdrop { 0% { opacity: 0; } 10% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
-        .celebration-popup { position: fixed; top: 50%; left: 50%; width: 100%; text-align: center; transform: translate(-50%, -50%) scale(0); font-size: 34px; font-weight: 800; color: #ffd700; text-shadow: 0 0 20px #ff0000, 2px 2px 0px #8b0000, -2px -2px 0px #8b0000; z-index: 9999; pointer-events: none; animation: zoomPopCenter 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; line-height: 1.4;}
+        .celebration-popup { position: fixed; top: 50%; left: 50%; width: 100vw; text-align: center; transform: translate(-50%, -50%) scale(0); font-size: 34px; font-weight: 800; color: #ffd700; text-shadow: 0 0 20px #ff0000, 2px 2px 0px #8b0000, -2px -2px 0px #8b0000; z-index: 9999; pointer-events: none; animation: zoomPopCenter 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; line-height: 1.4;}
         @keyframes zoomPopCenter { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 15% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 85% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; } }
         .static-highlight { display: block; text-align: center; font-size: 24px; font-weight: 800; color: #d00000; text-shadow: 1px 1px 0px rgba(255,255,255,0.5); margin-top: 5px; margin-bottom: 20px; animation: popIn 0.5s; text-wrap: balance; }
         .btn-lucky { display: none; padding: 12px 30px; margin: 0 auto; background: linear-gradient(to right, #ffd700, #fdb931); color: #d00000; font-weight: 800; border-radius: 50px; border: 2px solid #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); font-size: 16px; transition: transform 0.2s; animation: pulse-gold 1.5s infinite; }
         @keyframes pulse-gold { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 
-        /* --- XIN KEO & TRẢ QUẺ --- */
-        #shakingModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
+        /* --- XIN KEO & TRẢ QUẺ (ĐÃ CỐ ĐỊNH WIDTH/HEIGHT VỚI MỌI MÁY) --- */
+        #shakingModal { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
         .fortune-container { width: 100px; height: 160px; background: linear-gradient(to right, #b30000, #d00000, #b30000); border: 4px solid #ffd700; border-radius: 10px 10px 30px 30px; position: relative; animation: shake-hard 0.4s ease-in-out infinite; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
         .fortune-container::before { content: ''; position: absolute; top: -15px; left: 5px; width: 82px; height: 25px; background: #800000; border: 4px solid #ffd700; border-radius: 50%; z-index: 2; }
         .sticks-bundle { position: absolute; top: -40px; left: 20px; width: 60px; height: 60px; z-index: 1; }
@@ -94,7 +96,7 @@
         @keyframes shake-hard { 0% { transform: rotate(0deg) translateY(0); } 25% { transform: rotate(-10deg) translateY(-10px); } 50% { transform: rotate(0deg) translateY(0); } 75% { transform: rotate(10deg) translateY(10px); } 100% { transform: rotate(0deg) translateY(0); } }
         .shaking-text { color: #ffd700; font-size: 22px; font-weight: 700; margin-top: 40px; text-shadow: 0 0 10px #d00000; animation: blink 1s infinite; }
         
-        #resultModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 3000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
+        #resultModal { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 3000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
         .bamboo-card { width: 300px; min-height: 450px; background: #fdf5e6; border: 8px solid #d4a017; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; padding: 0; box-shadow: 0 0 50px rgba(255, 215, 0, 0.5); transform: scale(0.1); opacity: 0; animation: card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; overflow: hidden; }
         .card-header { width: 100%; height: 70px; background: #d00000; display: flex; justify-content: center; align-items: center; color: #ffd700; font-size: 32px; font-weight: 800; border-bottom: 4px solid #d4a017; text-transform: uppercase; }
         .card-body { padding: 20px; width: 100%; box-sizing: border-box; text-align: center; color: #5c4033; background-image: linear-gradient(#fdf5e6 1px, transparent 1px), linear-gradient(90deg, #fdf5e6 1px, transparent 1px); background-size: 20px 20px; }
@@ -110,7 +112,7 @@
            3. GIAO DIỆN HÁI LỘC CÂY ĐÀO 3D (ĐÃ TỐI ƯU CĂN CHỈNH)
            ========================================================== */
         #treeOverlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 4000;
+            display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 4000;
             overflow: hidden; animation: fadeIn 0.8s;
             background: linear-gradient(to bottom, #7EC8E3 0%, #E0F7FA 30%, #FFF0F5 70%, #C1E1C1 100%);
             background-image: radial-gradient(circle at 20% 25%, rgba(255,255,255,0.7) 0%, transparent 25%), 
@@ -124,7 +126,6 @@
             clip-path: ellipse(150% 100% at 50% 100%); z-index: 1; pointer-events: none;
         }
 
-        /* TIÊU ĐỀ: Căn giữa tuyệt đối trên cùng màn hình */
         .tree-title { 
             position: absolute; top: 4vh; left: 0; width: 100%; text-align: center;
             color: #d41414; font-size: 38px; font-weight: 900; 
@@ -132,16 +133,15 @@
             font-family: 'Dancing Script', cursive; animation: pulse-gold 2s infinite; z-index: 10; pointer-events: none;
         }
 
-        /* KHUNG CHỨA TOÀN BỘ CÂY VÀ CHẬU */
         .tree-area {
             position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%);
-            width: 100vw; min-width: 600px; max-width: 900px; /* Kiểm soát độ vươn của cành trên mobile */
+            width: 100vw; min-width: 600px; max-width: 900px; 
             height: 70vh; max-height: 800px;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
             z-index: 2;
         }
 
-        /* CHI TIẾT CHẬU HOA 3D (Z-index xen kẽ) */
+        /* CHI TIẾT CHẬU HOA 3D */
         .pot-lip-back { position: absolute; bottom: 95px; left: 50%; transform: translateX(-50%); width: 150px; height: 22px; background: #6b2f15; border-radius: 50%; z-index: 1; }
         .pot-soil { position: absolute; bottom: 93px; left: 50%; transform: translateX(-50%); width: 135px; height: 16px; background: #2b1408; border-radius: 50%; z-index: 2; box-shadow: inset 0 0 10px rgba(0,0,0,0.8);}
         .pot-lip-front { position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%); width: 160px; height: 26px; background: linear-gradient(to right, #a0522d, #d2691e, #a0522d); border-radius: 50%; z-index: 4; box-shadow: 0 4px 6px rgba(0,0,0,0.4), inset 0 2px 2px rgba(255,255,255,0.2); }
@@ -150,25 +150,21 @@
 
         /* CÂY ĐÀO SVG (Cắm vào chính giữa đất) */
         .tree-svg-container, .tree-canopy {
-            position: absolute; bottom: 90px; 
-            width: 100%; height: calc(100% - 90px);
-            pointer-events: none;
+            position: absolute; bottom: 90px; width: 100%; height: calc(100% - 90px); pointer-events: none;
         }
         .tree-svg-container { z-index: 3; }
         .tree-canopy { z-index: 5; }
-        .tree-svg-container svg { width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(3px 15px 10px rgba(0,0,0,0.3)); }
-
-        /* HOA ĐÀO & LÁ (Sinh bằng JS) */
-        .svg-flower, .svg-leaf { position: absolute; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2)); transform-origin: center; will-change: transform; }
-        .svg-flower { animation: blossom-pulse 3s infinite alternate; }
+        
+        /* ĐÃ LOẠI BỎ FILTER DROP-SHADOW để chống LAG trên Android */
+        .tree-svg-container svg { width: 100%; height: 100%; display: block; overflow: visible; }
+        .svg-flower, .svg-leaf { position: absolute; transform-origin: center; animation: blossom-pulse 3s infinite alternate; }
+        .tree-falling-petal { position: absolute; top: -5vh; z-index: 8; pointer-events: none; }
+        
         @keyframes blossom-pulse { 0% { transform: scale(0.9); } 100% { transform: scale(1.15); } }
-
-        /* MƯA HOA ĐÀO RƠI TRONG MÀN HÌNH CÂY */
-        .tree-falling-petal { position: absolute; top: -5vh; z-index: 8; pointer-events: none; will-change: transform, top, left; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));}
         @keyframes tree-fall { to { transform: translateY(110vh) rotate(var(--fall-rot)) translateX(var(--fall-drift)); opacity: 0; } }
 
         /* LÌ XÌ TREO TRÊN CÂY */
-        .tree-envelope-wrapper { position: absolute; display: flex; flex-direction: column; align-items: center; z-index: 20; transform-origin: top center; pointer-events: auto; animation: env-swing 3s ease-in-out infinite alternate; cursor: pointer; will-change: transform;}
+        .tree-envelope-wrapper { position: absolute; display: flex; flex-direction: column; align-items: center; z-index: 20; transform-origin: top center; pointer-events: auto; animation: env-swing 3s ease-in-out infinite alternate; cursor: pointer; }
         .env-string { width: 2px; height: 25px; background: #ffd700; box-shadow: 0 0 2px rgba(0,0,0,0.5); }
         .tree-envelope { width: 32px; height: 48px; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; border-radius: 4px; display: flex; justify-content: center; align-items: center; position: relative; box-shadow: 0 5px 15px rgba(255,0,0,0.4); transition: transform 0.2s; animation: env-blink 1.5s infinite alternate;}
         .tree-envelope-wrapper:hover { animation: none; z-index: 30; transform: scale(1.2); }
@@ -180,35 +176,32 @@
         @keyframes env-blink { 0% { box-shadow: 0 0 5px #ffd700; } 100% { box-shadow: 0 0 15px #ffd700, 0 0 20px rgba(255,0,0,0.6); } }
 
         /* LÌ XÌ CLONE BAY RA MÀN HÌNH (ĐÃ TỐI ƯU SIÊU NHẸ) */
-        .env-clone-wrap { width: 34px; height: 50px; z-index: 9999; display: flex; flex-direction: column; align-items: center; transition: all 2s ease-in-out; transform-origin: center; will-change: transform, top, left, opacity;}
-        .env-clone { width: 100%; height: 100%; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; border-radius: 4px; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; }
+        .env-clone-wrap { width: 34px; height: 50px; z-index: 9999; display: flex; flex-direction: column; align-items: center; transition: all 2s ease-in-out; transform-origin: center;}
+        .env-clone { width: 100%; height: 100%; background: linear-gradient(135deg, #d00000, #ff1a1a); border: 2px solid #ffd700; border-radius: 4px; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.8); position: relative; transition: box-shadow 0.5s;}
         .env-clone::before { content: ''; position: absolute; top: -2px; left: -2px; border-left: 17px solid transparent; border-right: 17px solid transparent; border-top: 15px solid #b30000; z-index: 2; }
         .env-clone .epass-logo { color: #ffaa00; font-weight: 800; font-size: 9px; text-shadow: 1px 1px 0px #5a0000; transform: rotate(-10deg); z-index: 3;}
         
-        /* Chỉ phóng to ra giữa màn hình và từ từ mờ đi ở những giây cuối */
+        /* Phóng to ra màn hình & Xóa bóng đổ để giảm lag trên Mobile */
         .env-clone-wrap.fly-and-open { top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) scale(5); opacity: 0; }
+        .env-clone-wrap.fly-and-open .env-clone { box-shadow: none !important; }
 
         /* ==========================================================
            4. POPUP QR CUỐI CÙNG & HIỆU ỨNG NỀN
            ========================================================== */
-        #qrOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(50, 0, 0, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 5000; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.8s; overflow-y: auto; padding: 20px 0; }
+        #qrOverlay { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(50, 0, 0, 0.9); z-index: 5000; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.8s; overflow-y: auto; padding: 20px 0; }
         .btn-close-qr { position: absolute; top: 30px; right: 30px; color: #fff; font-size: 40px; cursor: pointer; opacity: 0.8; transition: 0.3s; text-shadow: 0 0 10px rgba(0,0,0,0.5); z-index: 2005; }
         .btn-close-qr:hover { opacity: 1; transform: scale(1.1); }
         .qr-title-large { color: #ffd700; font-size: 28px; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); margin-top: 50px; }
         
-        /* ĐÃ SỬA LẠI CÂU NHẮC NHỞ CHO RÕ RÀNG TRÊN ZALO */
         .qr-note-top { color: #fff; font-style: italic; font-size: 15px; margin-bottom: 15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); text-align: center; line-height: 1.4; padding: 0 20px; }
-        
-        /* Đã tối ưu CSS để Zalo cho phép tải ảnh QR khi giữ lâu */
         .qr-img-large { width: 260px; height: 260px; border: 5px solid #ffd700; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white; margin-bottom: 20px; transition: transform 0.2s; -webkit-touch-callout: default; -webkit-user-select: auto; user-select: auto; pointer-events: auto; }
-        .qr-img-large:hover { transform: scale(1.02); }
         
-        #qrLightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s; }
+        #qrLightbox { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; animation: fadeIn 0.3s; }
         .lightbox-img-content { width: auto; height: auto; max-width: 90%; max-height: 80vh; border: 3px solid #ffd700; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); background-color: #fff; animation: zoomInPopup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: zoom-out; }
         @keyframes zoomInPopup { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .lightbox-hint-text { color: #ccc; margin-top: 15px; font-style: italic; font-size: 14px; animation: blink 2s infinite; }
+        
         .btn-download-bottom { display: flex; align-items: center; gap: 10px; padding: 10px 25px; background: #d00000; border: 2px solid #ffd700; color: #ffd700; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 16px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
-        .btn-download-bottom:hover { transform: scale(1.05); background: #b30000; }
         .final-message { margin-top: 25px; margin-bottom: 50px; font-style: italic; color: #fff; font-size: 15px; max-width: 85%; line-height: 1.6; text-shadow: 0 1px 2px rgba(0,0,0,0.8); background: rgba(0, 0, 0, 0.4); border: 1px dashed #ffd700; padding: 15px 20px; border-radius: 15px; opacity: 0; animation: fadeMsg 2s ease-in-out forwards; animation-delay: 0.5s; }
         @keyframes fadeMsg { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -218,7 +211,7 @@
 
         /* Pháo Hoa */
         .firework-shell { position: absolute; pointer-events: none; z-index: 10000; }
-        .firework-particle { position: absolute; border-radius: 50%; animation: realistic-burst 1.2s ease-out forwards; will-change: transform, opacity; }
+        .firework-particle { position: absolute; border-radius: 50%; animation: realistic-burst 1.2s ease-out forwards; }
         @keyframes realistic-burst { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 60% { transform: translate(var(--x), var(--y)) scale(0.8); opacity: 0.8; } 100% { transform: translate(var(--x), calc(var(--y) + 80px)) scale(0.4); opacity: 0; } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -264,6 +257,7 @@
     </div>
 
     <div id="shakingModal"><div class="fortune-container"><div class="sticks-bundle"><div class="stick-sample"></div><div class="stick-sample"></div><div class="stick-sample"></div></div></div><div class="shaking-text">Đang xin keo... 🙏</div></div>
+    
     <div id="resultModal">
         <div class="bamboo-card">
             <div class="card-header"><div>Lộc</div></div>
@@ -274,9 +268,7 @@
 
     <div id="treeOverlay">
         <h2 class="tree-title">Hái Lộc Đầu Xuân</h2>
-        
         <div class="tree-area">
-            
             <div class="pot-lip-back"></div>
             <div class="pot-soil"></div>
             
@@ -284,11 +276,7 @@
                 <svg viewBox="0 0 1000 800" preserveAspectRatio="xMidYMax meet">
                     <defs>
                         <linearGradient id="bark" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#2a160d"/>
-                            <stop offset="30%" stop-color="#4a2e1b"/>
-                            <stop offset="50%" stop-color="#5c3a21"/>
-                            <stop offset="70%" stop-color="#4a2e1b"/>
-                            <stop offset="100%" stop-color="#1f0f08"/>
+                            <stop offset="0%" stop-color="#2a160d"/><stop offset="30%" stop-color="#4a2e1b"/><stop offset="50%" stop-color="#5c3a21"/><stop offset="70%" stop-color="#4a2e1b"/><stop offset="100%" stop-color="#1f0f08"/>
                         </linearGradient>
                     </defs>
                     <path d="M 460 800 C 460 700, 470 600, 480 500 C 490 350, 580 250, 780 150 C 860 110, 930 80, 960 50 C 900 90, 830 140, 730 180 C 600 230, 520 300, 500 380 C 470 280, 340 180, 140 80 C 70 50, 20 20, 0 10 C 50 50, 140 90, 240 140 C 340 210, 410 300, 440 420 C 430 550, 440 700, 450 800 Z" fill="url(#bark)"/>
@@ -300,10 +288,8 @@
             </div>
 
             <div class="tree-canopy" id="treeCanopy"></div>
-
             <div class="pot-lip-front"></div>
             <div class="pot-body"></div>
-            
         </div>
     </div>
 
@@ -474,7 +460,7 @@
             setTimeout(function() { document.getElementById('shakingModal').style.display = 'none'; document.getElementById('resultModal').style.display = 'flex'; }, 3000);
         }
 
-        /* --- CÂY ĐÀO 3D & LÌ XÌ --- */
+        /* --- CÂY ĐÀO 3D & LÌ XÌ (ĐÃ TỐI ƯU SIÊU NHẸ) --- */
         function showTreeOverlay() {
             document.getElementById('resultModal').style.display = 'none'; document.getElementById('content').style.display = 'none';
             document.getElementById('treeOverlay').style.display = 'flex';
@@ -482,7 +468,8 @@
             clearInterval(flowerInterval); 
             clearInterval(fireworkIntervalMain); 
             
-            treePetalInterval = setInterval(createTreeFallingPetal, 300);
+            // Giảm tần suất rơi hoa để bớt ngốn GPU
+            treePetalInterval = setInterval(createTreeFallingPetal, 600);
 
             if (!treeInitialized) { generateTree(); treeInitialized = true; }
         }
@@ -491,19 +478,20 @@
             const canopy = document.getElementById('treeCanopy'); canopy.innerHTML = '';
             
             const zones = [
-                {x: 10, y: 10, w: 35, h: 40},   
-                {x: 55, y: 5, w: 40, h: 35},    
-                {x: 55, y: 35, w: 35, h: 25},   
-                {x: 35, y: 0, w: 25, h: 40},    
-                {x: 40, y: 40, w: 20, h: 30}    
+                {x: 15, y: 15, w: 30, h: 30},   
+                {x: 50, y: 10, w: 35, h: 30},    
+                {x: 55, y: 35, w: 30, h: 20},   
+                {x: 35, y: 5, w: 25, h: 35},    
+                {x: 45, y: 40, w: 15, h: 20}    
             ];
 
-            for (let i = 0; i < 180; i++) {
+            // Rút gọn từ 180 thẻ xuống còn 80 thẻ, giúp máy Android khỏe re
+            for (let i = 0; i < 80; i++) {
                 let zone = zones[Math.floor(Math.random() * zones.length)];
                 let cx = zone.x + Math.random() * zone.w;
                 let cy = zone.y + Math.random() * zone.h;
 
-                const isFlower = Math.random() > 0.30; 
+                const isFlower = Math.random() > 0.40; 
                 let element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                 let useTag = document.createElementNS("http://www.w3.org/2000/svg", "use");
                 
@@ -511,17 +499,16 @@
                 
                 if (isFlower) {
                     element.setAttribute("class", "svg-flower"); useTag.setAttribute("href", "#peach-flower");
-                    element.style.width = (15 + Math.random()*15) + 'px'; element.style.height = element.style.width; element.style.animationDelay = (Math.random() * 3) + 's';
+                    element.style.width = (20 + Math.random()*20) + 'px'; element.style.height = element.style.width; element.style.animationDelay = (Math.random() * 3) + 's';
                 } else {
                     element.setAttribute("class", "svg-leaf"); useTag.setAttribute("href", "#peach-leaf");
-                    element.style.width = (12 + Math.random()*8) + 'px'; element.style.height = element.style.width; element.style.transform = `rotate(${Math.random()*360}deg)`;
+                    element.style.width = (15 + Math.random()*12) + 'px'; element.style.height = element.style.width; element.style.transform = `rotate(${Math.random()*360}deg)`;
                 }
                 element.appendChild(useTag); canopy.appendChild(element);
             }
 
             const qrImage = PERSON_DATA[selectedPerson].qr;
             
-            // Đã giảm số lượng lì xì xuống còn 8 cái cho đỡ rườm rà và nhẹ máy
             const envPos = [
                 [20, 25], [40, 40], [65, 12], [85, 35], 
                 [55, 25], [35, 50], [75, 55], [48, 5] 
@@ -532,7 +519,6 @@
                 const pos = envPos[i];
                 wrap.style.left = pos[0] + '%'; wrap.style.top = pos[1] + '%'; wrap.style.animationDelay = (Math.random() * 2) + 's';
                 
-                // Đã bỏ hoàn toàn việc nhét ảnh QR ngầm vào bên trong bao lì xì để giảm tải bộ nhớ
                 wrap.innerHTML = `<div class="env-string"></div><div class="tree-envelope"><div class="epass-logo">ePass</div></div>`;
                 
                 let envBox = wrap.querySelector('.tree-envelope');
@@ -545,21 +531,18 @@
             let wrapElement = envBox.parentElement;
             if (wrapElement.classList.contains('opened')) return; wrapElement.classList.add('opened'); 
             
-            // Dừng ngay mưa hoa rơi trên cây để dồn tài nguyên điện thoại cho hiệu ứng phóng to lì xì
             clearInterval(treePetalInterval); 
             
             const rect = envBox.getBoundingClientRect();
             const cloneWrap = document.createElement('div'); cloneWrap.className = 'env-clone-wrap';
             cloneWrap.style.position = 'fixed'; cloneWrap.style.top = rect.top + 'px'; cloneWrap.style.left = rect.left + 'px';
             
-            // Bao lì xì clone chỉ chứa vỏ, không chứa ảnh nặng
             cloneWrap.innerHTML = `<div class="env-clone"><div class="epass-logo">ePass</div></div>`;
             document.body.appendChild(cloneWrap); wrapElement.style.opacity = '0';
             
-            void cloneWrap.offsetWidth; // Kích hoạt CSS render lại
-            cloneWrap.classList.add('fly-and-open'); // Chạy hiệu ứng phóng to 2s
+            void cloneWrap.offsetWidth;
+            cloneWrap.classList.add('fly-and-open');
             
-            // Chuyển cảnh chính xác sau 2 giây (2000ms)
             setTimeout(() => { 
                 document.getElementById('treeOverlay').style.display = 'none'; 
                 showQRModalReal(qrImage); 
@@ -582,7 +565,6 @@
             }
             document.getElementById('qrOverlay').style.display = 'flex';
 
-            // Khởi động lại các hiệu ứng rơi và pháo hoa cho màn QR
             clearInterval(flowerInterval);
             flowerInterval = setInterval(createFlower, 450);
             clearInterval(fireworkIntervalMain);
@@ -593,15 +575,13 @@
         function forceDownloadQR() {
             const imgSrc = document.getElementById('qrImgMain').src;
             
-            // Nhận diện trình duyệt in-app (Zalo, Facebook)
+            // XỬ LÝ ZALO/FACEBOOK in-app browser
             const ua = navigator.userAgent || navigator.vendor || window.opera;
             const isInAppBrowser = /Zalo|FBAN|FBAV/i.test(ua);
 
             if (isInAppBrowser) {
-                // Chuyển hướng thẳng đến link ảnh để Zalo/FB mở trình xem ảnh native của nó
                 window.location.href = imgSrc;
             } else {
-                // Trình duyệt chuẩn (Safari, Chrome) tải ngầm qua Blob bình thường
                 fetch(imgSrc).then(resp => resp.blob()).then(blob => {
                     const url = window.URL.createObjectURL(blob); 
                     const a = document.createElement('a'); 
@@ -619,6 +599,7 @@
                 });
             }
         }
+        
         function closeQR() { document.getElementById('qrOverlay').style.display = 'none'; document.getElementById('content').style.display = 'block'; fireworkIntervalMain = setInterval(createFirework, 1800); }
         function openLightbox(imgSrc) { document.getElementById("lightboxImg").src = imgSrc; document.getElementById("qrLightbox").style.display = "flex"; }
         function closeLightbox() { document.getElementById("qrLightbox").style.display = "none"; }
@@ -631,12 +612,12 @@
             document.body.appendChild(flower); setTimeout(() => { flower.remove(); }, duration * 1000);
         }
 
+        // ĐỔI SANG DÙNG EMOJI THAY VÌ SVG CHO HOA RƠI TRÊN CÂY ĐỂ CHỐNG LAG
         function createTreeFallingPetal() {
-            let element = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            let useTag = document.createElementNS("http://www.w3.org/2000/svg", "use");
-            element.setAttribute("class", "tree-falling-petal");
-            useTag.setAttribute("href", "#peach-flower");
-            element.style.width = (12 + Math.random()*8) + 'px'; element.style.height = element.style.width;
+            let element = document.createElement("div");
+            element.className = "tree-falling-petal";
+            element.innerHTML = "🌸";
+            element.style.fontSize = (15 + Math.random() * 10) + 'px';
             element.style.left = (Math.random() * 100) + 'vw';
             
             const duration = Math.random() * 4 + 4;
@@ -644,7 +625,6 @@
             element.style.setProperty('--fall-drift', (Math.random() * 200 - 100) + 'px');
             element.style.animation = `tree-fall ${duration}s linear forwards`;
             
-            element.appendChild(useTag);
             document.getElementById('treeOverlay').appendChild(element);
             setTimeout(() => { element.remove(); }, duration * 1000);
         }
