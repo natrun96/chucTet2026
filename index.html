@@ -92,15 +92,54 @@
         .btn-lucky { display: none; padding: 12px 15px; margin: 0 auto; background: linear-gradient(to right, #ffd700, #fdb931); color: #d00000; font-weight: 800; border-radius: 50px; border: 2px solid #fff; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5); font-size: clamp(14px, 4vw, 16px); transition: transform 0.2s; animation: pulse-gold 1.5s infinite; white-space: nowrap; max-width: 100%; }
         @keyframes pulse-gold { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 50% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 
-        /* --- XIN KEO & TRẢ QUẺ --- */
-        #shakingModal { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
-        .fortune-container { width: 100px; height: 160px; background: linear-gradient(to right, #b30000, #d00000, #b30000); border: 4px solid #ffd700; border-radius: 10px 10px 30px 30px; position: relative; animation: shake-hard 0.4s ease-in-out infinite; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-        .fortune-container::before { content: ''; position: absolute; top: -15px; left: 5px; width: 82px; height: 25px; background: #800000; border: 4px solid #ffd700; border-radius: 50%; z-index: 2; }
-        .sticks-bundle { position: absolute; top: -40px; left: 20px; width: 60px; height: 60px; z-index: 1; }
-        .stick-sample { position: absolute; width: 10px; height: 80px; background: #f0e68c; border-radius: 5px; border: 1px solid #d4a017; }
-        .stick-sample:nth-child(1) { left: 10px; transform: rotate(-15deg); top: 10px; } .stick-sample:nth-child(2) { left: 25px; transform: rotate(0deg); top: 0px; } .stick-sample:nth-child(3) { left: 40px; transform: rotate(15deg); top: 10px; }
-        @keyframes shake-hard { 0% { transform: rotate(0deg) translateY(0); } 25% { transform: rotate(-10deg) translateY(-10px); } 50% { transform: rotate(0deg) translateY(0); } 75% { transform: rotate(10deg) translateY(10px); } 100% { transform: rotate(0deg) translateY(0); } }
-        .shaking-text { color: #ffd700; font-size: 22px; font-weight: 700; margin-top: 40px; text-shadow: 0 0 10px #d00000; animation: blink 1s infinite; }
+        /* --- XIN KEO & TRẢ QUẺ (ĐÃ NÂNG CẤP ỐNG TRE 3D) --- */
+        #shakingModal { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); z-index: 3000; justify-content: center; align-items: center; flex-direction: column; }
+        
+        .bamboo-tube-container { position: relative; width: 90px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; transform-origin: bottom center; }
+        
+        /* Ống tre hình trụ */
+        .tube-body { width: 90px; height: 140px; background: linear-gradient(to right, #6b3e1b, #c17d3d, #e3a765, #c17d3d, #6b3e1b); border-radius: 5px 5px 20px 20px; position: relative; z-index: 4; display: flex; justify-content: center; align-items: center; box-shadow: inset -10px 0 20px rgba(0,0,0,0.5), 0 15px 25px rgba(0,0,0,0.6); border: 2px solid #4a2810; border-top: none; }
+        .tube-body::after { content: '福'; color: #d00000; font-size: 45px; font-weight: 900; font-family: 'Arial Black', sans-serif; text-shadow: 1px 1px 0 #ffd700, -1px -1px 0 #ffd700, 1px -1px 0 #ffd700, -1px 1px 0 #ffd700; opacity: 0.9; }
+        
+        /* Miệng ống tre (tạo cảm giác 3D) */
+        .tube-lip-back { position: absolute; bottom: 130px; left: 0; width: 90px; height: 22px; background: #331908; border-radius: 50%; z-index: 1; }
+        .tube-lip-front { position: absolute; bottom: 128px; left: -2px; width: 94px; height: 26px; background: linear-gradient(to right, #8a5024, #f4c28d, #8a5024); border-radius: 50%; z-index: 5; box-shadow: 0 4px 6px rgba(0,0,0,0.5), inset 0 2px 3px rgba(255,255,255,0.3); border: 2px solid #4a2810; }
+
+        /* Các thẻ tre bên trong */
+        .sticks-bundle { position: absolute; bottom: 135px; left: 50%; transform: translateX(-50%); width: 70px; height: 110px; z-index: 2; }
+        .stick-item { position: absolute; bottom: -15px; width: 10px; height: 110px; background: linear-gradient(to right, #deb887, #fff8dc, #deb887); border-radius: 5px 5px 2px 2px; border: 1px solid #a0522d; box-shadow: 1px 2px 4px rgba(0,0,0,0.4); transform-origin: bottom center; }
+        
+        .stick-1 { left: 8px; transform: rotate(-15deg); }
+        .stick-2 { left: 20px; transform: rotate(-7deg); height: 120px; }
+        .stick-3 { left: 42px; transform: rotate(8deg); height: 115px; }
+        .stick-4 { left: 55px; transform: rotate(16deg); }
+        .winner-stick { left: 30px; transform: rotate(0deg); height: 110px; z-index: 3; background: linear-gradient(to right, #ffd700, #fff, #ffd700); border: 1px solid #d00000; }
+        .winner-stick::after { content: ''; position: absolute; top: 5px; left: 2px; width: 4px; height: 20px; background: #d00000; border-radius: 2px; }
+
+        /* Chữ Đang xóc quẻ */
+        .shaking-text { color: #ffd700; font-size: 22px; font-weight: 700; margin-top: 50px; text-shadow: 0 0 10px #d00000; animation: blink 1s infinite; }
+
+        /* ================= Animations Xóc & Rút Thẻ ================= */
+        .bamboo-tube-container.is-shaking { animation: shake-tube 0.15s ease-in-out infinite alternate; }
+        @keyframes shake-tube { 0% { transform: rotate(-8deg) translateY(0); } 100% { transform: rotate(8deg) translateY(-8px); } }
+
+        .bamboo-tube-container.is-shaking .stick-1 { animation: jump-1 0.12s infinite alternate; }
+        .bamboo-tube-container.is-shaking .stick-2 { animation: jump-2 0.16s infinite alternate; }
+        .bamboo-tube-container.is-shaking .stick-3 { animation: jump-3 0.14s infinite alternate; }
+        .bamboo-tube-container.is-shaking .stick-4 { animation: jump-4 0.17s infinite alternate; }
+        .bamboo-tube-container.is-shaking .winner-stick { animation: jump-winner 0.15s infinite alternate; }
+
+        @keyframes jump-1 { from { transform: translateY(0) rotate(-15deg); } to { transform: translateY(-18px) rotate(-18deg); } }
+        @keyframes jump-2 { from { transform: translateY(0) rotate(-7deg); } to { transform: translateY(-22px) rotate(-5deg); } }
+        @keyframes jump-3 { from { transform: translateY(0) rotate(8deg); } to { transform: translateY(-15px) rotate(10deg); } }
+        @keyframes jump-4 { from { transform: translateY(0) rotate(16deg); } to { transform: translateY(-20px) rotate(18deg); } }
+        @keyframes jump-winner { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-25px) rotate(2deg); } }
+
+        .winner-stick.draw-out { animation: pull-stick-out 1.2s cubic-bezier(0.175, 0.885, 0.32, 1) forwards !important; }
+        @keyframes pull-stick-out { 
+            0% { transform: translateY(0) rotate(0deg); } 
+            100% { transform: translateY(-150px) rotate(0deg) scale(1.3); box-shadow: 0 0 20px #ffd700; z-index: 10; } 
+        }
         
         /* Cân chỉnh lại form thẻ lộc tre to hơn một chút */
         #resultModal { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); z-index: 3000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
@@ -265,7 +304,24 @@
         </div>
     </div>
 
-    <div id="shakingModal"><div class="fortune-container"><div class="sticks-bundle"><div class="stick-sample"></div><div class="stick-sample"></div><div class="stick-sample"></div></div></div><div class="shaking-text">Đang xin keo... 🙏</div></div>
+    <audio id="shakeAudio" preload="auto">
+        <source src="xoc-que.mp3" type="audio/mpeg">
+    </audio>
+    <div id="shakingModal">
+        <div class="bamboo-tube-container" id="bambooTubeContainer">
+            <div class="tube-lip-back"></div>
+            <div class="sticks-bundle" id="sticksBundle">
+                <div class="stick-item stick-1"></div>
+                <div class="stick-item stick-2"></div>
+                <div class="stick-item stick-3"></div>
+                <div class="stick-item stick-4"></div>
+                <div class="stick-item winner-stick" id="winningStick"></div>
+            </div>
+            <div class="tube-lip-front"></div>
+            <div class="tube-body"></div>
+        </div>
+        <div class="shaking-text">Đang xóc quẻ... 🙏</div>
+    </div>
     
     <div id="resultModal">
         <div class="bamboo-card">
@@ -460,36 +516,59 @@
             }
         }
 
-        /* FIX LỖI TÀNG HÌNH THE XĂM KHI NGƯỜI DÙNG QUAY LẠI RÚT VÒNG 2 */
+        /* --- LOGIC RÚT QUẺ VỚI ỐNG TRE MỚI --- */
         function startShaking() {
             const shakingModal = document.getElementById('shakingModal');
             const resultModal = document.getElementById('resultModal');
-            const bambooCard = document.querySelector('.bamboo-card');
-            const fortuneContainer = document.querySelector('.fortune-container');
+            const bambooTube = document.getElementById('bambooTubeContainer');
+            const winningStick = document.getElementById('winningStick');
+            const shakeAudio = document.getElementById('shakeAudio');
             
-            // Xóa animation cũ để ép trình duyệt phải render lại từ đầu
-            bambooCard.style.animation = 'none';
-            fortuneContainer.style.animation = 'none';
-            
+            // Hiện màn xóc
             shakingModal.style.display = 'flex';
             
-            // Ép reflow vẽ lại ống quẻ lắc
-            void fortuneContainer.offsetWidth;
-            fortuneContainer.style.animation = 'shake-hard 0.4s ease-in-out infinite';
+            // Xóa các class animation từ lượt chơi trước (nếu có)
+            bambooTube.classList.remove('is-shaking');
+            winningStick.classList.remove('draw-out');
             
+            // Mồi dữ liệu cho thẻ lộc kết quả
             const data = PERSON_DATA[selectedPerson].fortune;
             document.getElementById('fortune-word').innerHTML = data.word || "Bình An";
             document.getElementById('fortune-details').innerHTML = data.content || "<p><b>🍀 May Mắn:</b><br>Mọi sự hanh thông.</p>";
             document.getElementById('fortune-poem').innerHTML = data.poem || "\"Phúc lộc dồi dào vạn sự an\"";
+
+            // Bắt đầu hiệu ứng xóc
+            void bambooTube.offsetWidth; // Ép trình duyệt reflow
+            bambooTube.classList.add('is-shaking');
             
+            // Bật âm thanh xóc quẻ
+            if (shakeAudio) {
+                shakeAudio.currentTime = 0;
+                shakeAudio.volume = 1.0;
+                shakeAudio.play().catch(e => console.log("Lỗi tự động phát âm thanh:", e));
+            }
+
+            // Giai đoạn 1: Sau 4 giây, DỪNG xóc và RÚT THẺ lên
+            setTimeout(function() {
+                bambooTube.classList.remove('is-shaking');
+                if (shakeAudio) shakeAudio.pause(); // Tắt tiếng xóc
+                
+                // Kích hoạt hiệu ứng thẻ tre bay lên
+                winningStick.classList.add('draw-out');
+                
+            }, 4000);
+
+            // Giai đoạn 2: Sau 5.2 giây (cho thẻ bay lên xong), CHUYỂN MÀN HÌNH
             setTimeout(function() { 
                 shakingModal.style.display = 'none'; 
                 resultModal.style.display = 'flex'; 
                 
-                // Ép reflow vẽ lại hiệu ứng thẻ lộc tre bay lên
+                // Hiển thị thẻ kết quả
+                const bambooCard = document.querySelector('.bamboo-card');
+                bambooCard.style.animation = 'none';
                 void bambooCard.offsetWidth;
                 bambooCard.style.animation = 'card-reveal 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
-            }, 3000);
+            }, 5200);
         }
 
         /* --- CÂY ĐÀO 3D & LÌ XÌ (ĐÃ TỐI ƯU SIÊU NHẸ) --- */
